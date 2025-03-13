@@ -22,6 +22,7 @@ public class Main {
                 + "FOREIGN KEY (user_id) REFERENCES Users(id), "
                 + "FOREIGN KEY (username) REFERENCES Users(username)"
                 + ");";
+                
 
         try {
             Class.forName("org.sqlite.JDBC"); //driver load

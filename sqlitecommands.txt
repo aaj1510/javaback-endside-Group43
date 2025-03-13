@@ -7,4 +7,5 @@ select * from sqlite_master where type='table';
 
 //run file for javabackside commands
 javac Main.java
-java -classpath ".;C:\Users\Alaina\JavaProject\javabackside\sqlite-jdbc-3.7.2.jar" Main
+java -classpath ".;C:\Users\Alaina\JavaProject\javabackside\sqlite-jdbc-3.7.2.jar"  Main
+

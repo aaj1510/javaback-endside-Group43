@@ -14,6 +14,7 @@ String createTableSQL = "CREATE TABLE IF NOT EXISTS Users ("
                 + "FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id)"
                 + ");";
 
+
 FOR Tasks:
 String createTableSQL = "CREATE TABLE IF NOT EXISTS Tasks ("
                 + "task_id INTEGER PRIMARY KEY, "
