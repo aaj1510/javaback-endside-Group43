@@ -5,9 +5,9 @@ import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
-        String url = "jdbc:sqlite:C:/Users/Alaina/javabackside.db"; // Path to SQLite database
+        String url = "jdbc:sqlite:C:/Users/Alaina/javabackside.db"; //change path to ur db path
 
-        // SQL statement for creating a table
+        //create table statement
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Users ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "username TEXT NOT NULL UNIQUE, "
@@ -18,12 +18,12 @@ public class Main {
                 + "task_id INTEGER, "
                 + "total_bosses INTEGER DEFAULT 0, "
                 + "inventory_id INTEGER, "
-                + "FOREIGN KEY (task_id) REFERENCES Tasks(id), "
-                + "FOREIGN KEY (inventory_id) REFERENCES Inventory(id)"
+                + "FOREIGN KEY (task_id) REFERENCES Tasks(task_id), "
+                + "FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id)"
                 + ");";
 
         try {
-            Class.forName("org.sqlite.JDBC"); // Load driver manually
+            Class.forName("org.sqlite.JDBC"); //driver load
             System.out.println("Driver loaded successfully!");
 
             try (Connection conn = DriverManager.getConnection(url);
@@ -36,10 +36,10 @@ public class Main {
                     return;
                 }
 
-                // Enable foreign keys
+                //enable foreign keys: foreign keys are to reference another table
                 stmt.execute("PRAGMA foreign_keys = ON;");
 
-                // Execute SQL statement
+                //execute SQL statement
                 stmt.execute(createTableSQL);
                 System.out.println("Table created successfully!");
 
