@@ -1,0 +1,15 @@
+String createTableSQL = "CREATE TABLE IF NOT EXISTS Users ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "username TEXT NOT NULL UNIQUE, "
+                + "email TEXT NOT NULL, "
+                + "avatar TEXT NOT NULL, "
+                + "password TEXT NOT NULL, "
+                + "points_earned INTEGER DEFAULT 0, "
+                + "task_id INTEGER, "
+                + "total_bosses INTEGER DEFAULT 0, "
+                + "inventory_id INTEGER, "
+                + "FOREIGN KEY (task_id) REFERENCES Tasks(id), "
+                + "FOREIGN KEY (inventory_id) REFERENCES Inventory(id)"
+                + ");";
+
+
