@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.java1d'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.java1d"
@@ -32,6 +32,7 @@ android {
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.10.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
