@@ -3,6 +3,9 @@ package com.example.java1d;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,14 +18,15 @@ public class LoginActivity extends BackgroundActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         playMusic(R.raw.background_music);
-//        TextView usernameHeader = findViewById(R.id.usernameHeader);
-//        if (usernameHeader != null) {
-//            Typeface typeface = ResourcesCompat.getFont(this, R.font.pixelify_sans);
-//            usernameHeader.setTypeface(typeface);
-//        }
-//        else {
-//            Log.e("FontError", "TextView with ID usernameHeader not found!");
-//        }
+
+        Button loginButton = findViewById(R.id.sign_up_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
