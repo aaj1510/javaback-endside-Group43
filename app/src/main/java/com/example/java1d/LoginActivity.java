@@ -18,13 +18,21 @@ public class LoginActivity extends BackgroundActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         playMusic(R.raw.background_music);
-
-        Button loginButton = findViewById(R.id.sign_up_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Button signUpButton = findViewById(R.id.sign_up_button);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Need to change to intent when activity is added
+                setContentView(R.layout.hero_selection_page);
             }
         });
     }
