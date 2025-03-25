@@ -1,7 +1,9 @@
 package com.example.java1d;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -205,5 +207,57 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_SKILLS_TABLE);
     }
 
+    //1. Register USER
+
+    public long createUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        // Insert data into ContentValues
+        values.put(USERNAME, user.getUsername());
+        values.put(EMAIL, user.getEmail());
+        values.put(PASSWORD, user.getPassword());
+        values.put(USER_CLASS, user.getClassName());
+        values.put(GOLD, user.getGold());
+        values.put(ACTION_PTS, user.getActionPoints());
+        values.put(TOTAL_BOSSES_DEFEATED, user.getTotalBossesDefeated());
+        values.put(TOTAL_DAMAGE_DEALT, user.getTotalDamageDealt());
+
+
+        // Insert into the database and return the row ID
+        long result = db.insert(USERS_TABLE_NAME, null, values);
+        db.close();
+        return result;
+    }
+
+    //2. Validate User (LOGIN)
+    public User checkUserExists(String username, String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + USERS_TABLE_NAME + " WHERE " + USERNAME + "=? AND " + PASSWORD + "=?", new String[]{username,password});
+
+        //valid credentials
+        if (cursor!= null && cursor.moveToFirst()){
+            @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(EMAIL));
+            @SuppressLint("Range") String className = cursor.getString(cursor.getColumnIndex(USER_CLASS));
+            cursor.close();
+            return new User(username, email, password,className);
+        }
+
+        cursor.close();
+        return null;
+    }
+
+
+    //3. AVATAR CHOOSING - UPDATE CLASS BASED ON USERNAME
+    public boolean updateClass(String username, String newClass) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USER_CLASS, newClass);
+        int rowsAffected = db.update(USERS_TABLE_NAME, values, USERNAME + " = ?", new String[]{username});
+        db.close();
+        // Returns true if the update was successful
+        return rowsAffected == 1;
+    }
 
 }
+
