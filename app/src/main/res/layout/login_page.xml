@@ -83,7 +83,7 @@
             android:layout_marginTop="48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/task_tales_logo_black" />
+            app:srcCompat="@drawable/task_tales_logo" />
 
         <TextView
             android:id="@+id/username_header"
