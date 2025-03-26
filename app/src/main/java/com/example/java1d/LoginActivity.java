@@ -26,6 +26,15 @@ public class LoginActivity extends BackgroundActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+               startActivity(intent);
+            }
+        });
+
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 String username = String.valueOf(usernameInput.getText());
                 String password = String.valueOf(passwordInput.getText().toString());
 
@@ -60,15 +69,6 @@ public class LoginActivity extends BackgroundActivity {
                 else{
                     Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        Button loginButton = findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Need to change to intent when activity is added
-                setContentView(R.layout.hero_selection_page);
             }
         });
     }

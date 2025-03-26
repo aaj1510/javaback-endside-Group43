@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="412dp"
-        android:layout_height="731dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/wooden_board"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/archer_poster"
             app:layout_constraintEnd_toStartOf="@+id/mage_poster"
-            app:layout_constraintHorizontal_bias="0.63"
+            app:layout_constraintHorizontal_bias="0.455"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/change_text"
             app:layout_constraintVertical_bias="1.0"
@@ -34,7 +34,7 @@
             android:id="@+id/mage_poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="44dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="48dp"
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/pirate_poster"
@@ -48,11 +48,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="64dp"
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/confirm_button"
             app:layout_constraintEnd_toStartOf="@+id/pirate_poster"
-            app:layout_constraintHorizontal_bias="0.187"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/archer_poster" />
 
@@ -60,8 +60,8 @@
             android:id="@+id/pirate_poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="64dp"
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/confirm_button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,12 +71,13 @@
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="96dp"
             android:backgroundTint="#1c5db8"
             android:fontFamily="@font/pixelify_sans_medium"
             android:text="Confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
