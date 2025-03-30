@@ -1,5 +1,6 @@
 package com.example.java1d;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.database.DataSnapshot;
@@ -18,19 +21,114 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class HeroSelectionActivity extends BackgroundActivity{
-    private DatabaseReference mDatabase;
+    private DatabaseReference databaseRef;
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        ImageButton selectWarrior = findViewById(R.id.warrior_poster);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_selection_page);
         getClassData();
-//        selectWarrior.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user_key");
+        String userId = user.getUid();
+        String heroClass = user.getHero_class();
+        Log.d("User", userId + "/" + heroClass);
+        ImageButton selectWarrior = findViewById(R.id.warrior_poster);
+        ImageButton selectMage = findViewById(R.id.mage_poster);
+        ImageButton selectArcher = findViewById(R.id.archer_poster);
+        ImageButton selectPirate = findViewById(R.id.pirate_poster);
+        databaseRef = FirebaseDatabase.getInstance().getReference();
+        selectWarrior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseRef.child("Users").child(userId).child("class").setValue("Warrior").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        user.setHero_class("Warrior");
+                        Log.d("User Class", user.getHero_class());
+                        Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
+                        newIntent.putExtra("user_key",user);
+                        startActivity(newIntent);
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception e){
+                                Log.e("Firebase", e.getLocalizedMessage());
+                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        selectMage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseRef.child("Users").child(userId).child("class").setValue("Mage").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                user.setHero_class("Mage");
+                                Log.d("User Class", user.getHero_class());
+                                Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
+                                newIntent.putExtra("user_key",user);
+                                startActivity(newIntent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception e){
+                                Log.e("Firebase", e.getLocalizedMessage());
+                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        selectArcher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseRef.child("Users").child(userId).child("class").setValue("Archer").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                user.setHero_class("Archer");
+                                Log.d("User Class", user.getHero_class());
+                                Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
+                                newIntent.putExtra("user_key",user);
+                                startActivity(newIntent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception e){
+                                Log.e("Firebase", e.getLocalizedMessage());
+                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        selectPirate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseRef.child("Users").child(userId).child("class").setValue("Pirate").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                user.setHero_class("Pirate");
+                                Log.d("User Class", user.getHero_class());
+                                Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
+                                newIntent.putExtra("user_key",user);
+                                startActivity(newIntent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception e){
+                                Log.e("Firebase", e.getLocalizedMessage());
+                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
     }
 
     public void getClassData(){
@@ -39,8 +137,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
         TextView archer_traits = findViewById(R.id.archer_traits);
         TextView pirate_traits = findViewById(R.id.pirate_traits);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Class").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        databaseRef = FirebaseDatabase.getInstance().getReference();
+        databaseRef.child("Class").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()){

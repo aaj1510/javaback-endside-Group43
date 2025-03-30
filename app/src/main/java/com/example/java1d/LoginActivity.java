@@ -38,7 +38,7 @@ public class LoginActivity extends BackgroundActivity {
         passwordInput = findViewById(R.id.password_input);
         Button signUpButton = findViewById(R.id.sign_up_button);
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance().getReference("users");
+        db = FirebaseDatabase.getInstance().getReference("Users");
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +54,7 @@ public class LoginActivity extends BackgroundActivity {
             public void onClick(View view) {
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
-
+//                Toast.makeText(LoginActivity.this,"OnClick Works",Toast.LENGTH_SHORT).show();
                 // get email by searching username in realtime database..
                 // sign in with email and password using firebase auth.
 
@@ -75,14 +75,32 @@ public class LoginActivity extends BackgroundActivity {
                                                 if (task.isSuccessful()) {
                                                     // Sign-in success,check class.
                                                     FirebaseUser user = mAuth.getCurrentUser();
+                                                    String username = userSnapshot.child("username").getValue(String.class);
+                                                    String uid = userSnapshot.child("uid").getValue(String.class);
                                                     String className = userSnapshot.child("class").getValue(String.class);
-                                                    if (className.equals("NIL")){
+                                                    Integer gold = userSnapshot.child("gold").getValue(Integer.class);
+                                                    Integer action_points = userSnapshot.child("action_points").getValue(Integer.class);
+                                                    Integer total_boss_defeated = userSnapshot.child("total_boss_defeated").getValue(Integer.class);
+                                                    Integer total_damage_dealt = userSnapshot.child("total_damage_dealt").getValue(Integer.class);
+
+
+                                                    User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt);
+
+
+//                                                    Log.d("Firebase", className);
+                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
+                                                    if(userInfo.getHero_class().equals("NIL")){
+//                                                    if (className.equals("NIL")){
                                                         // go to hero selection
-                                                        setContentView(R.layout.hero_selection_page);
+                                                        Toast.makeText(LoginActivity.this,"Classname is nil",Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(LoginActivity.this, HeroSelectionActivity.class);
+                                                        intent.putExtra("user_key", userInfo);
+                                                        startActivity(intent);
                                                     }
                                                     else{
                                                         // go to home page
-
+                                                        setContentView(R.layout.activity_main);
+                                                        Toast.makeText(LoginActivity.this,"Classname is not nil",Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
                                                     // Sign-in failed, show an error message

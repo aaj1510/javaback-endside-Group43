@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends BackgroundActivity {
 
@@ -85,20 +86,23 @@ public class SignUpActivity extends BackgroundActivity {
                         public void onSuccess(AuthResult authResult) {
                             //store into db
                             String uid = mAuth.getUid();
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("uid", uid);
-                            hashMap.put("username", username);
-                            hashMap.put("email", email);
-                            hashMap.put("class", "NIL");
-                            //hashMap.put("password", password);//no need to store but will have it to debug
-                            hashMap.put("gold", 0);
-                            hashMap.put("action_points", 0);
-                            hashMap.put("total_bosses_defeated", 0);
-                            hashMap.put("assigned_boss_id", null);
+                            User user = new User(uid, username, email);
+                            Map<String, Object> userValues = user.toMap();
+
+//                            HashMap<String, Object> hashMap = new HashMap<>();
+//                            hashMap.put("uid", uid);
+//                            hashMap.put("username", username);
+//                            hashMap.put("email", email);
+//                            hashMap.put("class", "NIL");
+//                            //hashMap.put("password", password);//no need to store but will have it to debug
+//                            hashMap.put("gold", 0);
+//                            hashMap.put("action_points", 0);
+//                            hashMap.put("total_bosses_defeated", 0);
+//                            hashMap.put("assigned_boss_id", null);
 
                             //set data to db
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-                            ref.child(uid).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            ref.child(uid).setValue(userValues).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             // data added on db
