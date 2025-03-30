@@ -6,7 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+<<<<<<< HEAD
         android:id="@+id/constraint_layout"
+=======
+>>>>>>> 6369f6eb8d6d3a9bcfc972031a2d13d74503bd4d
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/wooden_board"
@@ -17,17 +20,79 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
+<<<<<<< HEAD
+=======
+        <ImageView
+            android:id="@+id/warrior_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/archer_poster"
+            app:layout_constraintEnd_toStartOf="@+id/mage_poster"
+            app:layout_constraintHorizontal_bias="0.455"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_text"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/warrior_poster" />
+
+        <ImageView
+            android:id="@+id/mage_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="48dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/pirate_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_text"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/mage_poster" />
+
+        <ImageView
+            android:id="@+id/archer_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="64dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_button"
+            app:layout_constraintEnd_toStartOf="@+id/pirate_poster"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/archer_poster" />
+
+        <ImageView
+            android:id="@+id/pirate_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="64dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/pirate_poster" />
+
+>>>>>>> 6369f6eb8d6d3a9bcfc972031a2d13d74503bd4d
         <Button
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_marginBottom="24dp"
+=======
+            android:layout_marginBottom="96dp"
+>>>>>>> 6369f6eb8d6d3a9bcfc972031a2d13d74503bd4d
             android:backgroundTint="#1c5db8"
             android:fontFamily="@font/pixelify_sans_medium"
             android:text="Confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
             app:layout_constraintHorizontal_bias="0.501"
+=======
+            app:layout_constraintHorizontal_bias="0.512"
+>>>>>>> 6369f6eb8d6d3a9bcfc972031a2d13d74503bd4d
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
