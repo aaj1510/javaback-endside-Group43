@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "736211640999",
+    "project_id": "javabacks",
+    "storage_bucket": "javabacks.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736211640999:android:3a0ff38d6f36d5a9dbf182",
+        "android_client_info": {
+          "package_name": "com.example.java1d"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLrZRJyMMQFxZD9VdoGFPyqOPRwjAXOvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
