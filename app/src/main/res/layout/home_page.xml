@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_layout"
+    tools:context=".HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/wooden_board"
+        android:scaleX="1"
+        tools:context=".MainActivity">
+
+        <ImageButton
+            android:id="@+id/achievement_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:cropToPadding="false"
+            android:maxWidth="190dp"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@id/boss_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/main_achievements"
+            tools:layout_editor_absoluteY="169dp" />
+
+        <TextView
+            android:id="@+id/achievements_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="35dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:shadowColor="@color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="ACHIEVEMENTS"
+            android:textColor="@color/white"
+            android:textColorLink="#E6E6E6"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/achievement_button"
+            app:layout_constraintEnd_toEndOf="@id/achievement_button"
+            app:layout_constraintStart_toStartOf="@id/achievement_button" />
+
+        <ImageButton
+            android:id="@+id/boss_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:cropToPadding="false"
+            android:maxWidth="190dp"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username_background"
+            app:srcCompat="@drawable/main_bossball" />
+
+        <TextView
+            android:id="@+id/boss_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="35dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:shadowColor="@color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="BOSS"
+            android:textColor="@color/white"
+            android:textColorLink="#E6E6E6"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/boss_button"
+            app:layout_constraintEnd_toEndOf="@id/boss_button"
+            app:layout_constraintStart_toStartOf="@id/boss_button" />
+
+        <ImageButton
+            android:id="@+id/inventory_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:maxWidth="150dp"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@id/cabinet_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/main_inventory" />
+
+        <TextView
+            android:id="@+id/inventory_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:shadowColor="@color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="INVENTORY"
+            android:textColor="@color/white"
+            android:textColorLink="#E6E6E6"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/inventory_button"
+            app:layout_constraintStart_toStartOf="@id/inventory_button" />
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:adjustViewBounds="true"
+            android:maxWidth="220dp"
+            app:layout_constraintBottom_toTopOf="@id/cabinet_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/avatar_warrior" />
+
+        <ImageView
+            android:id="@+id/cabinet_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_bar"
+            app:srcCompat="@drawable/background_cabinet" />
+
+        <ImageButton
+            android:id="@+id/task_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:maxWidth="215dp"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@id/cabinet_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/main_tasklectern" />
+
+        <TextView
+            android:id="@+id/task_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:shadowColor="@color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="TASKS"
+            android:textColor="@color/white"
+            android:textColorLink="#E6E6E6"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@id/task_button"
+            app:layout_constraintEnd_toEndOf="@id/task_button"
+            app:layout_constraintStart_toStartOf="@id/task_button"
+            app:layout_constraintTop_toTopOf="@id/task_button" />
+
+        <ImageView
+            android:id="@+id/username_background"
+            android:layout_width="256dp"
+            android:layout_height="70dp"
+            android:background="@drawable/signboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:shadowColor="@color/black"
+            android:shadowRadius="5"
+            android:text="username"
+            android:textColor="@color/white"
+            android:textColorLink="#E6E6E6"
+            android:textSize="20dp"
+            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintBottom_toBottomOf="@id/username_background"
+            app:layout_constraintEnd_toEndOf="@id/username_background"
+            app:layout_constraintStart_toStartOf="@id/username_background"
+            app:layout_constraintTop_toTopOf="@id/username_background" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottom_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#953A1B">
+
+            </com.google.android.material.bottomappbar.BottomAppBar>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
