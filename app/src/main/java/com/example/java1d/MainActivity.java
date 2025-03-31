@@ -13,15 +13,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.java1d.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BackgroundActivity {
 
     ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+        replaceFragment(new HomeFragment());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -31,17 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: Enable Navigation Bar on Home, Inventory, Tasks and Achievements (Leaderboard)
         // For Navigation Bar
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+
         binding.navigationBar.setBackground(null);
         binding.navigationBar.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.inventory){
                 replaceFragment(new InventoryFragment());
             }
-            else if (item.getItemId() == R.id.tasks) {
-                replaceFragment(new TaskFragment());
-            }
+//            else if (item.getItemId() == R.id.tasks) {
+//                replaceFragment(new TaskFragment());
+//            }
             else if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment());
             }

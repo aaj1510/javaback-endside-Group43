@@ -99,7 +99,9 @@ public class LoginActivity extends BackgroundActivity {
                                                     }
                                                     else{
                                                         // go to home page
-                                                        setContentView(R.layout.activity_main);
+                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        intent.putExtra("user_key", userInfo);
+                                                        startActivity(intent);
                                                         Toast.makeText(LoginActivity.this,"Classname is not nil",Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
