@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/wooden_board"
@@ -16,68 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <ImageView
-            android:id="@+id/warrior_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/archer_poster"
-            app:layout_constraintEnd_toStartOf="@+id/mage_poster"
-            app:layout_constraintHorizontal_bias="0.455"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/change_text"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/warrior_poster" />
-
-        <ImageView
-            android:id="@+id/mage_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="48dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/pirate_poster"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/change_text"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/mage_poster" />
-
-        <ImageView
-            android:id="@+id/archer_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginBottom="64dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/confirm_button"
-            app:layout_constraintEnd_toStartOf="@+id/pirate_poster"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/archer_poster" />
-
-        <ImageView
-            android:id="@+id/pirate_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/confirm_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/pirate_poster" />
-
         <Button
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="96dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="#1c5db8"
             android:fontFamily="@font/pixelify_sans_medium"
             android:text="Confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -108,56 +58,223 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/mage_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="21dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/pirate_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_text"
+            app:layout_constraintVertical_bias="0.043"
+            app:srcCompat="@drawable/mage_poster" />
+
+        <ImageButton
+            android:id="@+id/archer_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_button"
+            app:layout_constraintEnd_toStartOf="@+id/pirate_poster"
+            app:layout_constraintHorizontal_bias="0.479"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/archer_poster" />
+
+        <ImageButton
+            android:id="@+id/pirate_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="21dp"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/pirate_poster" />
+
+        <ImageButton
+            android:id="@+id/warrior_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/archer_poster"
+            app:layout_constraintEnd_toStartOf="@+id/mage_poster"
+            app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_text"
+            app:layout_constraintVertical_bias="0.043"
+            app:srcCompat="@drawable/warrior_poster" />
+
         <TextView
             android:id="@+id/warrior_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/pixelify_sans_medium"
             android:text="Warrior"
-            android:textSize="25dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/warrior_poster"
             app:layout_constraintEnd_toEndOf="@+id/warrior_poster"
-            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="@+id/warrior_poster"
-            app:layout_constraintTop_toTopOf="@+id/warrior_poster" />
+            app:layout_constraintTop_toTopOf="@+id/warrior_poster"
+            app:layout_constraintVertical_bias="0.136" />
 
         <TextView
             android:id="@+id/mage_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:fontFamily="@font/pixelify_sans_medium"
             android:text="Mage"
-            android:textSize="25dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mage_poster"
             app:layout_constraintEnd_toEndOf="@+id/mage_poster"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="@+id/mage_poster"
-            app:layout_constraintTop_toTopOf="@+id/mage_poster" />
+            app:layout_constraintTop_toTopOf="@+id/mage_poster"
+            app:layout_constraintVertical_bias="0.136" />
 
         <TextView
             android:id="@+id/archer_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/pixelify_sans_medium"
             android:text="Archer"
-            android:textSize="25dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/archer_poster"
             app:layout_constraintEnd_toEndOf="@+id/archer_poster"
-            app:layout_constraintHorizontal_bias="0.451"
+            app:layout_constraintHorizontal_bias="0.548"
             app:layout_constraintStart_toStartOf="@+id/archer_poster"
-            app:layout_constraintTop_toTopOf="@+id/archer_poster" />
+            app:layout_constraintTop_toTopOf="@+id/archer_poster"
+            app:layout_constraintVertical_bias="0.136" />
 
         <TextView
             android:id="@+id/pirate_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/pixelify_sans_medium"
             android:text="Pirate"
-            android:textSize="25dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pirate_poster"
             app:layout_constraintEnd_toEndOf="@+id/pirate_poster"
-            app:layout_constraintHorizontal_bias="0.532"
             app:layout_constraintStart_toStartOf="@+id/pirate_poster"
-            app:layout_constraintTop_toTopOf="@+id/pirate_poster" />
+            app:layout_constraintTop_toTopOf="@+id/pirate_poster"
+            app:layout_constraintVertical_bias="0.136" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Traits:"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/warrior_poster"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="@+id/warrior_poster"
+            app:layout_constraintTop_toBottomOf="@+id/warrior_header" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Traits:"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/mage_poster"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="@+id/mage_poster"
+            app:layout_constraintTop_toBottomOf="@+id/mage_header" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Traits:"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/archer_poster"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@+id/archer_poster"
+            app:layout_constraintTop_toBottomOf="@+id/archer_header" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Traits:"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/pirate_poster"
+            app:layout_constraintStart_toStartOf="@+id/pirate_poster"
+            app:layout_constraintTop_toBottomOf="@+id/pirate_header" />
+
+        <TextView
+            android:id="@+id/warrior_traits"
+            android:layout_width="117dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Loading"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/warrior_poster"
+            app:layout_constraintEnd_toEndOf="@+id/warrior_poster"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="@+id/warrior_poster"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/mage_traits"
+            android:layout_width="117dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Loading"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mage_poster"
+            app:layout_constraintEnd_toEndOf="@+id/mage_poster"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="@+id/mage_poster"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/archer_traits"
+            android:layout_width="117dp"
+            android:layout_height="43dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Loading"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/archer_poster"
+            app:layout_constraintEnd_toEndOf="@+id/archer_poster"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="@+id/archer_poster"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/pirate_traits"
+            android:layout_width="117dp"
+            android:layout_height="43dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Loading"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pirate_poster"
+            app:layout_constraintEnd_toEndOf="@+id/pirate_poster"
+            app:layout_constraintHorizontal_bias="0.561"
+            app:layout_constraintStart_toStartOf="@+id/pirate_poster"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
