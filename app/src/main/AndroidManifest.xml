@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".HeroSelectionActivity"/>
-<!--        <activity android:name=".MainActivity"/>-->
+        <activity android:name=".MainActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
