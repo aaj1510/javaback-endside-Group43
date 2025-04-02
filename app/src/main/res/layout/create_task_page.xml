@@ -17,7 +17,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="731dp">
+                android:layout_height="867dp">
 
                 <TextView
                     android:id="@+id/task_input_header"
@@ -26,15 +26,15 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="12dp"
                     android:text="Task Name:"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextText"
+                    app:layout_constraintBottom_toTopOf="@+id/task_name_input"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.175"
+                    app:layout_constraintHorizontal_bias="0.221"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.866" />
+                    app:layout_constraintVertical_bias="0.944" />
 
                 <EditText
-                    android:id="@+id/editTextText"
+                    android:id="@+id/task_name_input"
                     android:layout_width="300dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="12dp"
@@ -42,22 +42,22 @@
                     android:inputType="text"
                     app:layout_constraintBottom_toTopOf="@+id/textView4"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.531"
+                    app:layout_constraintHorizontal_bias="0.52"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="16dp"
                     android:text="Task Description:"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+                    app:layout_constraintBottom_toTopOf="@+id/task_description_input"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.194"
+                    app:layout_constraintHorizontal_bias="0.245"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine"
+                    android:id="@+id/task_description_input"
                     android:layout_width="300dp"
                     android:layout_height="214dp"
                     android:layout_marginBottom="12dp"
@@ -78,7 +78,7 @@
                     android:inputType="date"
                     app:layout_constraintBottom_toTopOf="@+id/textView11"
                     app:layout_constraintEnd_toStartOf="@+id/editTextTime"
-                    app:layout_constraintHorizontal_bias="0.674"
+                    app:layout_constraintHorizontal_bias="0.801"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
@@ -90,14 +90,14 @@
                     android:text="End of the Quest:"
                     app:layout_constraintBottom_toTopOf="@+id/editTextDate"
                     app:layout_constraintEnd_toStartOf="@+id/textView10"
-                    app:layout_constraintHorizontal_bias="0.209"
+                    app:layout_constraintHorizontal_bias="0.308"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
                     android:id="@+id/editTextTime"
                     android:layout_width="126dp"
                     android:layout_height="42dp"
-                    android:layout_marginEnd="52dp"
+                    android:layout_marginEnd="80dp"
                     android:layout_marginBottom="12dp"
                     android:ems="10"
                     android:inputType="time"
@@ -108,60 +108,62 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="52dp"
+                    android:layout_marginEnd="76dp"
                     android:layout_marginBottom="12dp"
                     android:text="Time"
                     app:layout_constraintBottom_toTopOf="@+id/editTextTime"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <SeekBar
-                    android:id="@+id/seekBar2"
+                    android:id="@+id/difficulty_seekbar"
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
                     android:layout_width="300dp"
                     android:layout_height="54dp"
-                    android:layout_marginBottom="164dp"
+                    android:layout_marginBottom="208dp"
                     android:max="9"
                     android:progress="0"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.504"
+                    app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="8dp"
                     android:text="Difficulty"
-                    app:layout_constraintBottom_toTopOf="@+id/seekBar2"
+                    app:layout_constraintBottom_toTopOf="@+id/difficulty_seekbar"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.156"
+                    app:layout_constraintHorizontal_bias="0.2"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/cancel_create_button"
                     android:layout_width="130dp"
                     android:layout_height="53dp"
                     android:layout_marginTop="36dp"
-                    android:layout_marginEnd="56dp"
-                    android:text="Button"
+                    android:layout_marginEnd="84dp"
+                    android:backgroundTint="#a8aaad"
+                    android:text="Cancel"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar2"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/difficulty_seekbar"
+                    app:layout_constraintVertical_bias="0.067" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/create_task_button"
                     android:layout_width="130dp"
                     android:layout_height="53dp"
                     android:layout_marginBottom="72dp"
-                    android:text="Button"
+                    android:backgroundTint="#3258a8"
+                    android:text="Create"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.199"
+                    app:layout_constraintHorizontal_bias="0.246"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar2"
-                    app:layout_constraintVertical_bias="0.923" />
+                    app:layout_constraintTop_toBottomOf="@+id/difficulty_seekbar"
+                    app:layout_constraintVertical_bias="0.533" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

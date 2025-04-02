@@ -1,5 +1,6 @@
 package com.example.java1d;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -25,7 +26,7 @@ public class MainActivity extends BackgroundActivity {
         EdgeToEdge.enable(this);
 //        setContentView(R.layout.activity_main);
         replaceFragment(new HomeFragment());
-
+        getUserId();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -62,5 +63,14 @@ public class MainActivity extends BackgroundActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+    }
+
+    public String getUserId(){
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user_key");
+        if(user!= null){
+            return user.getUid();
+        }
+        return null;
     }
 }
