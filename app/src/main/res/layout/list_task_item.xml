@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:elevation="10dp"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <!-- Horizontal Layout for Task Name and Checkbox -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start|center_vertical">
+
+            <!-- Task Name TextView -->
+            <TextView
+                android:id="@+id/taskTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Task Name"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:textColor="#000"/>
+
+            <!-- Checkbox for Task -->
+            <CheckBox
+                android:id="@+id/taskCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center_vertical"
+                android:text=""/>
+        </LinearLayout>
+
+        <!-- Description TextView (Initially Hidden) -->
+        <TextView
+            android:id="@+id/descriptionTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="#000"
+            android:text="Task description"
+            android:visibility="gone"
+            android:textSize="15sp"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -73,4 +73,13 @@ public class MainActivity extends BackgroundActivity {
         }
         return null;
     }
+
+    public String getHeroClass(){
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user_key");
+        if(user!= null){
+            return user.getHero_class();
+        }
+        return null;
+    }
 }

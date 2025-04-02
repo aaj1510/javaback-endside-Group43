@@ -34,6 +34,10 @@ public class CreateTaskFragment extends DialogFragment {
         EditText task_description_input = view.findViewById(R.id.task_description_input);
         SeekBar difficulty_seekbar = view.findViewById(R.id.difficulty_seekbar);
         Button create_task_button = view.findViewById(R.id.create_task_button);
+        Button cancel_task_button = view.findViewById(R.id.cancel_create_button);
+
+        cancel_task_button.setOnClickListener(v -> dismiss());  // Close the dialog
+
         create_task_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

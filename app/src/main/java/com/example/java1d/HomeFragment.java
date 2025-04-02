@@ -21,8 +21,10 @@ public class HomeFragment extends Fragment {
         task_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TaskFragment dialogFragment = new TaskFragment();
-                dialogFragment.show(getActivity().getSupportFragmentManager(), "TaskFragment");
+                //TaskFragment dialogFragment = new TaskFragment();
+                PresetTasksFragment dialogFragment = new PresetTasksFragment();
+                // dialogFragment.show(getActivity().getSupportFragmentManager(), "TaskFragment");
+                dialogFragment.show(getActivity().getSupportFragmentManager(), "PresetTasksFragment");
             }
         });
 
