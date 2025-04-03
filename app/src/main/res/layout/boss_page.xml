@@ -4,23 +4,250 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9CF5FD">
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/boss_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="500dp"
+        app:layout_constraintBottom_toTopOf="@id/buttons_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_top"
+        app:srcCompat="@drawable/boss_dragon" />
+
+    <ImageView
+        android:id="@+id/background_top"
+        android:layout_width="wrap_content"
+        android:layout_height="175dp"
+        android:scaleType="centerCrop"
+        android:tintMode="multiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent    "
+        app:srcCompat="@drawable/background_stone"
+        app:tint="@color/material_dynamic_secondary20" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="150dp"
+        app:layout_constraintBottom_toTopOf="@id/buttons_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/avatar_warrior" />
+
+    <FrameLayout
+        android:id="@+id/buttons_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:tintMode="multiply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/background_stone"
+            app:tint="@color/material_dynamic_secondary30" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/basic_attack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:backgroundTint="@android:color/transparent"
+                        android:scaleType="fitCenter"
+                        android:tintMode="multiply"
+                        app:srcCompat="@drawable/background_stone"
+                        app:tint="@android:color/holo_blue_bright" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="20"
+                        android:text="ATTACK"
+                        android:textColor="#5DEEFF"
+                        android:textSize="45sp"
+                        app:layout_constraintBottom_toBottomOf="@id/basic_attack"
+                        app:layout_constraintEnd_toEndOf="@id/basic_attack"
+                        app:layout_constraintStart_toStartOf="@id/basic_attack"
+                        app:layout_constraintTop_toTopOf="@id/basic_attack" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/skill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:backgroundTint="@android:color/transparent"
+                        android:scaleType="fitCenter"
+                        android:tintMode="multiply"
+                        app:srcCompat="@drawable/background_stone"
+                        app:tint="@android:color/holo_purple" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="20"
+                        android:text="SKILL"
+                        android:textColor="#AE4FE7"
+                        android:textSize="45sp"
+                        app:layout_constraintBottom_toBottomOf="@id/skill"
+                        app:layout_constraintEnd_toEndOf="@id/skill"
+                        app:layout_constraintStart_toStartOf="@id/skill"
+                        app:layout_constraintTop_toTopOf="@id/skill" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/inventory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:backgroundTint="@android:color/transparent"
+                        android:scaleType="fitCenter"
+                        android:tintMode="multiply"
+                        app:srcCompat="@drawable/background_stone"
+                        app:tint="@android:color/holo_orange_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="20"
+                        android:text="SHOP"
+                        android:textColor="#FF8922"
+                        android:textSize="45sp"
+                        app:layout_constraintBottom_toBottomOf="@id/inventory"
+                        app:layout_constraintEnd_toEndOf="@id/inventory"
+                        app:layout_constraintStart_toStartOf="@id/inventory"
+                        app:layout_constraintTop_toTopOf="@id/inventory" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/retreat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:backgroundTint="@android:color/transparent"
+                        android:scaleType="fitCenter"
+                        android:tintMode="multiply"
+                        app:srcCompat="@drawable/background_stone"
+                        app:tint="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="20"
+                        android:text="RETREAT"
+                        android:textColor="#FD3434"
+                        android:textSize="45sp"
+                        app:layout_constraintBottom_toBottomOf="@id/retreat"
+                        app:layout_constraintEnd_toEndOf="@id/retreat"
+                        app:layout_constraintStart_toStartOf="@id/retreat"
+                        app:layout_constraintTop_toTopOf="@id/retreat" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/boss_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pixelify_sans_medium"
+        android:text="KILLER RABBIT"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/time_left_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/boss_health_bar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
         android:layout_marginEnd="24dp"
         android:progress="75"
         android:progressBackgroundTint="@color/black"
         android:progressTint="#4CAF50"
         android:scaleY="5"
+        app:layout_constraintBottom_toBottomOf="@id/background_bar"
+        app:layout_constraintEnd_toEndOf="@id/background_bar"
+        app:layout_constraintStart_toStartOf="@id/background_bar"
+        app:layout_constraintTop_toTopOf="@id/background_bar"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <ImageView
+        android:id="@+id/background_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="@id/background_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/time_left_text"
+        app:srcCompat="@drawable/boss_health_bar" />
+
 
     <TextView
         android:id="@+id/boss_health_text"
@@ -39,74 +266,13 @@
         android:id="@+id/time_left_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/pixelify_sans_medium"
         android:text="Time Left: 0 days 0 hours"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@id/boss_health_bar"
-        app:layout_constraintStart_toStartOf="@id/boss_health_bar"
-        app:layout_constraintTop_toBottomOf="@id/boss_health_bar" />
-
-    <ImageView
-        android:id="@+id/boss_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintBottom_toTopOf="@id/background_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_left_text"
-        app:layout_constraintBottom_toTopOf="@id/buttons_background"
-        app:srcCompat="@drawable/boss_dragon" />
-
-    <TableLayout
-        android:id="@+id/buttons_background"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#757575"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:tint="@android:color/black"
-                android:backgroundTint="@android:color/transparent"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/signboard" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:backgroundTint="@android:color/transparent"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/signboard" />
-        </TableRow>
-
-    </TableLayout>
-
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:maxWidth="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons_background"
-        app:srcCompat="@drawable/avatar_warrior" />
+        app:layout_constraintTop_toBottomOf="@id/boss_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
