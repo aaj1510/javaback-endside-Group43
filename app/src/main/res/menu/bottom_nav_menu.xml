@@ -2,27 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/inventory"
-        android:icon="@drawable/nav_battle"
-        android:iconTint="@null"
+        android:icon="@drawable/nav_inventory"
         android:title="" />
     <item
         android:id="@+id/tasks"
-        android:icon="@drawable/nav_battle"
-        android:iconTintMode="src_in"
+        android:icon="@drawable/nav_tasks"
         android:title="" />
     <item
         android:id="@+id/home"
+        android:icon="@drawable/nav_home"
         android:title=""
-        android:enabled="false"
         />
     <item
         android:id="@+id/battle"
         android:icon="@drawable/nav_battle"
-        android:iconTintMode="src_in"
         android:title="" />
     <item
         android:id="@+id/achievements"
-        android:icon="@drawable/nav_battle"
-        android:iconTintMode="src_in"
+        android:icon="@drawable/nav_achievements"
         android:title="" />
 </menu>
