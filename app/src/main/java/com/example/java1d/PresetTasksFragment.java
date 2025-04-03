@@ -91,7 +91,8 @@ public class PresetTasksFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 CreateTaskFragment createTaskFragment = new CreateTaskFragment();
-                createTaskFragment.show(getActivity().getSupportFragmentManager(), "CreateTaskFragment"); //need to fix layout
+                createTaskFragment.show(getActivity().getSupportFragmentManager(), "CreateTaskFragment");
+                taskList.clear();
             }
         });
 
