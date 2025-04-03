@@ -26,7 +26,7 @@ public class MainActivity extends BackgroundActivity {
         EdgeToEdge.enable(this);
 //        setContentView(R.layout.activity_main);
         replaceFragment(new HomeFragment());
-        getUserId();
+        getUserInfo();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -67,21 +67,26 @@ public class MainActivity extends BackgroundActivity {
         fragmentTransaction.commit();
     }
 
-    public String getUserId(){
+    public User getUserInfo(){
         Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user_key");
-        if(user!= null){
-            return user.getUid();
-        }
-        return null;
+        return intent.getParcelableExtra("user_key");
     }
 
-    public String getHeroClass(){
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user_key");
-        if(user!= null){
-            return user.getHero_class();
-        }
-        return null;
-    }
+//    public String getUserId(){
+//        Intent intent = getIntent();
+//        User user = intent.getParcelableExtra("user_key");
+//        if(user!= null){
+//            return user.getUid();
+//        }
+//        return null;
+//    }
+//
+//    public String getHeroClass(){
+//        Intent intent = getIntent();
+//        User user = intent.getParcelableExtra("user_key");
+//        if(user!= null){
+//            return user.getHero_class();
+//        }
+//        return null;
+//    }
 }

@@ -1,71 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/frame_layout"
-    tools:context=".TaskFragment">
+    android:layout_height="match_parent" >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="626dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No tasks available" />
-        </LinearLayout>
+        <!-- Close Button at the top -->
 
         <ImageButton
-            android:id="@+id/close_task_fragment_button"
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/btn_dialog"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.444" />
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@android:drawable/ic_delete" />
 
-        <Button
-            android:id="@+id/create_task_btn"
-            android:layout_width="131dp"
-            android:layout_height="58dp"
-            android:layout_marginBottom="40dp"
-            android:text="Create"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/clear_task_btn"
-            app:layout_constraintHorizontal_bias="0.526"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="1.0" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/clear_task_btn"
-            android:layout_width="131dp"
-            android:layout_height="58dp"
-            android:layout_marginEnd="56dp"
-            android:layout_marginBottom="40dp"
-            android:text="Clear"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="1.0" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Minor Task" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Major Task" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <FrameLayout
+            android:id="@+id/task_fragment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_weight="1">
+
+        </FrameLayout>
+
+        <!--        <Switch-->
+        <!--            android:id="@+id/taskModeSwitch"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Minor Tasks" />-->
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/recycleView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1">-->
+
+        <!--        </androidx.recyclerview.widget.RecyclerView>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:gravity="center"-->
+        <!--        android:paddingBottom="40dp"-->
+        <!--        >-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/create_task_btn"-->
+        <!--            android:layout_width="131dp"-->
+        <!--            android:layout_height="58dp"-->
+        <!--            android:layout_marginStart="50dp"-->
+        <!--            android:layout_marginEnd="50dp"-->
+        <!--            android:visibility="gone"-->
+        <!--            android:text="Create"-->
+        <!--           />-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/clear_task_btn"-->
+        <!--                android:layout_width="131dp"-->
+        <!--                android:layout_height="58dp"-->
+        <!--                android:layout_marginEnd="56dp"-->
+        <!--                android:visibility="gone"-->
+        <!--                android:text="Clear" />-->
+
+        <!--        </LinearLayout>-->
+    </LinearLayout>
+
+
 </FrameLayout>
+

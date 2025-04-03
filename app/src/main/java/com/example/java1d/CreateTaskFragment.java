@@ -49,13 +49,14 @@ public class CreateTaskFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 db = FirebaseDatabase.getInstance().getReference("MajorTasks");
+                User user = getUserInfo();
                 String task_id = db.push().getKey();
                 String task_name = task_name_input.getText().toString();
                 String task_description = task_description_input.getText().toString();
                 Integer difficulty = difficulty_seekbar.getProgress();
                 String selected_date = date_input.getText().toString();
                 String selected_time = time_input.getText().toString();
-                String userId = getUserId();
+                String userId = user.getUid();
                 MajorTask majorTask = new MajorTask(userId,task_id,task_name,task_description,selected_date,selected_time,difficulty);
                 Map<String, Object> taskValues = majorTask.toMap();
                 if(task_name.isEmpty()){
@@ -136,8 +137,8 @@ public class CreateTaskFragment extends DialogFragment {
         }
     }
 
-    public String getUserId(){
+    public User getUserInfo(){
         MainActivity activity = (MainActivity) getActivity();
-        return activity.getUserId();
+        return activity.getUserInfo();
     }
 }

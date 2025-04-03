@@ -2,7 +2,6 @@ package com.example.java1d;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,7 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         if (view.getId() == R.id.task_button) {
 //            TaskFragment dialogFragment = new TaskFragment();
 //            dialogFragment.show(getActivity().getSupportFragmentManager(), "TaskFragment");
-            PresetTasksFragment dialogFragment = new PresetTasksFragment();
+            TasksFragment dialogFragment = new TasksFragment();
             dialogFragment.show(getActivity().getSupportFragmentManager(), "PresetTasksFragment");
         }
         else if (view.getId() == R.id.boss_button) {
