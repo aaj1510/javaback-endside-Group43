@@ -5,89 +5,200 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateTaskFragment">
-   <LinearLayout
-        android:orientation="vertical"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Add new task"
             android:gravity="center"
             android:padding="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:text="Add new task"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/pixelify_sans_medium"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Task name"
-                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:text="Task Details"
                     android:textColor="#000"
-                    android:layout_margin="10dp"/>
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Task name"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4">
+                android:layout_weight="3">
+
                 <EditText
                     android:id="@+id/task_name_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:hint="Task"
-                    android:textStyle="bold"
                     android:textColor="#000"
                     android:textColorHint="#6D6D6D"
-                    android:layout_margin="10dp"/>
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
         </LinearLayout>
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="10dp"
-           android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-           <RelativeLayout
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="2">
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="Description"
-                   android:textStyle="bold"
-                   android:textColor="#000"
-                   android:layout_margin="10dp"/>
-           </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2">
 
-           <RelativeLayout
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="4">
-               <EditText
-                   android:id="@+id/task_description_input"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:hint="Description"
-                   android:textStyle="bold"
-                   android:textColor="#000"
-                   android:textColorHint="#6D6D6D"
-                   android:layout_margin="10dp"/>
-           </RelativeLayout>
-       </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Description"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
+
+                <EditText
+                    android:id="@+id/task_description_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Description"
+                    android:textColor="#000"
+                    android:textColorHint="#6D6D6D"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Quest Deadline"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Date"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
+
+                <EditText
+                    android:id="@+id/task_dateline_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Select Date"
+                    android:inputType="none"
+                    android:textColor="#000"
+                    android:textColorHint="#6D6D6D"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+            </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,7 +209,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2">
+                android:layout_weight="1.2">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -107,96 +218,110 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Duration"
+                    android:text="Time"
+                    android:textSize="15sp"
                     android:textColor="#000"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4">
+                android:layout_weight="3">
+
                 <EditText
                     android:id="@+id/task_duration_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Timing.."
-                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Select Time"
+                    android:inputType="none"
                     android:textColor="#000"
                     android:textColorHint="#6D6D6D"
-                    android:layout_margin="10dp"/>
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="End of Quest"
-                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:text="Difficulty Level"
                     android:textColor="#000"
-                    android:layout_margin="10dp"/>
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Easy"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4">
-                <EditText
-                    android:id="@+id/task_dateline_input"
+
+                <SeekBar
+                    android:id="@+id/difficulty_seekbar"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="208dp"
+                    android:max="9"
+                    android:progress="0" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Due Date.."
-                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:text="Hard"
                     android:textColor="#000"
-                    android:textColorHint="#6D6D6D"
-                    android:layout_margin="10dp"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
         </LinearLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="91dp"
-           android:layout_margin="10dp"
-           android:orientation="horizontal">
-
-           <RelativeLayout
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="2">
-
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_margin="10dp"
-                   android:text="Difficulty Level"
-                   android:textColor="#000"
-                   android:textStyle="bold" />
-           </RelativeLayout>
-
-           <RelativeLayout
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="4">
-
-               <SeekBar
-                   android:id="@+id/difficulty_seekbar"
-                   style="@style/Widget.AppCompat.SeekBar.Discrete"
-                   android:layout_width="300dp"
-                   android:layout_height="54dp"
-                   android:layout_marginBottom="208dp"
-                   android:max="9"
-                   android:progress="0" />
-           </RelativeLayout>
-       </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -208,33 +333,36 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
+
                 <Button
                     android:id="@+id/cancel_create_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:text="Cancel"
                     android:textAllCaps="false"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:layout_margin="10dp"/>
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
+
                 <Button
                     android:id="@+id/create_task_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:text="Create"
                     android:textAllCaps="false"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:layout_margin="10dp"/>
+                    android:fontFamily="@font/pixelify_sans_medium"/>
             </RelativeLayout>
         </LinearLayout>
-
 
 
     </LinearLayout>

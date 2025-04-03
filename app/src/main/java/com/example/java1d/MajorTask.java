@@ -11,14 +11,14 @@ public class MajorTask {
     private String userId;
     private String taskName;
     private String taskDescription;
-    private LocalDate endDate;
-    private LocalTime endTime;
+    private String endDate;
+    private String endTime;
     private Integer difficulty;
     private Boolean completed;
 
     public MajorTask(){}
 
-    public MajorTask(String userId, String taskId, String taskName, String taskDescription, LocalDate endDate, LocalTime endTime, Integer difficulty){
+    public MajorTask(String userId, String taskId, String taskName, String taskDescription, String endDate, String endTime, Integer difficulty){
         this.userId = userId;
         this.taskId = taskId;
         this.taskName = taskName;
