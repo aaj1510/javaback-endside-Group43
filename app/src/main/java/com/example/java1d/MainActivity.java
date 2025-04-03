@@ -36,16 +36,16 @@ public class MainActivity extends BackgroundActivity {
         // TODO: Enable Navigation Bar on Home, Inventory, Tasks and Achievements (Leaderboard)
         // For Navigation Bar
 
-
+        binding.navigationBar.setItemIconTintList(null);
         binding.navigationBar.setBackground(null);
         binding.navigationBar.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.inventory){
                 replaceFragment(new InventoryFragment());
             }
-//            else if (item.getItemId() == R.id.tasks) {
-//                replaceFragment(new TaskFragment());
-//            }
+            else if (item.getItemId() == R.id.battle) {
+                setContentView(R.layout.boss_page);
+            }
             else if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment());
             }
@@ -55,6 +55,8 @@ public class MainActivity extends BackgroundActivity {
 
             return true;
         });
+
+
     }
 
     // Replaces Fragment (For UI)

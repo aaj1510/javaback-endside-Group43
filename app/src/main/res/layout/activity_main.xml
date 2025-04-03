@@ -35,8 +35,6 @@
             android:layout_gravity="bottom"
             android:backgroundTint="#953A1B"
             app:fabAlignmentMode="center"
-            app:fabCradleMargin="10dp"
-            app:fabCradleRoundedCornerRadius="50dp"
             app:paddingBottomSystemWindowInsets="false">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -46,20 +44,11 @@
                 android:layout_marginEnd="6dp"
                 android:background="@android:color/transparent"
                 app:itemIconSize="55dp"
-                app:itemIconTint="@android:color/holo_blue_light"
+                app:itemIconTint="@null"
                 app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/bottom_nav_menu" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contextClickable="false"
-            android:foreground="@drawable/nav_home"
-            app:backgroundTint="@android:color/transparent"
-            app:layout_anchor="@id/bottom_app_bar" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
