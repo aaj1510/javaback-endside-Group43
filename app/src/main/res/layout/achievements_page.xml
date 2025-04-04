@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +8,54 @@
     tools:context=".AchievementsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Layout for recyclerview -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="300dp"
+            android:layout_height="600dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/achievementRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+        <!-- Button to sort by number of bosses defeated -->
+        <Button
+            android:id="@+id/rank_by_boss_defeated"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text="Sort by boss defeated"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintLeft_toLeftOf="@+id/linearLayout"/>
+
+        <!-- Button to sort by total dmg -->
+        <Button
+            android:id="@+id/rank_by_dmg"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text="Sort by total dmg"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintRight_toRightOf="@+id/linearLayout"/>
+
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="@string/hello_blank_fragment" /> -->
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

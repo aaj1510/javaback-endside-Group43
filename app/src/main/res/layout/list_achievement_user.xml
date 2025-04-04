@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:elevation="10dp"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Vertical Layout for entire ranking table -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <!-- Horizontal Layout for each rank tab -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start|center_vertical">
+
+            <!-- Players TextView -->
+            <TextView
+                android:id="@+id/rankTabUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Player Name"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:textColor="#000"/>
+
+            <!-- Ranking criteria TextView -->
+            <TextView
+                android:id="@+id/rankTabBy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Bosses/ DMG"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:textColor="#000"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
