@@ -53,7 +53,7 @@ public class CreateTaskFragment extends DialogFragment {
                 String task_id = db.push().getKey();
                 String task_name = task_name_input.getText().toString();
                 String task_description = task_description_input.getText().toString();
-                Integer difficulty = difficulty_seekbar.getProgress();
+                Integer difficulty = difficulty_seekbar.getProgress() + 1;
                 String selected_date = date_input.getText().toString();
                 String selected_time = time_input.getText().toString();
                 String userId = user.getUid();

@@ -17,8 +17,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -66,11 +69,23 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
                         @Override
                         public void onSuccess(Void unused) {
                             String userId = taskItem.getUserId();
+                            Integer task_actionPoints = taskItem.getTaskDifficulty();
                             Log.d("Firebase Data", "Updated task completed to true");
-                            Toast.makeText(view.getContext(), "Great Job, you earned " + taskItem.getTaskDifficulty().toString() + " actions points!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "Great Job, you earned " + task_actionPoints.toString() + " actions points!", Toast.LENGTH_SHORT).show();
                             databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                            // THIS DOES NOT ADD VALUE YET, ONLY SETS THE VALUE
-                            databaseReference.child(userId).child("action_points").setValue(taskItem.getTaskDifficulty());
+                            databaseReference.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Integer action_points = snapshot.getValue(Integer.class);
+                                    action_points += task_actionPoints;
+                                    databaseReference.child(userId).child("action_points").setValue(action_points);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                     });
 
