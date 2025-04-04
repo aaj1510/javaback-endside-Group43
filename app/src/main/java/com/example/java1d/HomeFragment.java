@@ -24,8 +24,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         username_text.setText(getUserInfo().getUsername().toLowerCase());
         //username_text.setText(username);
         ImageView avatar_image = view.findViewById(R.id.avatar);
+        User user = getUserInfo();
 
-        String avatar = getHeroClass().toLowerCase();
+        String avatar = user.getHero_class().toLowerCase();
         String imageResourceName = "avatar_" + avatar;
         avatar_image.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
 
@@ -82,10 +83,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 //            }
 //        });
 
-    public String getHeroClass(){
-        MainActivity activity = (MainActivity) getActivity();
-        return activity.getHeroClass();
-    }
 
     public User getUserInfo(){
         MainActivity activity = (MainActivity) getActivity();
