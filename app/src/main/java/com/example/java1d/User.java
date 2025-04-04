@@ -15,6 +15,7 @@ public class User implements Parcelable {
     private Integer action_points;
     private Integer total_boss_defeated;
     private Integer total_damage_dealt;
+    private String last_login_date;
 
     public User(){}
 
@@ -32,7 +33,7 @@ public class User implements Parcelable {
     }
 
     //When user logins
-    public User(String uid, String username, String email, String hero_class, Integer gold, Integer action_points, Integer total_boss_defeated, Integer total_damage_dealt){
+    public User(String uid, String username, String email, String hero_class, Integer gold, Integer action_points, Integer total_boss_defeated, Integer total_damage_dealt, String last_login_date){
         this.uid = uid;
         this.username = username;
         this.email = email;
@@ -41,6 +42,7 @@ public class User implements Parcelable {
         this.action_points = action_points;
         this.total_boss_defeated = total_boss_defeated;
         this.total_damage_dealt = total_damage_dealt;
+        this.last_login_date = last_login_date;
     }
 
     public String getUid(){
@@ -105,6 +107,7 @@ public class User implements Parcelable {
         userMap.put("action_points", action_points);
         userMap.put("total_boss_defeated", total_boss_defeated);
         userMap.put("total_damage_dealt", total_damage_dealt);
+        userMap.put("last_login_date", last_login_date);
         return userMap;
     }
 
@@ -117,6 +120,7 @@ public class User implements Parcelable {
         action_points = in.readInt();
         total_boss_defeated = in.readInt();
         total_damage_dealt = in.readInt();
+        last_login_date = in.readString();
     }
 
     @Override
@@ -129,6 +133,7 @@ public class User implements Parcelable {
         dest.writeInt(action_points);
         dest.writeInt(total_boss_defeated);
         dest.writeInt(total_damage_dealt);
+        dest.writeString(last_login_date);
     }
 
     @Override

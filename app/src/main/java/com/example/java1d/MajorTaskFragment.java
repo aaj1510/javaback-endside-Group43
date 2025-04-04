@@ -27,14 +27,14 @@ public class MajorTaskFragment extends Fragment {
 
     private DatabaseReference databaseReference;
     private List<ListTaskItem> taskList;
-    private TaskAdapter taskAdapter;
+    private MajorTaskAdapter majorTaskAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         taskList = new ArrayList<>();
-        taskAdapter = new TaskAdapter(taskList);
+        majorTaskAdapter = new MajorTaskAdapter(taskList);
         View rootView = inflater.inflate(R.layout.fragment_major_task, container, false);
         Button create_task_button = rootView.findViewById(R.id.create_task_btn);
         create_task_button.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +47,7 @@ public class MajorTaskFragment extends Fragment {
         });
         RecyclerView recyclerView = rootView.findViewById(R.id.major_task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(taskAdapter);
+        recyclerView.setAdapter(majorTaskAdapter);
         getMajorTasks();
         return rootView;
     }
@@ -68,17 +68,19 @@ public class MajorTaskFragment extends Fragment {
                     String taskId = taskSnapshot.getKey();
                     String taskName = taskSnapshot.child("task_name").getValue(String.class);
                     String taskDesc = taskSnapshot.child("task_description").getValue(String.class);
+                    String taskEndDate = taskSnapshot.child("end_date").getValue(String.class);
+                    String taskEndTime = taskSnapshot.child("end_time").getValue(String.class);
                     Boolean taskCompleted = taskSnapshot.child("completed").getValue(Boolean.class);
                     Integer difficulty = taskSnapshot.child("difficulty").getValue(Integer.class);
 
                     // Create a new ListTaskItem and add it to the list
-                    ListTaskItem taskItem = new ListTaskItem(userId, taskId, taskName, taskDesc, taskCompleted, difficulty);
+                    ListTaskItem taskItem = new ListTaskItem(userId, taskId, taskName, taskDesc, taskEndDate, taskEndTime,taskCompleted, difficulty);
                     taskList.add(taskItem);
                 }
 
 
                 // Notify the adapter that the data has been updated
-                taskAdapter.notifyDataSetChanged();
+                majorTaskAdapter.notifyDataSetChanged();
             }
 
             @Override

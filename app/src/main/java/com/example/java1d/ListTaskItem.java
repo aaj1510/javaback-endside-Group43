@@ -3,24 +3,33 @@ package com.example.java1d;
 public class ListTaskItem {
     private String userId;
     private String taskId;
+    private String taskNumber;
     private String taskName;
     private String taskDesc;
     private Boolean taskCompleted;
     private Integer taskDifficulty;
+    private String taskEndDate;
+    private String taskEndTime;
 
-    public ListTaskItem(String userId, String taskId, String taskName, String taskDesc, Boolean taskCompleted, Integer taskDifficulty){
+    public ListTaskItem(String userId, String taskId, String taskName, String taskDesc, String taskEndDate, String taskEndTime, Boolean taskCompleted, Integer taskDifficulty){
         this.userId = userId;
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDesc = taskDesc;
+        this.taskEndDate = taskEndDate;
+        this.taskEndTime = taskEndTime;
         this.taskCompleted = taskCompleted;
-         this.taskDifficulty = taskDifficulty;
+        this.taskDifficulty = taskDifficulty;
 
     }
 
-    public ListTaskItem(String taskName, String taskDesc){
+    public ListTaskItem(String userId, String taskNumber ,String taskName, String taskDesc, Integer taskDifficulty, Boolean taskCompleted){
+        this.userId = userId;
+        this.taskNumber = taskNumber;
         this.taskName = taskName;
         this.taskDesc = taskDesc;
+        this.taskDifficulty = taskDifficulty;
+        this.taskCompleted = taskCompleted;
     }
 
     public ListTaskItem() {
@@ -35,8 +44,11 @@ public class ListTaskItem {
         return taskDesc;
     }
     public String getTaskId() {return taskId;}
+    public String getTaskEndDate() {return taskEndDate;}
+    public String getTaskEndTime() {return taskEndTime;}
     public Boolean getTaskCompleted() {return taskCompleted;}
     public Integer getTaskDifficulty(){
         return taskDifficulty;
     }
+    public String getTaskNumber() {return taskNumber;}
 }

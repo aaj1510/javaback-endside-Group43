@@ -22,58 +22,100 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MinorTaskFragment extends Fragment {
-    private DatabaseReference databaseReference;
+    private DatabaseReference minorTasksRef;
+    private DatabaseReference presetTasksRef;
     private List<ListTaskItem> taskList;
-    private TaskAdapter taskAdapter;
+    private MinorTaskAdapter minorTaskAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_minor_task, container, false);
         taskList = new ArrayList<>();
-        taskAdapter = new TaskAdapter(taskList);
+        minorTaskAdapter = new MinorTaskAdapter(taskList);
         RecyclerView recyclerView = rootView.findViewById(R.id.minor_task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(taskAdapter);
+        recyclerView.setAdapter(minorTaskAdapter);
         getMinorTasks();
         return rootView;
     }
 
     private void getMinorTasks(){
         User user = getUserInfo();
-        String heroClass = user.getHero_class();
-        databaseReference = FirebaseDatabase.getInstance().getReference("PresetTasks");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        String userId = user.getUid();
+        minorTasksRef = FirebaseDatabase.getInstance().getReference("MinorTasks");
+        presetTasksRef = FirebaseDatabase.getInstance().getReference("PresetTasks");
+        minorTasksRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("FirebaseData", "DataSnapshot: " + snapshot.toString());
+                taskList.clear();
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        String taskNumber = dataSnapshot.getKey();
+                        Log.d("Minor Task Fragment", taskNumber);
+                        String taskId = dataSnapshot.child("task_id").getValue(String.class);
+                        Log.d("Minor Task Fragment", taskId );
+                        Boolean completed = dataSnapshot.child("completed").getValue(Boolean.class);
+                        presetTasksRef.child(taskId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    String taskName = snapshot.child("task_name").getValue(String.class);
+                                    Log.d("Minor Task Fragment", taskName );
+                                    String taskDesc = snapshot.child("task_description").getValue(String.class);
+                                    Integer difficulty = snapshot.child("difficulty").getValue(Integer.class);
 
+                                    ListTaskItem taskItem = new ListTaskItem(userId,taskNumber,taskName,taskDesc,difficulty,completed);
+                                    taskList.add(taskItem);
 
-                // Check if "Mage" node exists
-                if (snapshot.child(heroClass).exists()) {
-                    Log.d("FirebaseData", heroClass + "exists.");
+                                minorTaskAdapter.notifyDataSetChanged();
+                            }
 
-                    for (DataSnapshot taskSnapshot : snapshot.child(heroClass).getChildren()) {
-                        String taskName = taskSnapshot.child("task_name").getValue(String.class);
-                        String taskDesc = taskSnapshot.child("task_description").getValue(String.class);
-                        //int taskDifficulty = taskSnapshot.child("Difficulty").getValue(Integer.class); //add later
-                        //Log.d("FirebaseData", "Task Name: " + taskName); // Debug log for task names
-
-                        // Create a new ListTaskItem and add it to the list
-                        ListTaskItem taskItem = new ListTaskItem(taskName, taskDesc);
-                        taskList.add(taskItem);
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.d("FirebaseData", "Failed to read data: " + error.getMessage());
+                            }
+                        });
                     }
                 }
-
-                // Notify the adapter that the data has been updated
-                taskAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("FirebaseData", "Failed to read data: " + error.getMessage());
+
             }
         });
+//        databaseReference = FirebaseDatabase.getInstance().getReference("PresetTasks");
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Log.d("FirebaseData", "DataSnapshot: " + snapshot.toString());
+//
+//
+//                // Check if "Mage" node exists
+//                if (snapshot.child(heroClass).exists()) {
+//                    Log.d("FirebaseData", heroClass + "exists.");
+//
+//                    for (DataSnapshot taskSnapshot : snapshot.child(heroClass).getChildren()) {
+//                        String taskName = taskSnapshot.child("task_name").getValue(String.class);
+//                        String taskDesc = taskSnapshot.child("task_description").getValue(String.class);
+//                        //int taskDifficulty = taskSnapshot.child("Difficulty").getValue(Integer.class); //add later
+//                        //Log.d("FirebaseData", "Task Name: " + taskName); // Debug log for task names
+//
+//                        // Create a new ListTaskItem and add it to the list
+//                        ListTaskItem taskItem = new ListTaskItem(taskName, taskDesc);
+//                        taskList.add(taskItem);
+//                    }
+//                }
+//
+//                // Notify the adapter that the data has been updated
+//                majorTaskAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.d("FirebaseData", "Failed to read data: " + error.getMessage());
+//            }
+//        });
     }
 
     private User getUserInfo(){

@@ -23,11 +23,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 public class LoginActivity extends BackgroundActivity {
     EditText usernameInput, passwordInput;
 
     FirebaseAuth mAuth;
-    DatabaseReference db;
+    DatabaseReference usersRef;
+    DatabaseReference minorTasksRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,8 +44,8 @@ public class LoginActivity extends BackgroundActivity {
         passwordInput = findViewById(R.id.password_input);
         Button signUpButton = findViewById(R.id.sign_up_button);
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance().getReference("Users");
-
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        minorTasksRef = FirebaseDatabase.getInstance().getReference("MinorTasks");
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +66,7 @@ public class LoginActivity extends BackgroundActivity {
 
 
 
-                Query checkUserDatabase = db.orderByChild("username").equalTo(username);
+                Query checkUserDatabase = usersRef.orderByChild("username").equalTo(username);
 
 
                 checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,9 +88,54 @@ public class LoginActivity extends BackgroundActivity {
                                                     Integer action_points = userSnapshot.child("action_points").getValue(Integer.class);
                                                     Integer total_boss_defeated = userSnapshot.child("total_boss_defeated").getValue(Integer.class);
                                                     Integer total_damage_dealt = userSnapshot.child("total_damage_dealt").getValue(Integer.class);
+                                                    String last_login_date = userSnapshot.child("last_login_date").getValue(String.class);
 
+                                                    Calendar calendar = Calendar.getInstance();
+                                                    int year = calendar.get(Calendar.YEAR);
+                                                    int month = calendar.get(Calendar.MONTH);
+                                                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                                                    String currentDate = day + "/" + (month + 1) + "/" + year;
+                                                    usersRef.child(uid).child("last_login_date").setValue(currentDate);
 
-                                                    User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt);
+                                                    if(last_login_date == null || last_login_date.isEmpty() || !last_login_date.equals(currentDate)){
+                                                        Map<String, Object> minorTaskMap = new HashMap<>();
+                                                        Random random = new Random();
+                                                        for(int i = 1; i < 3; i ++ ){
+
+                                                            int max = 28;
+                                                            int min = 20;
+                                                            int number = random.nextInt(max - min + 1) + min;
+                                                            minorTaskMap.put("task_id", "task" + number);
+                                                            minorTaskMap.put("completed", false);
+                                                            minorTasksRef.child(uid).child("task_" + i).updateChildren(minorTaskMap);
+                                                        }
+                                                        int number = 0;
+                                                        for(int j = 3; j < 6; j ++){
+                                                            if(className.equals("Warrior")){
+                                                                int min = 1;
+                                                                int max = 5;
+                                                                number = random.nextInt(max - min + 1) + min;
+                                                            } else if (className.equals("Mage")){
+                                                                int min = 6;
+                                                                int max = 10;
+                                                                number = random.nextInt(max - min + 1) + min;
+                                                            } else if (className.equals("Archer")){
+                                                                int min = 11;
+                                                                int max = 15;
+                                                                number = random.nextInt(max - min + 1) + min;
+                                                            } else if (className.equals("Pirate")){
+                                                                int min = 16;
+                                                                int max = 20;
+                                                                number = random.nextInt(max - min + 1) + min;
+                                                            }
+                                                            minorTaskMap.put("task_id", "task" + number);
+                                                            minorTaskMap.put("completed", false);
+                                                            minorTasksRef.child(uid).child("task_" + j).updateChildren(minorTaskMap);
+
+                                                        }
+                                                    }
+                                                    User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
+
 
 
 //                                                    Log.d("Firebase", className);
