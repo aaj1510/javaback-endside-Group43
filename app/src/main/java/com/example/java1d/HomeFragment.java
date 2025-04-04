@@ -22,8 +22,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home_page, container, false);
         TextView username_text = view.findViewById(R.id.username);
+        username_text.setText(getUserInfo().getUsername().toLowerCase());
         //username_text.setText(username);
         ImageView avatar_image = view.findViewById(R.id.avatar);
+
+        String avatar = getHeroClass().toLowerCase();
+        String imageResourceName = "avatar_" + avatar;
+        avatar_image.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
+
+
 
         // Buttons
         ImageButton task_button = view.findViewById(R.id.task_button);
@@ -75,5 +82,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 //                dialogFragment.show(getActivity().getSupportFragmentManager(), "PresetTasksFragment");
 //            }
 //        });
+
+    public String getHeroClass(){
+        MainActivity activity = (MainActivity) getActivity();
+        return activity.getHeroClass();
+    }
+
+    public User getUserInfo(){
+        MainActivity activity = (MainActivity) getActivity();
+        return activity.getUserInfo();
+    }
 
 }
