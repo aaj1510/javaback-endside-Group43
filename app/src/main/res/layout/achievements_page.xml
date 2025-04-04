@@ -1,15 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/frame_layout"
     tools:context=".AchievementsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- 3 seperations needed
+    1. Top 3 Layout
+    2. RecyclerView of the other 7 users
+    3. Daily Shop Layout-->
+
+    <!--  1. Top 3 Layout-->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id = "@+id/layout">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/wooden_board">
+
+                    <View
+                        android:id="@+id/view6"
+                        android:layout_marginTop="52dp"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.4"
+                        android:background="@drawable/place_acheivement"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="42dp">
+
+                    </View>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/first_user_win"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="100dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toTopOf="@+id/view6"
+                        app:layout_constraintEnd_toEndOf="@+id/view6"
+                        app:layout_constraintStart_toStartOf="@+id/view6"
+                        app:layout_constraintTop_toTopOf="@+id/view6">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/avatar_mage" />
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- TODO: ADD CROWN FOR FIRST PLACE -->
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/view6"
+                        app:layout_constraintStart_toStartOf="@+id/view6"
+                        app:layout_constraintTop_toBottomOf="@+id/first_user_win">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:text="Top 1"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id="@+id/first_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:text="USERNAME"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id="@+id/first_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:text="0 BOSSES"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+
+                    <View
+                        android:id="@+id/view9"
+                        android:layout_width="100dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="42dp"
+                        android:alpha="0.4"
+                        android:background="@drawable/place_acheivement"
+                        app:layout_constraintEnd_toStartOf="@+id/view6"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/view6">
+
+                    </View>
+
+                    <!--second place -->
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/second_user_win"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="100dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toTopOf="@+id/view9"
+                        app:layout_constraintEnd_toEndOf="@+id/view9"
+                        app:layout_constraintStart_toStartOf="@+id/view9"
+                        app:layout_constraintTop_toTopOf="@+id/view9">
+
+                        <ImageView
+                            android:id ="@+id/second_class_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/avatar_archer" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/view9"
+                        app:layout_constraintStart_toStartOf="@+id/view9"
+                        app:layout_constraintTop_toBottomOf="@+id/second_user_win">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Top 2"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id = "@+id/second_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="USERNAME"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id = "@+id/second_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="0 BOSSES"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:textColor="#fff" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/view10"
+                        android:layout_width="100dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="20dp"
+                        android:alpha="0.4"
+                        android:background="@drawable/place_acheivement"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/view6"
+                        app:layout_constraintTop_toTopOf="@+id/view9">
+                    </View>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/third_user_win"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="100dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toTopOf="@+id/view10"
+                        app:layout_constraintEnd_toEndOf="@+id/view10"
+                        app:layout_constraintStart_toStartOf="@+id/view10"
+                        app:layout_constraintTop_toTopOf="@+id/view10">
+
+                        <ImageView
+                            android:id ="@+id/third_class_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/avatar_pirate" />
+                    </androidx.cardview.widget.CardView>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/view10"
+                        app:layout_constraintStart_toStartOf="@+id/view10"
+                        app:layout_constraintTop_toBottomOf="@+id/third_user_win">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Top 3"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id = "@+id/third_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="USERNAME"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id = "@+id/third_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="0 BOSSES"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+                    <!--  2. RecyclerView for LeaderBoard-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_leaderboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/wooden_board"
+                    android:padding="4dp">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="#EDEDEDED">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Shop"
+                        android:textColor="#000"
+                        android:layout_gravity="top" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
