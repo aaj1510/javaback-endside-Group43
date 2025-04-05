@@ -52,13 +52,11 @@ public class AchievementsFragment extends Fragment {
 
         fetchUsers();
 
-        //TODO: GET AVATAR AND CHANGE IN FRAGMENT
 
         firstPlaceTv = view.findViewById(R.id.first_username);
         //firstPlaceAvatar = view.findViewById(R.id.first_user_win);
         firstPlaceScore = view.findViewById(R.id.first_score);
         //firstPlaceTv = view.findViewById(R.id.first_username);
-
         secondPlaceTv = view.findViewById(R.id.second_username);
         secondPlaceScore = view.findViewById(R.id.second_score);
 
@@ -72,7 +70,7 @@ public class AchievementsFragment extends Fragment {
 
     private void fetchUsers() {
         // Start by clearing any old data
-        userList.clear();
+        //userList.clear();
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -85,16 +83,15 @@ public class AchievementsFragment extends Fragment {
                     String hero_class = taskSnapshot.child("class").getValue(String.class);
                     Integer bossDefeated = taskSnapshot.child("total_boss_defeated").getValue(Integer.class);
                     Integer total_damage_dealt = taskSnapshot.child("total_damage_dealt").getValue(Integer.class);
+                    Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class);
 
                     // if value is null, set it to 0
-                    if (bossDefeated == null) {
-                        bossDefeated = 0;
+                    if (action_pts == null) {
+                        action_pts = 0;
                     }
 
-                    int rank = 0;
 
-
-                    User user = new User(username,hero_class,bossDefeated,rank);
+                    User user = new User(username,hero_class,action_pts,0); //later change to bossDefeated (After attack is working)
                     //System.out.println(user.getUsername());
                     //System.out.println(user.getHero_class());
                     userList.add(user);
@@ -102,39 +99,41 @@ public class AchievementsFragment extends Fragment {
 
 
                 }
-
                 rankUsers(userList);
-
-                //TODO: DO BY CONDITION - not everytime there is more than 3 users...
-
                 //Set data into the textviews based on user rank
 
                 //first place
                 String first_username = userList.get(0).getUsername();
                 //String first_avatar = userList.get(0).getHero_class(); //do avatar later
-                Integer first_score = userList.get(0).getTotal_boss_defeated();
+                Integer first_score = userList.get(0).getAction_points();
                 firstPlaceTv.setText(first_username);
-                firstPlaceScore.setText(String.valueOf(first_score) + " BOSSES");
+                firstPlaceScore.setText(String.valueOf(first_score) + " POINTS");
 
                 //System.out.println(userList.get(1).getUsername()); //for debugging
                 //second place
                 String second_username = userList.get(1).getUsername();
-                Integer second_score = userList.get(1).getTotal_boss_defeated();
+                Integer second_score = userList.get(1).getAction_points();
                 secondPlaceTv.setText(second_username);
-                secondPlaceScore.setText(String.valueOf(second_score) + " BOSSES");
+                secondPlaceScore.setText(String.valueOf(second_score) + " POINTS");
 
                 //third place
-                String third_username = userList.get(3).getUsername();
-                Integer third_score = userList.get(3).getTotal_boss_defeated();
+                String third_username = userList.get(2).getUsername();
+                Integer third_score = userList.get(2).getAction_points();
                 thirdPlaceTv.setText(third_username);
-                thirdPlaceScore.setText(String.valueOf(third_score) + " BOSSES");
+                thirdPlaceScore.setText(String.valueOf(third_score) + " POINTS");
 
                 //4th place to all the way to be shown as in leaderboard
-                List<User> filteredList =  userList.subList(4, userList.size());
+                List<User> filteredList =  userList.subList(3, userList.size());
                 leaderboardAdapter.updateData(filteredList);
 
                 // Notify the adapter that the data has been updated
                 leaderboardAdapter.notifyDataSetChanged();
+
+                Log.d("Leaderboard", "User List: " + userList.size());
+                for (User user : userList) {
+                    Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getAction_points());
+                }
+
             }
 
 
@@ -156,7 +155,7 @@ public class AchievementsFragment extends Fragment {
             public int compare(User u1, User u2) {
                 // Compare by score in descending order
                 // Higher score comes first
-                return Integer.compare(u2.getTotal_boss_defeated(), u1.getTotal_boss_defeated());
+                return Integer.compare(u2.getAction_points(), u1.getAction_points());
             }
         });
 
