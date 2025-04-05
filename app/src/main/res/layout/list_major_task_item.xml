@@ -12,171 +12,182 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-
-        <!-- Horizontal Layout for Task Name and Checkbox -->
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
             android:orientation="horizontal">
 
-            <!-- Task Name TextView -->
-            <TextView
-                android:id="@+id/minorTaskTv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:maxLines="2"
-                android:padding="5dp"
-                android:text="Task Name"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <ImageButton
-                android:id="@+id/minorCompleteBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@android:drawable/checkbox_off_background"
-                android:backgroundTint="#FDF0A8"
-                android:backgroundTintMode="multiply"
-                android:layout_marginBottom="2dp"
-                android:layout_marginEnd="25dp"/>
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:layout_marginStart="15dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/taskDeadline"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:text="Date and Time"
-                android:textColor="#000"
-                android:textSize="15sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:layout_gravity="center_horizontal">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                app:srcCompat="@drawable/action_point" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2">
-
-            <TextView
-                android:id="@+id/minorTaskPoints"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:text="pts"
-                android:textColor="#000"
-                android:textSize="15sp" />
-        </RelativeLayout>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.18"
-                android:layout_marginStart="7.5dp">
-
-                <ImageView
-                    android:id="@+id/desc_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="20dp"
-                    android:backgroundTint="@color/black"
-                    app:srcCompat="?android:attr/actionModeFindDrawable" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/minorDescriptionTv"
+                <!-- Horizontal Layout for Task Name and Checkbox -->
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:fontFamily="@font/pixelify_sans_medium"
-                    android:maxLines="3"
-                    android:text="Task description"
-                    android:textColor="#000"
-                    android:textSize="15sp" />
+                    android:gravity="start|center_vertical"
+                    android:orientation="horizontal">
 
-            </RelativeLayout>
+                    <!-- Task Name TextView -->
+                    <TextView
+                        android:id="@+id/minorTaskTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:maxLines="2"
+                        android:padding="5dp"
+                        android:text="Task Name"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <Button
-                android:id="@+id/deleteBtn"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@android:drawable/ic_lock_idle_alarm"
+                            app:tint="@color/black" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/taskDeadline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:text="Date and Time"
+                            android:textColor="#000"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_gravity="top">
+
+                        <ImageView
+                            android:id="@+id/desc_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="?android:attr/actionModeFindDrawable"
+                            app:tint="@color/black" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/minorDescriptionTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:maxLines="3"
+                            android:paddingEnd="2dp"
+                            android:text="Task description"
+                            android:textColor="#000"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- Description TextView (Initially Hidden) -->
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:minHeight="10dp"
-                android:textColor="#AF3400"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="DELETE TASK"
-                android:padding="0dp"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@android:color/transparent"
-                android:visibility="invisible"/>
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:padding="5dp">
 
+                <ImageButton
+                    android:id="@+id/minorCompleteBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@android:drawable/checkbox_off_background"
+                    android:backgroundTint="#FDF0A8"
+                    android:backgroundTintMode="multiply" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/action_point" />
+
+                    <TextView
+                        android:id="@+id/minorTaskPoints"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:text="pts"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Description TextView (Initially Hidden) -->
-
-
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:layout_gravity="bottom|end"
+            android:minHeight="0dp"
+            android:textColor="#AF3400"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="DELETE TASK"
+            android:padding="0dp"
+            android:backgroundTint="@android:color/transparent"
+            android:visibility="gone"/>
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

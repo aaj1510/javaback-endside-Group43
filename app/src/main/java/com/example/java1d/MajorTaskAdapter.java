@@ -3,6 +3,7 @@ package com.example.java1d;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
     private List<ListTaskItem> listTasks;
     private Context context;
     private DatabaseReference databaseReference;
+    private DatabaseReference userTasksReference;
 
 
     public MajorTaskAdapter(List<ListTaskItem> listTasks) {
@@ -87,6 +89,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
         } else {
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_off_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#FDF0A8"));
+            holder.deleteBtn.setVisibility(View.GONE);
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -100,13 +103,13 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                             Integer task_actionPoints = taskItem.getTaskDifficulty();
                             Log.d("Firebase Data", "Updated task completed to true");
                             Toast.makeText(view.getContext(), "Great Job, you earned " + task_actionPoints.toString() + " actions points!", Toast.LENGTH_SHORT).show();
-                            databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                            databaseReference.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
+                            userTasksReference = FirebaseDatabase.getInstance().getReference("Users");
+                            userTasksReference.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += task_actionPoints;
-                                    databaseReference.child(userId).child("action_points").setValue(action_points);
+                                    userTasksReference.child(userId).child("action_points").setValue(action_points);
                                 }
 
                                 @Override

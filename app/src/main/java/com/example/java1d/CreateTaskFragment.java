@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class CreateTaskFragment extends DialogFragment {
         SeekBar difficulty_seekbar = view.findViewById(R.id.difficulty_seekbar);
         ImageButton create_task_button = view.findViewById(R.id.create_task_button);
         ImageButton cancel_task_button = view.findViewById(R.id.cancel_create_button);
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         cancel_task_button.setOnClickListener(v -> dismiss());  // Close the dialog
 

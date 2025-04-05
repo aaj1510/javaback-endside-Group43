@@ -7,6 +7,7 @@ import android.media.browse.MediaBrowser;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,6 +70,7 @@ public class BackgroundActivity extends AppCompatActivity{
 
     protected void hideSystemUI(){
         View decorView = getWindow().getDecorView();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
                         | View.SYSTEM_UI_FLAG_FULLSCREEN

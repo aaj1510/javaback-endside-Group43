@@ -87,13 +87,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:maxLines="2"
                         android:hint="Task"
                         android:backgroundTint="@color/black"
                         android:textColor="#000"
                         android:textColorHint="#6D6D6D"
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:fontFamily="@font/pixelify_sans_medium"/>
+                        android:fontFamily="@font/pixelify_sans_medium">
+                    </EditText>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -131,6 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:maxLines="3"
                         android:hint="Description"
                         android:backgroundTint="@color/black"
                         android:textColor="#000"
