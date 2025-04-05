@@ -64,33 +64,28 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
         if(taskItem.getTaskDesc() == null || taskItem.getTaskDesc().isEmpty()){
             holder.descIcon.setVisibility(View.GONE);
         }
-        if(taskItem.getTaskCompleted() == true){
+        if(taskItem.getTaskCompleted()){
             holder.completeBtn.setText("Delete");
             holder.completeBtn.setBackgroundColor(Color.parseColor("#990303"));
+            holder.cardView.setBackgroundColor(Color.parseColor("#525252"));
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
-                int position = holder.getAdapterPosition();
                 @Override
                 public void onClick(View view) {
                     String taskId = (String) holder.completeBtn.getTag();
                     databaseReference.child(taskId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            //BUG: DELETE WILL CAUSE THE NEXT ITEM TO BE BUGGED BECAUSE THE DATABASE IS RETRIEVED BUT THE VIEW IS NOT UPDATED
-//                            for (int i = 0; i < listTasks.size(); i ++){
-//                                if (listTasks.get(i).getTaskId().equals(taskId)) {
-//                                    listTasks.remove(i);
-//                                    notifyItemRemoved(i);
-//                                    notifyItemRangeChanged(i, listTasks.size());
-//                                    break;
-//                                }
-//                            }
+                            notifyDataSetChanged();
                             Toast.makeText(view.getContext(), "Task successfully deleted",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             });
-            holder.cardView.setBackgroundColor(Color.parseColor("#525252"));
+
         } else {
+            holder.completeBtn.setText("Complete");
+            holder.completeBtn.setBackgroundColor(Color.parseColor("#4CAF50"));
+            holder.cardView.setBackgroundColor(Color.parseColor("#ffffffff"));
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -98,6 +93,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                     databaseReference.child(taskId).child("completed").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            taskItem.setTaskCompleted(true);
+                            notifyDataSetChanged();
                             String userId = taskItem.getUserId();
                             Integer task_actionPoints = taskItem.getTaskDifficulty();
                             Log.d("Firebase Data", "Updated task completed to true");
@@ -118,7 +115,6 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                             });
                         }
                     });
-
                 }
             });
         }

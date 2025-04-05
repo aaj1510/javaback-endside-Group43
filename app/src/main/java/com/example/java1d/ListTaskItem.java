@@ -47,6 +47,7 @@ public class ListTaskItem {
     public String getTaskEndDate() {return taskEndDate;}
     public String getTaskEndTime() {return taskEndTime;}
     public Boolean getTaskCompleted() {return taskCompleted;}
+    public void setTaskCompleted(Boolean value) {this.taskCompleted = value;};
     public Integer getTaskDifficulty(){
         return taskDifficulty;
     }
