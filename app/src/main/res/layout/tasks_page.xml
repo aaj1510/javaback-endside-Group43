@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -7,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FDF0A8"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -18,31 +20,37 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@android:color/transparent"
-            android:src="@android:drawable/ic_delete" />
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/ic_delete"
+            app:tint="#AF3400"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#FDF0A8"
+            app:tabIndicatorColor="#AF3400"
+            app:tabSelectedTextColor="#AF3400"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="@color/black">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Minor Task" />
+                android:text="MINOR TASKS" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Major Task" />
+                android:text="MAJOR TASKS" />
         </com.google.android.material.tabs.TabLayout>
 
         <FrameLayout
             android:id="@+id/task_fragment_layout"
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:layout_weight="1">
-
-        </FrameLayout>
+            android:layout_weight="1"/>
 
         <!--        <Switch-->
         <!--            android:id="@+id/taskModeSwitch"-->

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -40,8 +41,8 @@ public class CreateTaskFragment extends DialogFragment {
         EditText date_input = view.findViewById(R.id.task_dateline_input);
         EditText time_input = view.findViewById(R.id.task_duration_input);
         SeekBar difficulty_seekbar = view.findViewById(R.id.difficulty_seekbar);
-        Button create_task_button = view.findViewById(R.id.create_task_button);
-        Button cancel_task_button = view.findViewById(R.id.cancel_create_button);
+        ImageButton create_task_button = view.findViewById(R.id.create_task_button);
+        ImageButton cancel_task_button = view.findViewById(R.id.cancel_create_button);
 
         cancel_task_button.setOnClickListener(v -> dismiss());  // Close the dialog
 

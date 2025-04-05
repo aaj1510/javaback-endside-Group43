@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,10 +67,10 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.descIcon.setVisibility(View.GONE);
         }
         if(taskItem.getTaskCompleted()){
-            holder.completeBtn.setText("Delete");
-            holder.completeBtn.setBackgroundColor(Color.parseColor("#990303"));
-            holder.cardView.setBackgroundColor(Color.parseColor("#525252"));
-            holder.completeBtn.setOnClickListener(new View.OnClickListener() {
+            holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
+            holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
+            holder.deleteBtn.setVisibility(View.VISIBLE);
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String taskId = (String) holder.completeBtn.getTag();
@@ -83,9 +85,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             });
 
         } else {
-            holder.completeBtn.setText("Complete");
-            holder.completeBtn.setBackgroundColor(Color.parseColor("#4CAF50"));
-            holder.cardView.setBackgroundColor(Color.parseColor("#ffffffff"));
+            holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_off_background));
+            holder.cardView.setBackgroundColor(Color.parseColor("#FDF0A8"));
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -150,7 +151,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
         public TextView taskDesc;
         public TextView taskDeadline;
         public TextView taskPoints;
-        public Button completeBtn;
+        public ImageButton completeBtn;
+        public Button deleteBtn;
         public CardView cardView;
         public ImageView descIcon;
         public ViewHolder(@NonNull View itemView) {
@@ -162,6 +164,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             taskDeadline = itemView.findViewById(R.id.taskDeadline);
             taskPoints = itemView.findViewById(R.id.minorTaskPoints);
             completeBtn = itemView.findViewById(R.id.minorCompleteBtn);
+            deleteBtn = itemView.findViewById(R.id.deleteBtn);
             descIcon = itemView.findViewById(R.id.desc_icon);
 
 

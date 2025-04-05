@@ -26,6 +26,8 @@ public class MainActivity extends BackgroundActivity {
         EdgeToEdge.enable(this);
 //        setContentView(R.layout.activity_main);
         replaceFragment(new HomeFragment());
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user_key");
         getUserInfo();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -44,13 +46,19 @@ public class MainActivity extends BackgroundActivity {
                 replaceFragment(new InventoryFragment());
             }
             else if (item.getItemId() == R.id.battle) {
-                setContentView(R.layout.boss_page);
+                Intent newIntent = new Intent(MainActivity.this, BossActivity.class);
+                newIntent.putExtra("user_key",user);
+                startActivity(newIntent);
             }
             else if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment());
             }
             else if (item.getItemId() == R.id.achievements) {
                 replaceFragment(new AchievementsFragment());
+            }
+            else if (item.getItemId() == R.id.tasks) {
+                TasksFragment dialogFragment = new TasksFragment();
+                dialogFragment.show(getSupportFragmentManager(), "PresetTasksFragment");
             }
 
             return true;

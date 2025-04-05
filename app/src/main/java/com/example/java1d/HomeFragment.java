@@ -20,12 +20,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home_page, container, false);
-        TextView username_text = view.findViewById(R.id.username);
-        username_text.setText(getUserInfo().getUsername().toLowerCase());
-        //username_text.setText(username);
-        ImageView avatar_image = view.findViewById(R.id.avatar);
+
         User user = getUserInfo();
 
+        // Changes Based on User Info
+        TextView username_text = view.findViewById(R.id.username);
+        username_text.setText(getUserInfo().getUsername().toLowerCase());
+
+        TextView pts_text = view.findViewById(R.id.actionPts);
+        pts_text.setText(String.valueOf(getUserInfo().getAction_points()));
+
+        ImageView avatar_image = view.findViewById(R.id.avatar);
         String avatar = user.getHero_class().toLowerCase();
         String imageResourceName = "avatar_" + avatar;
         avatar_image.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));

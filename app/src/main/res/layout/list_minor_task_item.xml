@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:elevation="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             <!-- Task Name TextView -->
             <TextView
                 android:id="@+id/minorTaskTv"
-                android:layout_width="0dp"
+                android:layout_width="284dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -38,21 +39,22 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/minorCompleteBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#4CAF50"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:padding="0dp"
-                android:text="Complete" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:drawable/checkbox_off_background"
+                android:backgroundTint="#FDF0A8"
+                android:backgroundTintMode="multiply"
+                android:layout_marginEnd="25dp"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
             android:layout_marginBottom="5dp"
+            android:gravity="start|center_vertical"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -82,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    app:srcCompat="@drawable/nav_battle" />
+                    app:srcCompat="@drawable/action_point" />
             </RelativeLayout>
 
             <RelativeLayout
