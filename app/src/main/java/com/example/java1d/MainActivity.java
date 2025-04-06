@@ -60,7 +60,7 @@ public class MainActivity extends BackgroundActivity {
                 startActivity(newIntent);
             }
             else if (item.getItemId() == R.id.home) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new HomeFragment(), "CurrentHomeFragment");
             }
             else if (item.getItemId() == R.id.achievements) {
                 replaceFragment(new AchievementsFragment());
@@ -82,6 +82,10 @@ public class MainActivity extends BackgroundActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void replaceFragment(Fragment fragment, String tag){
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,fragment,tag).commit();
     }
 
     public User getUserInfo(){

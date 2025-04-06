@@ -26,7 +26,6 @@ public class HeroSelectionActivity extends BackgroundActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_selection_page);
-        getClassData();
         Intent intent = getIntent();
         User user = intent.getParcelableExtra("user_key");
         String userId = user.getUid();
@@ -130,56 +129,4 @@ public class HeroSelectionActivity extends BackgroundActivity{
         });
 
     }
-
-    public void getClassData(){
-        TextView warrior_traits = findViewById(R.id.warrior_traits);
-        TextView mage_traits = findViewById(R.id.mage_traits);
-        TextView archer_traits = findViewById(R.id.archer_traits);
-        TextView pirate_traits = findViewById(R.id.pirate_traits);
-
-        databaseRef = FirebaseDatabase.getInstance().getReference();
-        databaseRef.child("Class").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()){
-                    Log.e("Firebase", "Failed getting data", task.getException());
-                }
-                else {
-                    Log.d("Firebase", String.valueOf(task.getResult().getValue()));
-                    DataSnapshot snapshot = task.getResult();
-                    for (DataSnapshot child: snapshot.getChildren()){
-                        String className = child.getKey();
-                        String traits = String.valueOf(child.child("traits").getValue());
-                        if(className.equals("Warrior")){
-                            warrior_traits.setText(traits);
-                        } else if (className.equals("Mage")){
-                            mage_traits.setText(traits);
-                        } else if (className.equals("Archer")) {
-                            archer_traits.setText(traits);
-                        } else if (className.equals("Pirate")){
-                            pirate_traits.setText(traits);
-                        } else {
-                            Toast.makeText(HeroSelectionActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-//  public Bitmap decodeImage(String encodedString){
-//        if(encodedString != null){
-//            String encodedValue = "data:image/png;base64,";
-//            String base64String = encodedString.substring(encodedValue.indexOf(",") + 1);
-//            Log.d("Image", base64String);
-//            byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-//            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);
-//            Log.d("Bitmap", "Width: " + decodedByte.getWidth() + ", Height: " + decodedByte.getHeight());
-//            Log.d("Density", "Screen density: " + getResources().getDisplayMetrics().density);
-//            return decodedByte;
-//        } else {
-//            return null;
-//        }
-//
-//  }
 }

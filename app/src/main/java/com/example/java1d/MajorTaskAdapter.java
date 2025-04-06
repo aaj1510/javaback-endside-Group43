@@ -46,6 +46,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_major_task_item, parent, false);
+
         return new ViewHolder(v);
 
 
@@ -53,6 +54,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        User user = new User();
         ListTaskItem taskItem = listTasks.get(position);
         databaseReference = FirebaseDatabase.getInstance().getReference("MajorTasks");
         String date = taskItem.getTaskEndDate();
@@ -112,6 +114,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += task_actionPoints;
                                     userTasksReference.child(userId).child("action_points").setValue(action_points);
+                                    user.setAction_points(action_points);
                                 }
 
                                 @Override

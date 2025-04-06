@@ -100,38 +100,47 @@ public class LoginActivity extends BackgroundActivity {
                                                     if(last_login_date == null || last_login_date.isEmpty() || !last_login_date.equals(currentDate)){
                                                         Map<String, Object> minorTaskMap = new HashMap<>();
                                                         Random random = new Random();
-                                                        for(int i = 1; i < 3; i ++ ){
-
-                                                            int max = 28;
-                                                            int min = 20;
-                                                            int number = random.nextInt(max - min + 1) + min;
-                                                            minorTaskMap.put("task_id", "task" + number);
-                                                            minorTaskMap.put("completed", false);
-                                                            minorTasksRef.child(uid).child("task_" + i).updateChildren(minorTaskMap);
-                                                        }
-                                                        int number = 0;
-                                                        for(int j = 3; j < 6; j ++){
-                                                            if(className.equals("Warrior")){
-                                                                int min = 1;
-                                                                int max = 5;
-                                                                number = random.nextInt(max - min + 1) + min;
-                                                            } else if (className.equals("Mage")){
-                                                                int min = 6;
-                                                                int max = 10;
-                                                                number = random.nextInt(max - min + 1) + min;
-                                                            } else if (className.equals("Archer")){
-                                                                int min = 11;
-                                                                int max = 15;
-                                                                number = random.nextInt(max - min + 1) + min;
-                                                            } else if (className.equals("Pirate")){
-                                                                int min = 16;
-                                                                int max = 20;
-                                                                number = random.nextInt(max - min + 1) + min;
+                                                        if(className.equals("NIL")){
+                                                            for(int i = 1; i < 6; i ++ ){
+                                                                int max = 28;
+                                                                int min = 21;
+                                                                int number = random.nextInt(max - min + 1) + min;
+                                                                minorTaskMap.put("task_id", "task" + number);
+                                                                minorTaskMap.put("completed", false);
+                                                                minorTasksRef.child(uid).child("task_" + i).updateChildren(minorTaskMap);
                                                             }
-                                                            minorTaskMap.put("task_id", "task" + number);
-                                                            minorTaskMap.put("completed", false);
-                                                            minorTasksRef.child(uid).child("task_" + j).updateChildren(minorTaskMap);
-
+                                                        } else {
+                                                            for(int i = 1; i < 3; i ++ ){
+                                                                int max = 28;
+                                                                int min = 21;
+                                                                int number = random.nextInt(max - min + 1) + min;
+                                                                minorTaskMap.put("task_id", "task" + number);
+                                                                minorTaskMap.put("completed", false);
+                                                                minorTasksRef.child(uid).child("task_" + i).updateChildren(minorTaskMap);
+                                                            }
+                                                            int number = 0;
+                                                            for(int j = 3; j < 6; j ++){
+                                                                if(className.equals("Warrior")){
+                                                                    int min = 1;
+                                                                    int max = 5;
+                                                                    number = random.nextInt(max - min + 1) + min;
+                                                                } else if (className.equals("Mage")){
+                                                                    int min = 6;
+                                                                    int max = 10;
+                                                                    number = random.nextInt(max - min + 1) + min;
+                                                                } else if (className.equals("Archer")){
+                                                                    int min = 11;
+                                                                    int max = 15;
+                                                                    number = random.nextInt(max - min + 1) + min;
+                                                                } else if (className.equals("Pirate")){
+                                                                    int min = 16;
+                                                                    int max = 20;
+                                                                    number = random.nextInt(max - min + 1) + min;
+                                                                }
+                                                                minorTaskMap.put("task_id", "task" + number);
+                                                                minorTaskMap.put("completed", false);
+                                                                minorTasksRef.child(uid).child("task_" + j).updateChildren(minorTaskMap);
+                                                            }
                                                         }
                                                     }
                                                     User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
+    TextView pts_text;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         TextView username_text = view.findViewById(R.id.username);
         username_text.setText(getUserInfo().getUsername().toLowerCase());
 
-        TextView pts_text = view.findViewById(R.id.actionPts);
+        pts_text = view.findViewById(R.id.actionPts);
         pts_text.setText(String.valueOf(getUserInfo().getAction_points()));
 
         ImageView avatar_image = view.findViewById(R.id.avatar);
@@ -88,6 +89,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 //            }
 //        });
 
+    public void updatePoints(){
+        pts_text.setText(String.valueOf(getUserInfo().getAction_points()));
+    }
 
     public User getUserInfo(){
         MainActivity activity = (MainActivity) getActivity();
