@@ -60,7 +60,6 @@ public class MinorTaskFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String taskName = snapshot.child("task_name").getValue(String.class);
-                                    Log.d("Minor Task Fragment", taskName );
                                     String taskDesc = snapshot.child("task_description").getValue(String.class);
                                     Integer difficulty = snapshot.child("difficulty").getValue(Integer.class);
 
