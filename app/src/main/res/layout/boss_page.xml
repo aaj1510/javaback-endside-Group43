@@ -42,11 +42,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/avatar_warrior" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttons_background">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Available Points: "
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/action_point" />
+
+        <TextView
+            android:id="@+id/actionPts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="0"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/buttons_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -80,22 +114,73 @@
                         android:backgroundTint="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:tintMode="multiply"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/background_stone"
                         app:tint="@android:color/holo_blue_bright" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pixelify_sans_medium"
-                        android:shadowColor="@color/black"
-                        android:shadowRadius="20"
-                        android:text="ATTACK"
-                        android:textColor="#5DEEFF"
-                        android:textSize="45sp"
-                        app:layout_constraintBottom_toBottomOf="@id/basic_attack"
-                        app:layout_constraintEnd_toEndOf="@id/basic_attack"
+                        android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="@id/basic_attack"
-                        app:layout_constraintTop_toTopOf="@id/basic_attack" />
+                        app:layout_constraintEnd_toEndOf="@id/basic_attack"
+                        app:layout_constraintTop_toTopOf="@id/basic_attack"
+                        app:layout_constraintBottom_toBottomOf="@id/basic_attack">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:shadowColor="@color/black"
+                            android:shadowRadius="20"
+                            android:text="ATTACK"
+                            android:textColor="#5DEEFF"
+                            android:textSize="40sp"
+                            app:layout_constraintBottom_toBottomOf="@id/basic_attack"
+                            app:layout_constraintEnd_toEndOf="@id/basic_attack"
+                            app:layout_constraintStart_toStartOf="@id/basic_attack"
+                            app:layout_constraintTop_toTopOf="@id/basic_attack" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            app:layout_constraintStart_toStartOf="@id/username"
+                            app:layout_constraintEnd_toEndOf="@id/username"
+                            app:layout_constraintTop_toBottomOf="@id/username">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="requires "
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="2dp"
+                                app:srcCompat="@drawable/action_point" />
+
+                            <TextView
+                                android:id="@+id/atkPts"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="1"
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,22 +197,74 @@
                         android:backgroundTint="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:tintMode="multiply"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/background_stone"
                         app:tint="@android:color/holo_purple" />
 
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pixelify_sans_medium"
-                        android:shadowColor="@color/black"
-                        android:shadowRadius="20"
-                        android:text="SKILL"
-                        android:textColor="#AE4FE7"
-                        android:textSize="45sp"
-                        app:layout_constraintBottom_toBottomOf="@id/skill"
-                        app:layout_constraintEnd_toEndOf="@id/skill"
+                        android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="@id/skill"
-                        app:layout_constraintTop_toTopOf="@id/skill" />
+                        app:layout_constraintEnd_toEndOf="@id/skill"
+                        app:layout_constraintTop_toTopOf="@id/skill"
+                        app:layout_constraintBottom_toBottomOf="@id/skill">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:shadowColor="@color/black"
+                            android:shadowRadius="20"
+                            android:text="SKILL"
+                            android:textColor="#AE4FE7"
+                            android:textSize="40sp"
+                            app:layout_constraintBottom_toBottomOf="@id/skill"
+                            app:layout_constraintEnd_toEndOf="@id/skill"
+                            app:layout_constraintStart_toStartOf="@id/skill"
+                            app:layout_constraintTop_toTopOf="@id/skill" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            app:layout_constraintStart_toStartOf="@id/skill"
+                            app:layout_constraintEnd_toEndOf="@id/skill"
+                            app:layout_constraintTop_toBottomOf="@id/skill">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="requires "
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="2dp"
+                                app:srcCompat="@drawable/action_point" />
+
+                            <TextView
+                                android:id="@+id/skillPts"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="3"
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -150,6 +287,10 @@
                         android:backgroundTint="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:tintMode="multiply"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/background_stone"
                         app:tint="@android:color/holo_orange_dark" />
 
@@ -161,7 +302,7 @@
                         android:shadowRadius="20"
                         android:text="SHOP"
                         android:textColor="#FF8922"
-                        android:textSize="45sp"
+                        android:textSize="40sp"
                         app:layout_constraintBottom_toBottomOf="@id/inventory"
                         app:layout_constraintEnd_toEndOf="@id/inventory"
                         app:layout_constraintStart_toStartOf="@id/inventory"
@@ -182,6 +323,10 @@
                         android:backgroundTint="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:tintMode="multiply"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/background_stone"
                         app:tint="@android:color/holo_red_dark" />
 
@@ -193,7 +338,7 @@
                         android:shadowRadius="20"
                         android:text="RETREAT"
                         android:textColor="#FD3434"
-                        android:textSize="45sp"
+                        android:textSize="40sp"
                         app:layout_constraintBottom_toBottomOf="@id/retreat"
                         app:layout_constraintEnd_toEndOf="@id/retreat"
                         app:layout_constraintStart_toStartOf="@id/retreat"

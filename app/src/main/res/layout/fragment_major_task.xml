@@ -29,8 +29,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:layout_margin="20dp"
-                android:text="Add a new task"
-                />
+                android:textSize="20sp"
+                android:backgroundTint="#AF3400"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:text="Add a new task" />
 
         </LinearLayout>
     </LinearLayout>

@@ -3,17 +3,20 @@ package com.example.java1d;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +34,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
     private List<ListTaskItem> listTasks;
     private Context context;
     private DatabaseReference databaseReference;
+    private DatabaseReference userTasksReference;
 
 
     public MajorTaskAdapter(List<ListTaskItem> listTasks) {
@@ -65,10 +69,10 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.descIcon.setVisibility(View.GONE);
         }
         if(taskItem.getTaskCompleted()){
-            holder.completeBtn.setText("Delete");
-            holder.completeBtn.setBackgroundColor(Color.parseColor("#990303"));
-            holder.cardView.setBackgroundColor(Color.parseColor("#525252"));
-            holder.completeBtn.setOnClickListener(new View.OnClickListener() {
+            holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
+            holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
+            holder.deleteBtn.setVisibility(View.VISIBLE);
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String taskId = (String) holder.completeBtn.getTag();
@@ -83,9 +87,9 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             });
 
         } else {
-            holder.completeBtn.setText("Complete");
-            holder.completeBtn.setBackgroundColor(Color.parseColor("#4CAF50"));
-            holder.cardView.setBackgroundColor(Color.parseColor("#ffffffff"));
+            holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_off_background));
+            holder.cardView.setBackgroundColor(Color.parseColor("#FDF0A8"));
+            holder.deleteBtn.setVisibility(View.GONE);
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -99,13 +103,13 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                             Integer task_actionPoints = taskItem.getTaskDifficulty();
                             Log.d("Firebase Data", "Updated task completed to true");
                             Toast.makeText(view.getContext(), "Great Job, you earned " + task_actionPoints.toString() + " actions points!", Toast.LENGTH_SHORT).show();
-                            databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                            databaseReference.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
+                            userTasksReference = FirebaseDatabase.getInstance().getReference("Users");
+                            userTasksReference.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += task_actionPoints;
-                                    databaseReference.child(userId).child("action_points").setValue(action_points);
+                                    userTasksReference.child(userId).child("action_points").setValue(action_points);
                                 }
 
                                 @Override
@@ -150,7 +154,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
         public TextView taskDesc;
         public TextView taskDeadline;
         public TextView taskPoints;
-        public Button completeBtn;
+        public ImageButton completeBtn;
+        public Button deleteBtn;
         public CardView cardView;
         public ImageView descIcon;
         public ViewHolder(@NonNull View itemView) {
@@ -162,6 +167,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             taskDeadline = itemView.findViewById(R.id.taskDeadline);
             taskPoints = itemView.findViewById(R.id.minorTaskPoints);
             completeBtn = itemView.findViewById(R.id.minorCompleteBtn);
+            deleteBtn = itemView.findViewById(R.id.deleteBtn);
             descIcon = itemView.findViewById(R.id.desc_icon);
 
 

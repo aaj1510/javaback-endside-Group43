@@ -17,6 +17,8 @@ public class User implements Parcelable {
     private Integer total_damage_dealt;
     private String last_login_date;
 
+    private Integer rank; //for leaderboard
+
     public User(){}
 
     //When creating a new user
@@ -30,6 +32,16 @@ public class User implements Parcelable {
         this.total_boss_defeated = 0;
         this.total_damage_dealt = 0;
 
+    }
+
+
+    //for leaderboard details:
+    // will change action_pts to total_boss_defeated later, using action_points for debugging
+    public User(String username, String hero_class,  Integer action_points,Integer rank ){
+        this.username = username;
+        this.hero_class = hero_class;
+        this.action_points = action_points;
+        this.rank = this.rank;
     }
 
     //When user logins
@@ -95,6 +107,14 @@ public class User implements Parcelable {
 
     public void setTotal_damage_dealt(Integer total_damage_dealt){
         this.total_damage_dealt = total_damage_dealt;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 
     public Map<String, Object> toMap(){

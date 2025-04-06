@@ -1,16 +1,19 @@
 package com.example.java1d;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,8 +55,8 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
         holder.taskName.setText(taskItem.getTaskName());
         holder.taskDesc.setText(taskItem.getTaskDesc());
         if(taskItem.getTaskCompleted().equals(true)){
-            holder.completeBtn.setVisibility(View.GONE);
-            holder.cardView.setBackgroundColor(Color.parseColor("#525252"));
+            holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
+            holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
         }else {
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,7 +93,7 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public CardView cardView;
-        public Button completeBtn;
+        public ImageButton completeBtn;
         public TextView taskDesc;
         public TextView taskName;
         public TextView taskPoints;

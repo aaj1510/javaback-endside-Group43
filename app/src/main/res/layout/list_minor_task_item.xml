@@ -5,90 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:elevation="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-
-        <!-- Horizontal Layout for Task Name and Checkbox -->
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-            <!-- Task Name TextView -->
-            <TextView
-                android:id="@+id/minorTaskTv"
-                android:layout_width="0dp"
+            <!-- Horizontal Layout for Task Name and Checkbox -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:maxLines="2"
-                android:padding="5dp"
-                android:text="Task Name"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/minorCompleteBtn"
+                <!-- Task Name TextView -->
+                <TextView
+                    android:id="@+id/minorTaskTv"
+                    android:layout_width="284dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:maxLines="2"
+                    android:padding="5dp"
+                    android:text="Task Name"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4CAF50"
-                android:fontFamily="@font/pixelify_sans_medium"
-                android:padding="0dp"
-                android:text="Complete" />
+                android:layout_marginBottom="5dp"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2">
+
+                    <TextView
+                        android:id="@+id/minorDescriptionTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/pixelify_sans_medium"
+                        android:maxLines="3"
+                        android:text="Task description"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:padding="5dp">
 
-            <RelativeLayout
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/minorCompleteBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@android:drawable/checkbox_off_background"
+                android:backgroundTint="#FDF0A8"
+                android:backgroundTintMode="multiply" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.2">
-
-                <TextView
-                    android:id="@+id/minorDescriptionTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:fontFamily="@font/pixelify_sans_medium"
-                    android:maxLines="3"
-                    android:text="Task description"
-                    android:textColor="#000"
-                    android:textSize="15sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.15">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    app:srcCompat="@drawable/nav_battle" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2">
+                    app:srcCompat="@drawable/action_point" />
 
                 <TextView
                     android:id="@+id/minorTaskPoints"
@@ -98,8 +108,8 @@
                     android:text="pts"
                     android:textColor="#000"
                     android:textSize="15sp" />
-            </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
