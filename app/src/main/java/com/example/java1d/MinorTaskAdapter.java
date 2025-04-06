@@ -55,6 +55,7 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
         holder.taskName.setText(taskItem.getTaskName());
         holder.taskDesc.setText(taskItem.getTaskDesc());
         if(taskItem.getTaskCompleted().equals(true)){
+            holder.completeBtn.setEnabled(false);
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
         }else {

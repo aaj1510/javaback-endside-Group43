@@ -72,6 +72,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
             holder.deleteBtn.setVisibility(View.VISIBLE);
+            holder.completeBtn.setEnabled(false);
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -90,6 +91,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_off_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#FDF0A8"));
             holder.deleteBtn.setVisibility(View.GONE);
+            holder.completeBtn.setEnabled(true);
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
