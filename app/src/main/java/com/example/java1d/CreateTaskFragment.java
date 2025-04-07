@@ -62,13 +62,16 @@ public class CreateTaskFragment extends DialogFragment {
                 String userId = user.getUserId();
                 MajorTask majorTask = new MajorTask(userId,task_id,task_name,task_description,selected_date,selected_time,difficulty);
                 Map<String, Object> taskValues = majorTask.toMap();
-                if(task_name.isEmpty()){
+                if(task_name.isEmpty() || task_name.equals(" ")){
                     Toast.makeText(getContext(),"Please enter the task name.", Toast.LENGTH_SHORT).show();
-                } else if (selected_date.isEmpty()){
+                }
+                if (selected_date.isEmpty()){
                     Toast.makeText(getContext(), "Please select an end date", Toast.LENGTH_SHORT).show();
-                } else if (selected_time.isEmpty()){
+                }
+                if (selected_time.isEmpty()){
                     Toast.makeText(getContext(), "Please select an end time", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                if(!task_name.isEmpty() && !selected_date.isEmpty() && !selected_time.isEmpty()){
                     db.child(task_id).setValue(taskValues).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -77,7 +80,6 @@ public class CreateTaskFragment extends DialogFragment {
                         }
                     });
                 }
-
             }
         });
 
