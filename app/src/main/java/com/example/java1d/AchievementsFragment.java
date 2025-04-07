@@ -59,7 +59,7 @@ public class AchievementsFragment extends Fragment {
         firstPlaceTv = view.findViewById(R.id.first_username);
         firstPlaceAvatar = view.findViewById(R.id.first_place_avatar);
         firstPlaceScore = view.findViewById(R.id.first_score);
-        //firstPlaceTv = view.findViewById(R.id.first_username);
+
         secondPlaceTv = view.findViewById(R.id.second_username);
         secondPlaceScore = view.findViewById(R.id.second_score);
         secondPlaceAvatar = view.findViewById(R.id.second_class_avatar);
@@ -87,15 +87,20 @@ public class AchievementsFragment extends Fragment {
                     String hero_class = taskSnapshot.child("class").getValue(String.class);
                     Integer bossDefeated = taskSnapshot.child("total_boss_defeated").getValue(Integer.class);
                     Integer total_damage_dealt = taskSnapshot.child("total_damage_dealt").getValue(Integer.class);
-                    Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class);
+                    Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class); //used for debugging
 
                     // if value is null, set it to 0
                     if (action_pts == null) {
                         action_pts = 0;
                     }
 
+                    if (total_damage_dealt == null){
+                        total_damage_dealt = 0;
 
-                    User user = new User(username, hero_class, action_pts, 0); //later change to bossDefeated (After attack is working)
+                    }
+
+                    //User user = new User(username, hero_class, action_pts, 0); //later change to bossDefeated (After attack is working)
+                    User user = new User(username, hero_class, total_damage_dealt, 0);
                     //System.out.println(user.getUsername());
                     //System.out.println(user.getHero_class());
                     userList.add(user);
@@ -105,7 +110,7 @@ public class AchievementsFragment extends Fragment {
                 List<User> sortedList = rankManualUsers(userList);
 
                 for (User u : sortedList) {
-                    Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getAction_points() + " POINTS");
+                    Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getTotal_damage_dealt() + " DAMAGE DEALT");
                 } //sorting works
 
                 //Set data into the textviews based on user rank
@@ -113,10 +118,16 @@ public class AchievementsFragment extends Fragment {
                 //first place
                 String first_username = sortedList.get(0).getUsername();
                 String first_avatar = userList.get(0).getHero_class().toLowerCase(); //do avatar later
-                Integer first_score = sortedList.get(0).getAction_points();
+                Integer first_score = sortedList.get(0).getTotal_damage_dealt();
+                String firstImageResourceName;
                 firstPlaceTv.setText(first_username);
-                firstPlaceScore.setText(String.valueOf(first_score) + " POINTS");
-                String firstImageResourceName = "avatar_" + first_avatar;
+                firstPlaceScore.setText(String.valueOf(first_score));
+                if (first_avatar.equals("nil")){
+                    firstImageResourceName = "avatar_warrior";
+                }
+                else{
+                    firstImageResourceName = "avatar_" + first_avatar;
+                }
                 firstPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(firstImageResourceName, "drawable", getContext().getPackageName()));
 
 
@@ -124,20 +135,33 @@ public class AchievementsFragment extends Fragment {
                 //second place
                 String second_username = sortedList.get(1).getUsername();
                 String second_avatar = sortedList.get(1).getHero_class().toLowerCase();
-                Integer second_score = sortedList.get(1).getAction_points();
+                Integer second_score = sortedList.get(1).getTotal_damage_dealt();
                 secondPlaceTv.setText(second_username);
-                secondPlaceScore.setText(String.valueOf(second_score) + " POINTS");
-                String secondImageResourceName = "avatar_" + second_avatar;
+                secondPlaceScore.setText(String.valueOf(second_score));
+                String secondImageResourceName;
+                if (second_avatar.equals("nil")){
+                    secondImageResourceName = "avatar_warrior";
+                }
+                else{
+                    secondImageResourceName = "avatar_" + second_avatar;
+                }
                 secondPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(secondImageResourceName, "drawable", getContext().getPackageName()));
                 Log.d("Check Avatar", "Details: " + second_avatar);
 
+
                 //third place
                 String third_username = sortedList.get(2).getUsername();
-                Integer third_score = sortedList.get(2).getAction_points();
+                Integer third_score = sortedList.get(2).getTotal_damage_dealt();
                 String third_avatar = sortedList.get(2).getHero_class().toLowerCase();
                 thirdPlaceTv.setText(third_username);
-                thirdPlaceScore.setText(String.valueOf(third_score) + " POINTS");
-                String thirdImageResourceName = "avatar_" + third_avatar;
+                thirdPlaceScore.setText(String.valueOf(third_score));
+                String thirdImageResourceName;
+                if (third_avatar.equals("nil")){
+                    thirdImageResourceName = "avatar_warrior";
+                }
+                else{
+                    thirdImageResourceName = "avatar_" + third_avatar;
+                }
                 thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
 
                 //4th place to all the way to be shown as in leaderboard
@@ -183,7 +207,7 @@ public class AchievementsFragment extends Fragment {
         for (int i = 1; i < userList.size(); i++) {
             User user = userList.get(i);
             int j;
-            for ( j=0; j < sortedUsers.size()&&sortedUsers.get(j).getAction_points().compareTo(user.getAction_points())>=0; j++){}
+            for ( j=0; j < sortedUsers.size()&&sortedUsers.get(j).getTotal_damage_dealt().compareTo(user.getTotal_damage_dealt())>=0; j++){}
             sortedUsers.add(j, user);
         }
         return sortedUsers;

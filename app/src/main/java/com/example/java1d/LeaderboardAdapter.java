@@ -39,7 +39,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         User item = userlist.get(position);
         holder.usernameTv.setText(item.getUsername());
-        holder.bossDefeatTv.setText("Total Points : "  + String.valueOf(item.getAction_points()));
+        holder.bossDefeatTv.setText("Total Damage Dealt : "  + String.valueOf(item.getTotal_damage_dealt()));
         holder.rankTv.setText("Rank - " + String.valueOf(item.getRank()));
         System.out.println(item.getHero_class());
         String imageResourceName;
