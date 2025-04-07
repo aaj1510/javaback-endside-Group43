@@ -42,7 +42,7 @@ public class MinorTaskFragment extends Fragment {
 
     private void getMinorTasks(){
         User user = getUserInfo();
-        String userId = user.getUid();
+        String userId = user.getUserId();
         minorTasksRef = FirebaseDatabase.getInstance().getReference("MinorTasks");
         presetTasksRef = FirebaseDatabase.getInstance().getReference("PresetTasks");
         minorTasksRef.child(userId).addValueEventListener(new ValueEventListener() {
@@ -83,38 +83,6 @@ public class MinorTaskFragment extends Fragment {
 
             }
         });
-//        databaseReference = FirebaseDatabase.getInstance().getReference("PresetTasks");
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Log.d("FirebaseData", "DataSnapshot: " + snapshot.toString());
-//
-//
-//                // Check if "Mage" node exists
-//                if (snapshot.child(heroClass).exists()) {
-//                    Log.d("FirebaseData", heroClass + "exists.");
-//
-//                    for (DataSnapshot taskSnapshot : snapshot.child(heroClass).getChildren()) {
-//                        String taskName = taskSnapshot.child("task_name").getValue(String.class);
-//                        String taskDesc = taskSnapshot.child("task_description").getValue(String.class);
-//                        //int taskDifficulty = taskSnapshot.child("Difficulty").getValue(Integer.class); //add later
-//                        //Log.d("FirebaseData", "Task Name: " + taskName); // Debug log for task names
-//
-//                        // Create a new ListTaskItem and add it to the list
-//                        ListTaskItem taskItem = new ListTaskItem(taskName, taskDesc);
-//                        taskList.add(taskItem);
-//                    }
-//                }
-//
-//                // Notify the adapter that the data has been updated
-//                majorTaskAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.d("FirebaseData", "Failed to read data: " + error.getMessage());
-//            }
-//        });
     }
 
     private User getUserInfo(){

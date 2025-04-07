@@ -28,8 +28,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
         setContentView(R.layout.hero_selection_page);
         Intent intent = getIntent();
         User user = intent.getParcelableExtra("user_key");
-        String userId = user.getUid();
-        String heroClass = user.getHero_class();
+        String userId = user.getUserId();
+        String heroClass = user.getHeroClass();
         Log.d("User", userId + "/" + heroClass);
         ImageButton selectWarrior = findViewById(R.id.warrior_poster);
         ImageButton selectMage = findViewById(R.id.mage_poster);
@@ -42,8 +42,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
                 databaseRef.child("Users").child(userId).child("class").setValue("Warrior").addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        user.setHero_class("Warrior");
-                        Log.d("User Class", user.getHero_class());
+                        user.setHeroClass("Warrior");
+                        Log.d("User Class", user.getHeroClass());
                         Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
                         newIntent.putExtra("user_key",user);
                         startActivity(newIntent);
@@ -65,8 +65,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
                 databaseRef.child("Users").child(userId).child("class").setValue("Mage").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                user.setHero_class("Mage");
-                                Log.d("User Class", user.getHero_class());
+                                user.setHeroClass("Mage");
+                                Log.d("User Class", user.getHeroClass());
                                 Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
                                 newIntent.putExtra("user_key",user);
                                 startActivity(newIntent);
@@ -88,8 +88,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
                 databaseRef.child("Users").child(userId).child("class").setValue("Archer").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                user.setHero_class("Archer");
-                                Log.d("User Class", user.getHero_class());
+                                user.setHeroClass("Archer");
+                                Log.d("User Class", user.getHeroClass());
                                 Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
                                 newIntent.putExtra("user_key",user);
                                 startActivity(newIntent);
@@ -111,8 +111,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
                 databaseRef.child("Users").child(userId).child("class").setValue("Pirate").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                user.setHero_class("Pirate");
-                                Log.d("User Class", user.getHero_class());
+                                user.setHeroClass("Pirate");
+                                Log.d("User Class", user.getHeroClass());
                                 Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
                                 newIntent.putExtra("user_key",user);
                                 startActivity(newIntent);

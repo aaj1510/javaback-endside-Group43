@@ -29,10 +29,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         username_text.setText(getUserInfo().getUsername().toLowerCase());
 
         pts_text = view.findViewById(R.id.actionPts);
-        pts_text.setText(String.valueOf(getUserInfo().getAction_points()));
+        pts_text.setText(String.valueOf(getUserInfo().getActionPoints()));
 
         ImageView avatar_image = view.findViewById(R.id.avatar);
-        String avatar = user.getHero_class().toLowerCase();
+        String avatar = user.getHeroClass().toLowerCase();
         String imageResourceName = "avatar_" + avatar;
         avatar_image.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
 
@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 //        });
 
     public void updatePoints(){
-        pts_text.setText(String.valueOf(getUserInfo().getAction_points()));
+        pts_text.setText(String.valueOf(getUserInfo().getActionPoints()));
     }
 
     public User getUserInfo(){

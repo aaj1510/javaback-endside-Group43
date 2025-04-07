@@ -114,7 +114,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += task_actionPoints;
                                     userTasksReference.child(userId).child("action_points").setValue(action_points);
-                                    user.setAction_points(action_points);
+                                    user.setActionPoints(action_points);
                                 }
 
                                 @Override
@@ -127,25 +127,6 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                 }
             });
         }
-
-
-
-        // Initially set the description to be hidden
-//        holder.taskDesc.setVisibility(View.GONE);
-
-        // Set a click listener on the itemView (the entire card)
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Toggle visibility of the task description
-//                if (holder.taskDesc.getVisibility() == View.GONE) {
-//                    holder.taskDesc.setVisibility(View.VISIBLE);  // Show the description
-//                } else {
-//                    holder.taskDesc.setVisibility(View.GONE);     // Hide the description
-//                }
-//            }
-//        });
-
     }
 
     @Override

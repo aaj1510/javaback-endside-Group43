@@ -59,7 +59,7 @@ public class CreateTaskFragment extends DialogFragment {
                 Integer difficulty = difficulty_seekbar.getProgress() + 1;
                 String selected_date = date_input.getText().toString();
                 String selected_time = time_input.getText().toString();
-                String userId = user.getUid();
+                String userId = user.getUserId();
                 MajorTask majorTask = new MajorTask(userId,task_id,task_name,task_description,selected_date,selected_time,difficulty);
                 Map<String, Object> taskValues = majorTask.toMap();
                 if(task_name.isEmpty()){

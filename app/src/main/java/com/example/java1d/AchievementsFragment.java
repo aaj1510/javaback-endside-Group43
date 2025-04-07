@@ -105,20 +105,20 @@ public class AchievementsFragment extends Fragment {
                 //first place
                 String first_username = userList.get(0).getUsername();
                 //String first_avatar = userList.get(0).getHero_class(); //do avatar later
-                Integer first_score = userList.get(0).getAction_points();
+                Integer first_score = userList.get(0).getActionPoints();
                 firstPlaceTv.setText(first_username);
                 firstPlaceScore.setText(String.valueOf(first_score) + " POINTS");
 
                 //System.out.println(userList.get(1).getUsername()); //for debugging
                 //second place
                 String second_username = userList.get(1).getUsername();
-                Integer second_score = userList.get(1).getAction_points();
+                Integer second_score = userList.get(1).getActionPoints();
                 secondPlaceTv.setText(second_username);
                 secondPlaceScore.setText(String.valueOf(second_score) + " POINTS");
 
                 //third place
                 String third_username = userList.get(2).getUsername();
-                Integer third_score = userList.get(2).getAction_points();
+                Integer third_score = userList.get(2).getActionPoints();
                 thirdPlaceTv.setText(third_username);
                 thirdPlaceScore.setText(String.valueOf(third_score) + " POINTS");
 
@@ -131,7 +131,7 @@ public class AchievementsFragment extends Fragment {
 
                 Log.d("Leaderboard", "User List: " + userList.size());
                 for (User user : userList) {
-                    Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getAction_points());
+                    Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getActionPoints());
                 }
 
             }
@@ -155,7 +155,7 @@ public class AchievementsFragment extends Fragment {
             public int compare(User u1, User u2) {
                 // Compare by score in descending order
                 // Higher score comes first
-                return Integer.compare(u2.getAction_points(), u1.getAction_points());
+                return Integer.compare(u2.getActionPoints(), u1.getActionPoints());
             }
         });
 

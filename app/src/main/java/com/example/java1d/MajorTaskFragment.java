@@ -54,7 +54,7 @@ public class MajorTaskFragment extends Fragment {
 
     public void getMajorTasks(){
         User user = getUserInfo();
-        String userId = user.getUid();
+        String userId = user.getUserId();
         Log.d("UserID", userId);
         databaseReference = FirebaseDatabase.getInstance().getReference("MajorTasks");
         Query userMajorTasksQuery = databaseReference.orderByChild("user_id").equalTo(userId);
