@@ -42,8 +42,14 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         holder.bossDefeatTv.setText("Total Points : "  + String.valueOf(item.getAction_points()));
         holder.rankTv.setText("Rank - " + String.valueOf(item.getRank()));
         System.out.println(item.getHero_class());
-
-        String imageResourceName = "avatar_" + item.getHero_class().toLowerCase();
+        String imageResourceName;
+        if (item.getHero_class().toLowerCase().equals("nil")){
+            imageResourceName = "avatar_warrior"; //set to warrior default
+        }
+        else{
+            imageResourceName = "avatar_" + item.getHero_class().toLowerCase();
+        }
+        //String imageResourceName = "avatar_" + item.getHero_class().toLowerCase();
         holder.userclassIv.setImageResource(holder.itemView.getContext().getResources().getIdentifier(imageResourceName, "drawable", holder.itemView.getContext().getPackageName()));
 
     }

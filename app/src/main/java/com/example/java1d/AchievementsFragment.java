@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,13 +30,15 @@ public class AchievementsFragment extends Fragment {
     private LeaderboardAdapter leaderboardAdapter;
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
-    TextView firstPlaceTv,firstPlaceAvatar,firstPlaceScore, secondPlaceTv, secondPlaceScore, thirdPlaceTv, thirdPlaceScore;
+    TextView firstPlaceTv, firstPlaceScore, secondPlaceTv, secondPlaceScore, thirdPlaceTv, thirdPlaceScore;
+
+    ImageView firstPlaceAvatar,secondPlaceAvatar, thirdPlaceAvatar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.achievements_page, container, false);
+        View view = inflater.inflate(R.layout.achievements_page, container, false);
 
         // Initialize Firebase Database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -54,18 +57,19 @@ public class AchievementsFragment extends Fragment {
 
 
         firstPlaceTv = view.findViewById(R.id.first_username);
-        //firstPlaceAvatar = view.findViewById(R.id.first_user_win);
+        firstPlaceAvatar = view.findViewById(R.id.first_place_avatar);
         firstPlaceScore = view.findViewById(R.id.first_score);
         //firstPlaceTv = view.findViewById(R.id.first_username);
         secondPlaceTv = view.findViewById(R.id.second_username);
         secondPlaceScore = view.findViewById(R.id.second_score);
+        secondPlaceAvatar = view.findViewById(R.id.second_class_avatar);
 
         thirdPlaceTv = view.findViewById(R.id.third_username);
         thirdPlaceScore = view.findViewById(R.id.third_score);
+        thirdPlaceAvatar = view.findViewById(R.id.third_class_avatar);
         return view;
 
     }
-
 
 
     private void fetchUsers() {
@@ -91,51 +95,64 @@ public class AchievementsFragment extends Fragment {
                     }
 
 
-                    User user = new User(username,hero_class,action_pts,0); //later change to bossDefeated (After attack is working)
+                    User user = new User(username, hero_class, action_pts, 0); //later change to bossDefeated (After attack is working)
                     //System.out.println(user.getUsername());
                     //System.out.println(user.getHero_class());
                     userList.add(user);
 
 
-
                 }
-                rankUsers(userList);
+                List<User> sortedList = rankManualUsers(userList);
+
+                for (User u : sortedList) {
+                    Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getAction_points() + " POINTS");
+                } //sorting works
+
                 //Set data into the textviews based on user rank
 
                 //first place
-                String first_username = userList.get(0).getUsername();
-                //String first_avatar = userList.get(0).getHero_class(); //do avatar later
-                Integer first_score = userList.get(0).getAction_points();
+                String first_username = sortedList.get(0).getUsername();
+                String first_avatar = userList.get(0).getHero_class().toLowerCase(); //do avatar later
+                Integer first_score = sortedList.get(0).getAction_points();
                 firstPlaceTv.setText(first_username);
                 firstPlaceScore.setText(String.valueOf(first_score) + " POINTS");
+                String firstImageResourceName = "avatar_" + first_avatar;
+                firstPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(firstImageResourceName, "drawable", getContext().getPackageName()));
 
-                //System.out.println(userList.get(1).getUsername()); //for debugging
+
+
                 //second place
-                String second_username = userList.get(1).getUsername();
-                Integer second_score = userList.get(1).getAction_points();
+                String second_username = sortedList.get(1).getUsername();
+                String second_avatar = sortedList.get(1).getHero_class().toLowerCase();
+                Integer second_score = sortedList.get(1).getAction_points();
                 secondPlaceTv.setText(second_username);
                 secondPlaceScore.setText(String.valueOf(second_score) + " POINTS");
+                String secondImageResourceName = "avatar_" + second_avatar;
+                secondPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(secondImageResourceName, "drawable", getContext().getPackageName()));
+                Log.d("Check Avatar", "Details: " + second_avatar);
 
                 //third place
-                String third_username = userList.get(2).getUsername();
-                Integer third_score = userList.get(2).getAction_points();
+                String third_username = sortedList.get(2).getUsername();
+                Integer third_score = sortedList.get(2).getAction_points();
+                String third_avatar = sortedList.get(2).getHero_class().toLowerCase();
                 thirdPlaceTv.setText(third_username);
                 thirdPlaceScore.setText(String.valueOf(third_score) + " POINTS");
+                String thirdImageResourceName = "avatar_" + third_avatar;
+                thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
 
                 //4th place to all the way to be shown as in leaderboard
-                List<User> filteredList =  userList.subList(3, userList.size());
+                List<User> filteredList = sortedList.subList(3, sortedList.size());
                 leaderboardAdapter.updateData(filteredList);
 
                 // Notify the adapter that the data has been updated
                 leaderboardAdapter.notifyDataSetChanged();
 
-                Log.d("Leaderboard", "User List: " + userList.size());
-                for (User user : userList) {
+                Log.d("Leaderboard", "User List: " + sortedList.size());
+                for (User user : sortedList) {
                     Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getAction_points());
                 }
 
             }
-
 
 
             @Override
@@ -146,8 +163,36 @@ public class AchievementsFragment extends Fragment {
         });
     }
 
-    //TODO: USE ALGO TO RANK THE USERS
-    //rank users function using collections.sort()
+
+
+    private List<User> rankManualUsers(List<User> userList) {
+
+        List<User> newList = manualSort(userList);
+        // Assign ranks based on the sorted list
+        for (int i = 0; i < newList.size(); i++) { //works
+            User user = newList.get(i);
+            //rank starts at 1
+            user.setRank(i + 1);
+        }
+
+        return newList;
+    }
+
+    private List<User> manualSort(List<User> userList) {
+        List<User> sortedUsers = new ArrayList<>();
+        for (int i = 1; i < userList.size(); i++) {
+            User user = userList.get(i);
+            int j;
+            for ( j=0; j < sortedUsers.size()&&sortedUsers.get(j).getAction_points().compareTo(user.getAction_points())>=0; j++){}
+            sortedUsers.add(j, user);
+        }
+        return sortedUsers;
+    }
+
+
+    //rank users function using collections.sort() //for debugging
+
+    /*
     private void rankUsers(List<User> userList) {
         // Sort the list of users by score in descending order using compare function
         Collections.sort(userList, new Comparator<User>() {
@@ -166,7 +211,5 @@ public class AchievementsFragment extends Fragment {
             user.setRank(i + 1);
 
         }
-    }
-
+    }*/
 }
-
