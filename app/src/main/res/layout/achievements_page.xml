@@ -53,6 +53,7 @@
                         android:id="@+id/first_user_win"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="100dp"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/view6"
@@ -61,6 +62,7 @@
                         app:layout_constraintTop_toTopOf="@+id/view6">
 
                         <ImageView
+                            android:id="@+id/first_place_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -106,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/pixelify_sans_medium"
-                            android:text="0 BOSSES"
+                            android:text="0"
                             android:textColor="#fff"
                             android:textStyle="bold" />
 
@@ -135,6 +137,7 @@
                         android:id="@+id/second_user_win"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="100dp"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/view9"
@@ -143,7 +146,7 @@
                         app:layout_constraintTop_toTopOf="@+id/view9">
 
                         <ImageView
-                            android:id ="@+id/second_class_avatar"
+                            android:id="@+id/second_class_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -182,7 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="0 BOSSES"
+                            android:text="0"
                             android:textStyle="bold"
                             android:fontFamily="@font/pixelify_sans_medium"
                             android:textColor="#fff" />
@@ -208,6 +211,7 @@
                         android:id="@+id/third_user_win"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="100dp"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/view10"
@@ -216,7 +220,7 @@
                         app:layout_constraintTop_toTopOf="@+id/view10">
 
                         <ImageView
-                            android:id ="@+id/third_class_avatar"
+                            android:id="@+id/third_class_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -256,7 +260,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="0 BOSSES"
+                            android:text="0"
                             android:textStyle="bold"
                             android:fontFamily="@font/pixelify_sans_medium"
                             android:textColor="#fff" />
@@ -276,21 +280,6 @@
 
 
                 </androidx.recyclerview.widget.RecyclerView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:background="#EDEDEDED">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Daily Shop"
-                        android:textColor="#000"
-                        android:layout_gravity="top" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
