@@ -58,7 +58,7 @@ public class AchievementsFragment extends Fragment {
             public void onClick(View v) {
                 ListOfUsers.clear();
                 getUsers("Boss Defeated: ");
-                sort(unsortedUsers);
+                manualsort(unsortedUsers);
                 for (UserSorting user: sort(unsortedUsers)){
                     ListOfUsers.add(new AchievementsList(user.username, user.criteria, user.criteriaValue));
                     System.out.println(user.username + user.criteria + user.criteriaValue);
@@ -118,6 +118,18 @@ public class AchievementsFragment extends Fragment {
         sortedUsers.add(i, user);
     }
     /* End of sorting Algorithm */
+
+    public void manualsort(List<UserSorting> unsortedUsers){
+        List<UserSorting> sortedUsers = new ArrayList<>();
+        for(int i=0; i<unsortedUsers.size(); i++){
+            UserSorting user = unsortedUsers.get(i);
+            for(int j=0; j< sortedUsers.size(); j++){
+                if(sortedUsers.get(i).criteriaValue.compareTo(user.criteriaValue)>=0){
+                    sortedUsers.add(i, user);
+                }
+            }
+        }
+    }
 
     protected static class UserSorting{
         private String username;
