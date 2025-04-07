@@ -114,66 +114,64 @@ public class AchievementsFragment extends Fragment {
                 } //sorting works
 
                 //Set data into the textviews based on user rank
+                if (getContext() != null) {
+                    //first place
+                    String first_username = sortedList.get(0).getUsername();
+                    String first_avatar = sortedList.get(0).getHero_class().toLowerCase(); //do avatar later
+                    Integer first_score = sortedList.get(0).getAction_points();
+                    String firstImageResourceName;
+                    firstPlaceTv.setText(first_username);
+                    firstPlaceScore.setText(String.valueOf(first_score));
+                    if (first_avatar.equals("nil")) {
+                        firstImageResourceName = "avatar_warrior";
+                    } else {
+                        firstImageResourceName = "avatar_" + first_avatar;
+                    }
 
-                //first place
-                String first_username = sortedList.get(0).getUsername();
-                String first_avatar = sortedList.get(0).getHero_class().toLowerCase(); //do avatar later
-                Integer first_score = sortedList.get(0).getAction_points();
-                String firstImageResourceName;
-                firstPlaceTv.setText(first_username);
-                firstPlaceScore.setText(String.valueOf(first_score));
-                if (first_avatar.equals("nil")){
-                    firstImageResourceName = "avatar_warrior";
-                }
-                else{
-                    firstImageResourceName = "avatar_" + first_avatar;
-                }
-                firstPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(firstImageResourceName, "drawable", getContext().getPackageName()));
-
-
-
-                //second place
-                String second_username = sortedList.get(1).getUsername();
-                String second_avatar = sortedList.get(1).getHero_class().toLowerCase();
-                Integer second_score = sortedList.get(1).getAction_points();
-                secondPlaceTv.setText(second_username);
-                secondPlaceScore.setText(String.valueOf(second_score));
-                String secondImageResourceName;
-                if (second_avatar.equals("nil")){
-                    secondImageResourceName = "avatar_warrior";
-                }
-                else{
-                    secondImageResourceName = "avatar_" + second_avatar;
-                }
-                secondPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(secondImageResourceName, "drawable", getContext().getPackageName()));
-                Log.d("Check Avatar", "Details: " + second_avatar);
+                    firstPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(firstImageResourceName, "drawable", getContext().getPackageName()));
 
 
-                //third place
-                String third_username = sortedList.get(2).getUsername();
-                Integer third_score = sortedList.get(2).getAction_points();
-                String third_avatar = sortedList.get(2).getHero_class().toLowerCase();
-                thirdPlaceTv.setText(third_username);
-                thirdPlaceScore.setText(String.valueOf(third_score));
-                String thirdImageResourceName;
-                if (third_avatar.equals("nil")){
-                    thirdImageResourceName = "avatar_warrior";
-                }
-                else{
-                    thirdImageResourceName = "avatar_" + third_avatar;
-                }
-                thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
+                    //second place
+                    String second_username = sortedList.get(1).getUsername();
+                    String second_avatar = sortedList.get(1).getHero_class().toLowerCase();
+                    Integer second_score = sortedList.get(1).getAction_points();
+                    secondPlaceTv.setText(second_username);
+                    secondPlaceScore.setText(String.valueOf(second_score));
+                    String secondImageResourceName;
+                    if (second_avatar.equals("nil")) {
+                        secondImageResourceName = "avatar_warrior";
+                    } else {
+                        secondImageResourceName = "avatar_" + second_avatar;
+                    }
+                    secondPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(secondImageResourceName, "drawable", getContext().getPackageName()));
+                    Log.d("Check Avatar", "Details: " + second_avatar);
 
-                //4th place to all the way to be shown as in leaderboard
-                List<User> filteredList = sortedList.subList(3, sortedList.size());
-                leaderboardAdapter.updateData(filteredList);
 
-                // Notify the adapter that the data has been updated
-                leaderboardAdapter.notifyDataSetChanged();
+                    //third place
+                    String third_username = sortedList.get(2).getUsername();
+                    Integer third_score = sortedList.get(2).getAction_points();
+                    String third_avatar = sortedList.get(2).getHero_class().toLowerCase();
+                    thirdPlaceTv.setText(third_username);
+                    thirdPlaceScore.setText(String.valueOf(third_score));
+                    String thirdImageResourceName;
+                    if (third_avatar.equals("nil")) {
+                        thirdImageResourceName = "avatar_warrior";
+                    } else {
+                        thirdImageResourceName = "avatar_" + third_avatar;
+                    }
+                    thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
 
-                Log.d("Leaderboard", "User List: " + sortedList.size());
-                for (User user : sortedList) {
-                    Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getAction_points());
+                    //4th place to all the way to be shown as in leaderboard
+                    List<User> filteredList = sortedList.subList(3, sortedList.size());
+                    leaderboardAdapter.updateData(filteredList);
+
+                    // Notify the adapter that the data has been updated
+                    leaderboardAdapter.notifyDataSetChanged();
+
+                    Log.d("Leaderboard", "User List: " + sortedList.size());
+                    for (User user : sortedList) {
+                        Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getAction_points());
+                    }
                 }
 
             }
