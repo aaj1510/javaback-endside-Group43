@@ -100,7 +100,7 @@ public class AchievementsFragment extends Fragment {
                     }
 
                     //User user = new User(username, hero_class, action_pts, 0); //later change to bossDefeated (After attack is working)
-                    User user = new User(username, hero_class, total_damage_dealt, 0);
+                    User user = new User(username, hero_class, action_pts, 0);
                     //System.out.println(user.getUsername());
                     //System.out.println(user.getHero_class());
                     userList.add(user);
@@ -117,8 +117,8 @@ public class AchievementsFragment extends Fragment {
 
                 //first place
                 String first_username = sortedList.get(0).getUsername();
-                String first_avatar = userList.get(0).getHero_class().toLowerCase(); //do avatar later
-                Integer first_score = sortedList.get(0).getTotal_damage_dealt();
+                String first_avatar = sortedList.get(0).getHero_class().toLowerCase(); //do avatar later
+                Integer first_score = sortedList.get(0).getAction_points();
                 String firstImageResourceName;
                 firstPlaceTv.setText(first_username);
                 firstPlaceScore.setText(String.valueOf(first_score));
@@ -135,7 +135,7 @@ public class AchievementsFragment extends Fragment {
                 //second place
                 String second_username = sortedList.get(1).getUsername();
                 String second_avatar = sortedList.get(1).getHero_class().toLowerCase();
-                Integer second_score = sortedList.get(1).getTotal_damage_dealt();
+                Integer second_score = sortedList.get(1).getAction_points();
                 secondPlaceTv.setText(second_username);
                 secondPlaceScore.setText(String.valueOf(second_score));
                 String secondImageResourceName;
@@ -151,7 +151,7 @@ public class AchievementsFragment extends Fragment {
 
                 //third place
                 String third_username = sortedList.get(2).getUsername();
-                Integer third_score = sortedList.get(2).getTotal_damage_dealt();
+                Integer third_score = sortedList.get(2).getAction_points();
                 String third_avatar = sortedList.get(2).getHero_class().toLowerCase();
                 thirdPlaceTv.setText(third_username);
                 thirdPlaceScore.setText(String.valueOf(third_score));
@@ -207,7 +207,7 @@ public class AchievementsFragment extends Fragment {
         for (int i = 1; i < userList.size(); i++) {
             User user = userList.get(i);
             int j;
-            for ( j=0; j < sortedUsers.size()&&sortedUsers.get(j).getTotal_damage_dealt().compareTo(user.getTotal_damage_dealt())>=0; j++){}
+            for ( j=0; j < sortedUsers.size()&&sortedUsers.get(j).getAction_points().compareTo(user.getAction_points())>=0; j++){}
             sortedUsers.add(j, user);
         }
         return sortedUsers;
