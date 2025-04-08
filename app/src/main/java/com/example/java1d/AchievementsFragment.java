@@ -34,7 +34,7 @@ public class AchievementsFragment extends Fragment {
     private RecyclerView recyclerView;
     TextView firstPlaceTv, firstPlaceScore, secondPlaceTv, secondPlaceScore, thirdPlaceTv, thirdPlaceScore;
 
-    ImageView firstPlaceAvatar,secondPlaceAvatar, thirdPlaceAvatar;
+    ImageView firstPlaceAvatar, secondPlaceAvatar, thirdPlaceAvatar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,9 +106,9 @@ public class AchievementsFragment extends Fragment {
 
 
                 }
-                List<User> sortedList = rankManualUsers(userList);
+                rankUsers(userList);
 
-                for (User u : sortedList) {
+                for (User u : userList) {
                     Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getActionPoints());
                 } //sorting works
 
@@ -116,9 +116,9 @@ public class AchievementsFragment extends Fragment {
                 if (getContext() != null) {
 
                     //first place to 3rd place
-                    updateLeaderboardItem(sortedList.get(0).getUsername(), sortedList.get(0).getActionPoints(), sortedList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
-                    updateLeaderboardItem(sortedList.get(1).getUsername(), sortedList.get(1).getActionPoints(), sortedList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
-                    updateLeaderboardItem(sortedList.get(2).getUsername(), sortedList.get(2).getActionPoints(), sortedList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
+                    updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getActionPoints(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
+                    updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getActionPoints(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
+                    updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getActionPoints(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
 
                     /*
                     //first place
@@ -167,14 +167,14 @@ public class AchievementsFragment extends Fragment {
                     */
 
                     //4th place to all the way to be shown as in leaderboard
-                    List<User> filteredList = sortedList.subList(3, sortedList.size());
+                    List<User> filteredList = userList.subList(3, userList.size());
                     leaderboardAdapter.updateData(filteredList);
 
                     // Notify the adapter that the data has been updated
                     leaderboardAdapter.notifyDataSetChanged();
 
-                    Log.d("Leaderboard", "User List: " + sortedList.size());
-                    for (User user : sortedList) {
+                    Log.d("Leaderboard", "User List: " + userList.size());
+                    for (User user : userList) {
                         Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getActionPoints());
                     }
                 }
@@ -191,34 +191,60 @@ public class AchievementsFragment extends Fragment {
     }
 
 
+    //rankusers using merge sort
+    private void rankUsers(List<User> userList) {
 
-
-    private List<User> rankManualUsers(List<User> userList) {
-
-        List<User> newList = manualSort(userList);
+        mergeSort(userList, 0, userList.size() - 1);
         // Assign ranks based on the sorted list
-        for (int i = 0; i < newList.size(); i++) { //works
-            User user = newList.get(i);
+        for (int i = 0; i < userList.size(); i++) { //works
+            User user = userList.get(i);
             //rank starts at 1
             user.setRank(i + 1);
         }
-
-        return newList;
+        
     }
 
-    //sorts the list and adds into a new arraylist
-    //returns the new arraylist
-    private List<User> manualSort(List<User> userList) {
-        //
+    public static List<User> merge(List<User> userList, int low, int mid, int high) {
         List<User> sortedUsers = new ArrayList<>();
-        for (int i = 1; i < userList.size(); i++) {
-            User user = userList.get(i);
-            int j;
-            for (j = 0; j < sortedUsers.size() && sortedUsers.get(j).getActionPoints().compareTo(user.getActionPoints())>=0; j++){}
-            sortedUsers.add(j, user);
+        int startL = low;
+        int startR = mid + 1;
+        while (startL <= mid && startR <= high) {
+            if (userList.get(startL).getActionPoints() >= userList.get(startR).getActionPoints()) {
+                sortedUsers.add(userList.get(startL));
+                startL += 1;
+
+            } else {
+                sortedUsers.add(userList.get(startR));
+                startR += 1;
+            }
         }
-        return sortedUsers;
+
+        while (startL <= mid) {
+            sortedUsers.add(userList.get(startL));
+            startL += 1;
+        }
+
+        while (startR <= high) {
+            sortedUsers.add(userList.get(startR));
+            startR += 1;
+        }
+
+        for (int i = low; i <= high; i++) {
+            userList.set((i), sortedUsers.get(i - low));
+        }
+        return userList;
     }
+
+    public static void mergeSort(List<User> unsortedUsers, int low, int high){
+        if (low < high){
+            int mid = (low + high)/2;
+            mergeSort(unsortedUsers, low, mid);
+            mergeSort(unsortedUsers, mid+1, high);
+            merge(unsortedUsers, low, mid, high);
+        }
+
+    }
+
 
     // To avoid repetitions, updateLeaderboardItem - sets data in UI for first place, second place and third place
     private void updateLeaderboardItem(String user_username, int user_score, String user_avatar, TextView usernameTextView, TextView scoreTextView, ImageView avatarImageView) {
@@ -258,4 +284,7 @@ public class AchievementsFragment extends Fragment {
 
         }
     }*/
+
+
+
 }
