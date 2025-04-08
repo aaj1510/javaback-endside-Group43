@@ -45,7 +45,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         //set textviews in UI based user data
         holder.usernameTv.setText(item.getUsername());
-        holder.bossDefeatTv.setText("Total Damage Dealt : "  + String.valueOf(item.getAction_points())); //using action points for debugging
+        holder.bossDefeatTv.setText("Total Damage Dealt : "  + String.valueOf(item.getActionPoints())); //using action points for debugging
         holder.rankTv.setText("Rank - " + String.valueOf(item.getRank()));
         //System.out.println(item.getHero_class());
 

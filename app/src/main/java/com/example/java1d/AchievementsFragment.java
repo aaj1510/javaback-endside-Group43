@@ -109,16 +109,16 @@ public class AchievementsFragment extends Fragment {
                 List<User> sortedList = rankManualUsers(userList);
 
                 for (User u : sortedList) {
-                    Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getAction_points());
+                    Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getActionPoints());
                 } //sorting works
 
                 //Set data into the textviews based on user rank
                 if (getContext() != null) {
 
                     //first place to 3rd place
-                    updateLeaderboardItem(sortedList.get(0).getUsername(), sortedList.get(0).getAction_points(), sortedList.get(0).getHero_class().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
-                    updateLeaderboardItem(sortedList.get(1).getUsername(), sortedList.get(1).getAction_points(), sortedList.get(1).getHero_class().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
-                    updateLeaderboardItem(sortedList.get(2).getUsername(), sortedList.get(2).getAction_points(), sortedList.get(2).getHero_class().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
+                    updateLeaderboardItem(sortedList.get(0).getUsername(), sortedList.get(0).getActionPoints(), sortedList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
+                    updateLeaderboardItem(sortedList.get(1).getUsername(), sortedList.get(1).getActionPoints(), sortedList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
+                    updateLeaderboardItem(sortedList.get(2).getUsername(), sortedList.get(2).getActionPoints(), sortedList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
 
                     /*
                     //first place
@@ -214,7 +214,7 @@ public class AchievementsFragment extends Fragment {
         for (int i = 1; i < userList.size(); i++) {
             User user = userList.get(i);
             int j;
-            for (j = 0; j < sortedUsers.size() && sortedUsers.get(j).getAction_points().compareTo(user.getAction_points())>=0; j++){}
+            for (j = 0; j < sortedUsers.size() && sortedUsers.get(j).getActionPoints().compareTo(user.getActionPoints())>=0; j++){}
             sortedUsers.add(j, user);
         }
         return sortedUsers;
