@@ -50,11 +50,11 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         //System.out.println(item.getHero_class());
 
         String imageResourceName;
-        if (item.getHero_class().toLowerCase().equals("nil")){
+        if (item.getHeroClass().toLowerCase().equals("nil")){
             imageResourceName = "avatar_warrior"; //set to warrior default
         }
         else{
-            imageResourceName = "avatar_" + item.getHero_class().toLowerCase();
+            imageResourceName = "avatar_" + item.getHeroClass().toLowerCase();
         }
         //sets the image for the ImageView by using the getResources().getIdentifier() method to get the correct drawable resource based on the imageResourceName
         holder.userclassIv.setImageResource(holder.itemView.getContext().getResources().getIdentifier(imageResourceName, "drawable", holder.itemView.getContext().getPackageName()));

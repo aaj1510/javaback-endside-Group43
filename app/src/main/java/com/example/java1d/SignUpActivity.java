@@ -89,17 +89,6 @@ public class SignUpActivity extends BackgroundActivity {
                             User user = new User(uid, username, email);
                             Map<String, Object> userValues = user.toMap();
 
-//                            HashMap<String, Object> hashMap = new HashMap<>();
-//                            hashMap.put("uid", uid);
-//                            hashMap.put("username", username);
-//                            hashMap.put("email", email);
-//                            hashMap.put("class", "NIL");
-//                            //hashMap.put("password", password);//no need to store but will have it to debug
-//                            hashMap.put("gold", 0);
-//                            hashMap.put("action_points", 0);
-//                            hashMap.put("total_bosses_defeated", 0);
-//                            hashMap.put("assigned_boss_id", null);
-
                             //set data to db
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
                             ref.child(uid).setValue(userValues).addOnSuccessListener(new OnSuccessListener<Void>() {

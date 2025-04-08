@@ -102,8 +102,7 @@ public class LoginActivity extends BackgroundActivity {
                                                         Random random = new Random();
                                                         if(className.equals("NIL")){
                                                             for(int i = 1; i < 6; i ++ ){
-                                                                int max = 28;
-                                                                int min = 21;
+                                                                int max = 28;                                                                int min = 21;
                                                                 int number = random.nextInt(max - min + 1) + min;
                                                                 minorTaskMap.put("task_id", "task" + number);
                                                                 minorTaskMap.put("completed", false);
@@ -149,7 +148,7 @@ public class LoginActivity extends BackgroundActivity {
 
 //                                                    Log.d("Firebase", className);
                                                     Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
-                                                    if(userInfo.getHero_class().equals("NIL")){
+                                                    if(userInfo.getHeroClass().equals("NIL")){
 //                                                    if (className.equals("NIL")){
                                                         // go to hero selection
                                                         Toast.makeText(LoginActivity.this,"Classname is nil",Toast.LENGTH_SHORT).show();

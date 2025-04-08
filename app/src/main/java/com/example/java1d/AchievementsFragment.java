@@ -1,5 +1,7 @@
 package com.example.java1d;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -121,8 +123,8 @@ public class AchievementsFragment extends Fragment {
                     /*
                     //first place
                     String first_username = sortedList.get(0).getUsername();
-                    String first_avatar = sortedList.get(0).getHero_class().toLowerCase(); //do avatar later
-                    Integer first_score = sortedList.get(0).getAction_points();
+                    String first_avatar = sortedList.get(0).getHeroClass().toLowerCase(); //do avatar later
+                    Integer first_score = sortedList.get(0).getActionPoints();
                     String firstImageResourceName;
                     firstPlaceTv.setText(first_username);
                     firstPlaceScore.setText(String.valueOf(first_score));
@@ -131,14 +133,12 @@ public class AchievementsFragment extends Fragment {
                     } else {
                         firstImageResourceName = "avatar_" + first_avatar;
                     }
-
                     firstPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(firstImageResourceName, "drawable", getContext().getPackageName()));
-
 
                     //second place
                     String second_username = sortedList.get(1).getUsername();
-                    String second_avatar = sortedList.get(1).getHero_class().toLowerCase();
-                    Integer second_score = sortedList.get(1).getAction_points();
+                    String second_avatar = sortedList.get(1).getHeroClass().toLowerCase();
+                    Integer second_score = sortedList.get(1).getActionPoints();
                     secondPlaceTv.setText(second_username);
                     secondPlaceScore.setText(String.valueOf(second_score));
                     String secondImageResourceName;
@@ -153,8 +153,8 @@ public class AchievementsFragment extends Fragment {
 
                     //third place
                     String third_username = sortedList.get(2).getUsername();
-                    Integer third_score = sortedList.get(2).getAction_points();
-                    String third_avatar = sortedList.get(2).getHero_class().toLowerCase();
+                    Integer third_score = sortedList.get(2).getActionPoints();
+                    String third_avatar = sortedList.get(2).getHeroClass().toLowerCase();
                     thirdPlaceTv.setText(third_username);
                     thirdPlaceScore.setText(String.valueOf(third_score));
                     String thirdImageResourceName;
@@ -175,7 +175,7 @@ public class AchievementsFragment extends Fragment {
 
                     Log.d("Leaderboard", "User List: " + sortedList.size());
                     for (User user : sortedList) {
-                        Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getAction_points());
+                        Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getActionPoints());
                     }
                 }
 

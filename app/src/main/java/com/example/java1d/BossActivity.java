@@ -38,11 +38,11 @@ public class BossActivity extends BackgroundActivity {
         // Changes Based on User Info
         // Action Points
         TextView pts_text = findViewById(R.id.actionPts);
-        pts_text.setText(String.valueOf(user.getAction_points()));
+        pts_text.setText(String.valueOf(user.getActionPoints()));
 
         // Avatar
         ImageView avatar_image = findViewById(R.id.avatar);
-        String avatar = user.getHero_class().toLowerCase();
+        String avatar = user.getHeroClass().toLowerCase();
         String imageResourceName = "avatar_" + avatar;
         avatar_image.setImageResource(getResources().getIdentifier(imageResourceName, "drawable", getPackageName()));
 

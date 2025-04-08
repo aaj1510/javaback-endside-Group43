@@ -53,6 +53,7 @@
                         android:id="@+id/first_user_win"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="100dp"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/view6"
@@ -61,7 +62,7 @@
                         app:layout_constraintTop_toTopOf="@+id/view6">
 
                         <ImageView
-                            android:id = "@+id/first_place_avatar"
+                            android:id="@+id/first_place_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -136,6 +137,7 @@
                         android:id="@+id/second_user_win"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="100dp"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/view9"
@@ -144,7 +146,7 @@
                         app:layout_constraintTop_toTopOf="@+id/view9">
 
                         <ImageView
-                            android:id ="@+id/second_class_avatar"
+                            android:id="@+id/second_class_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -209,6 +211,7 @@
                         android:id="@+id/third_user_win"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="100dp"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toTopOf="@+id/view10"
@@ -217,7 +220,7 @@
                         app:layout_constraintTop_toTopOf="@+id/view10">
 
                         <ImageView
-                            android:id ="@+id/third_class_avatar"
+                            android:id="@+id/third_class_avatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"

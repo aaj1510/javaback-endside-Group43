@@ -74,7 +74,7 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += difficulty;
                                     userTasksRef.child(userId).child("action_points").setValue(action_points);
-                                    user.setAction_points(action_points);
+                                    user.setActionPoints(action_points);
                                 }
 
                                 @Override
