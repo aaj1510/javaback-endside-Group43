@@ -19,45 +19,10 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 
 public class BackgroundActivity extends AppCompatActivity{
-    private static int currentMusicResId = -1;
-    private static SimpleExoPlayer player;
     @Override
     protected void onCreate(Bundle savedInstaceState){
         super.onCreate(savedInstaceState);
         hideSystemUI();
-    }
-
-    public void playMusic(int music){
-        if (player != null && currentMusicResId == music && player.isPlaying()) {
-            return; // Already playing the requested music
-        }
-
-        stopMusic();
-        player = new SimpleExoPlayer.Builder(this).build();
-        Uri musicUri = RawResourceDataSource.buildRawResourceUri(music);
-        MediaItem mediaItem = MediaItem.fromUri(musicUri);
-
-        player.setMediaItem(mediaItem);
-        player.setVolume(1f);
-        player.setRepeatMode(Player.REPEAT_MODE_ALL);
-        player.prepare();
-        player.play();
-
-    }
-
-    public void stopMusic() {
-        if (player != null) {
-            player.stop();
-            player.release();
-            player = null;
-            currentMusicResId = -1;
-        }
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-//        stopMusic();
     }
 
     @Override

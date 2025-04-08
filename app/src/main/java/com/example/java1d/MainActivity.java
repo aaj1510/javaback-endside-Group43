@@ -2,16 +2,11 @@ package com.example.java1d;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowInsets;
-import android.view.WindowManager;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -29,8 +24,11 @@ public class MainActivity extends BackgroundActivity {
         setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
         replaceFragment(new HomeFragment());
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user_key");
+
+        Intent serviceIntent = new Intent(MainActivity.this, BackgroundService.class);
+        serviceIntent.putExtra("musicId", R.raw.background_music);
+        serviceIntent.setAction("play_music");
+        startService(serviceIntent);
         getUserInfo();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -55,9 +53,7 @@ public class MainActivity extends BackgroundActivity {
                 replaceFragment(new InventoryFragment());
             }
             else if (item.getItemId() == R.id.battle) {
-                Intent newIntent = new Intent(MainActivity.this, BossActivity.class);
-                newIntent.putExtra("user_key",user);
-                startActivity(newIntent);
+                replaceFragment(new BossPreviewFragment());
             }
             else if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment(), "CurrentHomeFragment");
@@ -67,7 +63,7 @@ public class MainActivity extends BackgroundActivity {
             }
             else if (item.getItemId() == R.id.tasks) {
                 TasksFragment dialogFragment = new TasksFragment();
-                dialogFragment.show(getSupportFragmentManager(), "PresetTasksFragment");
+                dialogFragment.show(getSupportFragmentManager(), null);
             }
 
             return true;
@@ -89,25 +85,7 @@ public class MainActivity extends BackgroundActivity {
     }
 
     public User getUserInfo(){
-        Intent intent = getIntent();
-        return intent.getParcelableExtra("user_key");
+        return BackgroundService.getUserInfo();
     }
 
-//    public String getUserId(){
-//        Intent intent = getIntent();
-//        User user = intent.getParcelableExtra("user_key");
-//        if(user!= null){
-//            return user.getUid();
-//        }
-//        return null;
-//    }
-//
-//    public String getHeroClass(){
-//        Intent intent = getIntent();
-//        User user = intent.getParcelableExtra("user_key");
-//        if(user!= null){
-//            return user.getHero_class();
-//        }
-//        return null;
-//    }
 }

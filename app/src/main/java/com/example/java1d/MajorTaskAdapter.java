@@ -54,7 +54,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = new User();
+        User user = getUserInfo();
+        String userId = user.getUserId();
         ListTaskItem taskItem = listTasks.get(position);
         databaseReference = FirebaseDatabase.getInstance().getReference("MajorTasks");
         String date = taskItem.getTaskEndDate();
@@ -103,7 +104,6 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                         public void onSuccess(Void unused) {
                             taskItem.setTaskCompleted(true);
                             notifyDataSetChanged();
-                            String userId = taskItem.getUserId();
                             Integer task_actionPoints = taskItem.getTaskDifficulty();
                             Log.d("Firebase Data", "Updated task completed to true");
                             Toast.makeText(view.getContext(), "Great Job, you earned " + task_actionPoints.toString() + " actions points!", Toast.LENGTH_SHORT).show();
@@ -127,6 +127,10 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                 }
             });
         }
+    }
+
+    public User getUserInfo(){
+        return BackgroundService.getUserInfo();
     }
 
     @Override

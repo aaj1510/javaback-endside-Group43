@@ -74,7 +74,7 @@ public class MajorTaskFragment extends Fragment {
                     Integer difficulty = taskSnapshot.child("difficulty").getValue(Integer.class);
 
                     // Create a new ListTaskItem and add it to the list
-                    ListTaskItem taskItem = new ListTaskItem(userId, taskId, taskName, taskDesc, taskEndDate, taskEndTime,taskCompleted, difficulty);
+                    ListTaskItem taskItem = new ListTaskItem(taskId, taskName, taskDesc, taskEndDate, taskEndTime,taskCompleted, difficulty);
                     taskList.add(taskItem);
                 }
 
@@ -94,7 +94,6 @@ public class MajorTaskFragment extends Fragment {
 
 
     public User getUserInfo(){
-        MainActivity activity = (MainActivity) getActivity();
-        return activity.getUserInfo();
+        return BackgroundService.getUserInfo();
     }
 }

@@ -47,9 +47,9 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
-        User user = new User();
+        User user = getUserInfo();
+        String userId = user.getUserId();
         ListTaskItem taskItem = listTasks.get(position);
-        String userId = taskItem.getUserId();
         Integer difficulty = taskItem.getTaskDifficulty();
         String points = String.format(Locale.US," +%d", difficulty);
         holder.taskPoints.setText(points);
@@ -87,6 +87,10 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
                 }
             });
         }
+    }
+
+    public User getUserInfo(){
+        return BackgroundService.getUserInfo();
     }
 
     @Override

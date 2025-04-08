@@ -143,7 +143,6 @@ public class CreateTaskFragment extends DialogFragment {
     }
 
     public User getUserInfo(){
-        MainActivity activity = (MainActivity) getActivity();
-        return activity.getUserInfo();
+        return BackgroundService.getUserInfo();
     }
 }

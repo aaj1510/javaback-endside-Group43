@@ -39,7 +39,11 @@ public class LoginActivity extends BackgroundActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
-        playMusic(R.raw.background_music);
+        Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
+        serviceIntent.putExtra("musicId", R.raw.background_music);
+        serviceIntent.setAction("play_music");
+        startService(serviceIntent);
+
         usernameInput = findViewById(R.id.username_input);
         passwordInput = findViewById(R.id.password_input);
         Button signUpButton = findViewById(R.id.sign_up_button);
@@ -143,23 +147,24 @@ public class LoginActivity extends BackgroundActivity {
                                                         }
                                                     }
                                                     User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
-
-
-
 //                                                    Log.d("Firebase", className);
                                                     Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
                                                     if(userInfo.getHeroClass().equals("NIL")){
 //                                                    if (className.equals("NIL")){
                                                         // go to hero selection
+                                                        Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
+                                                        serviceIntent.putExtra("user_key", userInfo);
+                                                        startService(serviceIntent);
                                                         Toast.makeText(LoginActivity.this,"Classname is nil",Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(LoginActivity.this, HeroSelectionActivity.class);
-                                                        intent.putExtra("user_key", userInfo);
                                                         startActivity(intent);
                                                     }
                                                     else{
                                                         // go to home page
+                                                        Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
+                                                        serviceIntent.putExtra("user_key", userInfo);
+                                                        startService(serviceIntent);
                                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                        intent.putExtra("user_key", userInfo);
                                                         startActivity(intent);
                                                         Toast.makeText(LoginActivity.this,"Classname is not nil",Toast.LENGTH_SHORT).show();
                                                     }

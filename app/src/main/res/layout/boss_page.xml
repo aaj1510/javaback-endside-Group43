@@ -25,6 +25,7 @@
         android:scaleType="centerCrop"
         android:tintMode="multiply"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent    "
         app:srcCompat="@drawable/background_stone"
@@ -65,7 +66,7 @@
             app:srcCompat="@drawable/action_point" />
 
         <TextView
-            android:id="@+id/actionPts"
+            android:id="@+id/boss_battle_action_pts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pixelify_sans_medium"
@@ -176,7 +177,7 @@
                                 android:fontFamily="@font/pixelify_sans_medium"
                                 android:shadowColor="@color/black"
                                 android:shadowRadius="20"
-                                android:text="1"
+                                android:text="5"
                                 android:textColor="#fff"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -260,7 +261,7 @@
                                 android:fontFamily="@font/pixelify_sans_medium"
                                 android:shadowColor="@color/black"
                                 android:shadowRadius="20"
-                                android:text="3"
+                                android:text="20"
                                 android:textColor="#fff"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -360,7 +361,7 @@
         android:text="KILLER RABBIT"
         android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@id/time_left_text"
+        app:layout_constraintBottom_toTopOf="@id/time_left_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -372,16 +373,38 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:progress="75"
+        android:max="100"
+        android:progress="100"
         android:progressBackgroundTint="@color/black"
-        android:progressTint="#4CAF50"
+        android:progressTint="#FF0000"
         android:scaleY="5"
         app:layout_constraintBottom_toBottomOf="@id/background_bar"
         app:layout_constraintEnd_toEndOf="@id/background_bar"
         app:layout_constraintStart_toStartOf="@id/background_bar"
         app:layout_constraintTop_toTopOf="@id/background_bar"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.38"/>
+    <!--        android:progressTint="#4CAF50"-->
 
+
+<!--    <SeekBar-->
+<!--        android:id="@+id/boss_health_bar"-->
+<!--        android:layout_width="175dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        android:max="100"-->
+<!--        android:progress="100"-->
+<!--        android:thumb="@android:color/transparent"-->
+<!--        android:clickable="false"-->
+<!--        android:focusable="false"-->
+<!--        android:enabled="false"-->
+<!--        android:progressDrawable="@drawable/health_progress_bar_drawable"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/background_bar"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/background_bar"-->
+<!--        app:layout_constraintStart_toStartOf="@id/background_bar"-->
+<!--        app:layout_constraintTop_toTopOf="@id/background_bar"-->
+<!--        app:layout_constraintVertical_bias="0.38"/>-->
     <ImageView
         android:id="@+id/background_bar"
         android:layout_width="wrap_content"
@@ -390,7 +413,7 @@
         app:layout_constraintBottom_toBottomOf="@id/background_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_left_text"
+        app:layout_constraintTop_toBottomOf="@id/time_left_header"
         app:srcCompat="@drawable/boss_health_bar" />
 
 
@@ -408,16 +431,32 @@
         app:layout_constraintTop_toTopOf="@id/boss_health_bar" />
 
     <TextView
-        android:id="@+id/time_left_text"
+        android:id="@+id/time_left_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
         android:fontFamily="@font/pixelify_sans_medium"
-        android:text="Time Left: 0 days 0 hours"
+        android:text="Time Left:"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/background_bar"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/boss_name" />
+
+    <TextView
+        android:id="@+id/time_left_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/pixelify_sans_medium"
+        android:text="00Days 00Hours"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/boss_health_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toEndOf="@+id/time_left_header"
+        app:layout_constraintTop_toBottomOf="@+id/boss_name"
+        app:layout_constraintVertical_bias="0.033" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

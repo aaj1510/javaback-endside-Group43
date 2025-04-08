@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wooden_board"
+    tools:context=".BossPreviewFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/boss_ball"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_bossball"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/boss_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:maxHeight="250dp"
+            android:src="@drawable/boss_killer_rabbit"
+            android:tintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="@id/boss_ball"
+            app:layout_constraintEnd_toEndOf="@id/boss_ball"
+            app:layout_constraintStart_toStartOf="@id/boss_ball"
+            app:layout_constraintTop_toTopOf="@id/boss_ball"
+            app:layout_constraintVertical_bias="0.1"
+            app:tint="#BA3FB9E6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="REMAINING TIME:"
+            android:textColor="#fff"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toTopOf="@+id/remaining_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/remaining_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="00D 00H"
+            android:textColor="#fff"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/boss_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/boss_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:text="Loading..."
+            android:textColor="#fff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/boss_ball"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/alert_light_frame"
+            android:backgroundTint="#710606"
+            android:backgroundTintMode="multiply"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/boss_ball">
+
+<!--            <ImageView-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:clickable="true"-->
+<!--                android:src="@drawable/action_point" />-->
+<!--            -->
+            <ImageButton
+                android:id="@+id/battleButton"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:backgroundTint="@android:color/transparent"
+                android:clickable="true"
+                android:scaleX="5"
+                android:scaleY="5"
+                android:src="@drawable/action_point" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="10dp"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:shadowColor="@color/black"
+                android:shadowRadius="10"
+                android:text="BATTLE"
+                android:textColor="#fff"
+                android:textSize="30sp"/>
+<!--            <Button-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:backgroundTint="@android:color/transparent"-->
+<!--                android:elevation="10dp"-->
+<!--                android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                android:shadowColor="@color/black"-->
+<!--                android:shadowRadius="10"-->
+<!--                android:text="BATTLE"-->
+<!--                android:textColor="#fff"-->
+<!--                android:textSize="30sp" />-->
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

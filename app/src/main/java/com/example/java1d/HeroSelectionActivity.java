@@ -26,8 +26,7 @@ public class HeroSelectionActivity extends BackgroundActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_selection_page);
-        Intent intent = getIntent();
-        User user = intent.getParcelableExtra("user_key");
+        User user = getUserInfo();
         String userId = user.getUserId();
         String heroClass = user.getHeroClass();
         Log.d("User", userId + "/" + heroClass);
@@ -44,9 +43,8 @@ public class HeroSelectionActivity extends BackgroundActivity{
                     public void onSuccess(Void unused) {
                         user.setHeroClass("Warrior");
                         Log.d("User Class", user.getHeroClass());
-                        Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                        newIntent.putExtra("user_key",user);
-                        startActivity(newIntent);
+                        Intent intent = new Intent(HeroSelectionActivity.this,MainActivity.class);
+                        startActivity(intent);
                     }
                 })
                         .addOnFailureListener(new OnFailureListener(){
@@ -68,7 +66,6 @@ public class HeroSelectionActivity extends BackgroundActivity{
                                 user.setHeroClass("Mage");
                                 Log.d("User Class", user.getHeroClass());
                                 Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                                newIntent.putExtra("user_key",user);
                                 startActivity(newIntent);
                             }
                         })
@@ -91,7 +88,6 @@ public class HeroSelectionActivity extends BackgroundActivity{
                                 user.setHeroClass("Archer");
                                 Log.d("User Class", user.getHeroClass());
                                 Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                                newIntent.putExtra("user_key",user);
                                 startActivity(newIntent);
                             }
                         })
@@ -114,7 +110,6 @@ public class HeroSelectionActivity extends BackgroundActivity{
                                 user.setHeroClass("Pirate");
                                 Log.d("User Class", user.getHeroClass());
                                 Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                                newIntent.putExtra("user_key",user);
                                 startActivity(newIntent);
                             }
                         })
@@ -128,5 +123,9 @@ public class HeroSelectionActivity extends BackgroundActivity{
             }
         });
 
+    }
+
+    public User getUserInfo(){
+        return BackgroundService.getUserInfo();
     }
 }

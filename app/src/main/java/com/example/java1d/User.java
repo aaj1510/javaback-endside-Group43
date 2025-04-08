@@ -130,6 +130,13 @@ public class User implements Parcelable {
         return userMap;
     }
 
+    public Map<String, Object> attackBossMap(){
+        Map<String, Object> attackBossMap = new HashMap<>();
+        attackBossMap.put("action_points", actionPoints);
+        attackBossMap.put("total_damage_dealt", totalDamageDealt);
+        return attackBossMap;
+    }
+
     protected User(Parcel in){
         userId = in.readString();
         username = in.readString();

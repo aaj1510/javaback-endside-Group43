@@ -1,7 +1,6 @@
 package com.example.java1d;
 
 public class ListTaskItem {
-    private String userId;
     private String taskId;
     private String taskNumber;
     private String taskName;
@@ -11,8 +10,7 @@ public class ListTaskItem {
     private String taskEndDate;
     private String taskEndTime;
 
-    public ListTaskItem(String userId, String taskId, String taskName, String taskDesc, String taskEndDate, String taskEndTime, Boolean taskCompleted, Integer taskDifficulty){
-        this.userId = userId;
+    public ListTaskItem(String taskId, String taskName, String taskDesc, String taskEndDate, String taskEndTime, Boolean taskCompleted, Integer taskDifficulty){
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDesc = taskDesc;
@@ -23,8 +21,7 @@ public class ListTaskItem {
 
     }
 
-    public ListTaskItem(String userId, String taskNumber ,String taskName, String taskDesc, Integer taskDifficulty, Boolean taskCompleted){
-        this.userId = userId;
+    public ListTaskItem(String taskNumber ,String taskName, String taskDesc, Integer taskDifficulty, Boolean taskCompleted){
         this.taskNumber = taskNumber;
         this.taskName = taskName;
         this.taskDesc = taskDesc;
@@ -36,7 +33,6 @@ public class ListTaskItem {
         // Default constructor is required for Firebase
     }
 
-    public String getUserId() {return userId;}
     public String getTaskName(){
         return taskName;
     }

@@ -63,7 +63,7 @@ public class MinorTaskFragment extends Fragment {
                                     String taskDesc = snapshot.child("task_description").getValue(String.class);
                                     Integer difficulty = snapshot.child("difficulty").getValue(Integer.class);
 
-                                    ListTaskItem taskItem = new ListTaskItem(userId,taskNumber,taskName,taskDesc,difficulty,completed);
+                                    ListTaskItem taskItem = new ListTaskItem(taskNumber,taskName,taskDesc,difficulty,completed);
                                     taskList.add(taskItem);
 
                                 minorTaskAdapter.notifyDataSetChanged();
@@ -86,7 +86,6 @@ public class MinorTaskFragment extends Fragment {
     }
 
     private User getUserInfo(){
-        MainActivity activity = (MainActivity) getActivity();
-        return activity.getUserInfo();
+        return BackgroundService.getUserInfo();
     }
 }
