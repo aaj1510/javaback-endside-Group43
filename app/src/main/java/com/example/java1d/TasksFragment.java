@@ -48,7 +48,7 @@ public class TasksFragment extends DialogFragment {
             }
         });
 
-        ImageButton closeButton = rootView.findViewById(R.id.imageButton);
+        ImageButton closeButton = rootView.findViewById(R.id.exit);
         closeButton.setOnClickListener(v -> dismiss());  // Close the dialog
 
         return rootView;

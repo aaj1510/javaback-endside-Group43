@@ -39,23 +39,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
         // Buttons
-        ImageButton task_button = view.findViewById(R.id.task_button);
-        ImageButton boss_button = view.findViewById(R.id.boss_button);
-        ImageButton inventory_button = view.findViewById(R.id.inventory_button);
-        ImageButton achievements_button = view.findViewById(R.id.achievement_button);
+        ImageButton tasksBtn = view.findViewById(R.id.tasksBtn);
+        ImageButton bossBtn = view.findViewById(R.id.boss_button);
+        ImageButton inventoryBtn = view.findViewById(R.id.inventory_button);
+        ImageButton achievementsBtn = view.findViewById(R.id.achievement_button);
+        ImageButton settingsBtn = view.findViewById(R.id.settings);
 
         // Listeners
-        task_button.setOnClickListener(this);
-        boss_button.setOnClickListener(this);
-        inventory_button.setOnClickListener(this);
-        achievements_button.setOnClickListener(this);
+        tasksBtn.setOnClickListener(this);
+        bossBtn.setOnClickListener(this);
+        inventoryBtn.setOnClickListener(this);
+        achievementsBtn.setOnClickListener(this);
+        settingsBtn.setOnClickListener(this);
 
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.task_button) {
+        if (view.getId() == R.id.tasksBtn) {
 //            TaskFragment dialogFragment = new TaskFragment();
 //            dialogFragment.show(getActivity().getSupportFragmentManager(), "TaskFragment");
             TasksFragment dialogFragment = new TasksFragment();
@@ -69,6 +71,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
         else if (view.getId() == R.id.achievement_button) {
             replaceFragment(new AchievementsFragment());
+        }
+        if (view.getId() == R.id.settings) {
+            SettingsFragment settingsDialogFragment = new SettingsFragment();
+            settingsDialogFragment.show(getActivity().getSupportFragmentManager(), null);
         }
     }
 

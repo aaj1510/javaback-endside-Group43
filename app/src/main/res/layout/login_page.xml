@@ -46,24 +46,22 @@
 
                 <TextView
                     android:id="@+id/username_header"
+                    style="@style/pixelTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Username"
-                    android:fontFamily="@font/pixelify_sans_medium"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:text="Username" />
 
                 <EditText
                     android:id="@+id/username_input"
+                    style="@style/pixelTxt"
+                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:inputType="text"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    android:backgroundTint="#000"/>
 
             </LinearLayout>
 
@@ -71,27 +69,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
                     android:id="@+id/passwordHeader"
+                    style="@style/pixelTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/pixelify_sans_medium"
-                    android:text="Password"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:text="Password" />
 
 
                 <EditText
                     android:id="@+id/password_input"
+                    style="@style/pixelTxt"
+                    android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPassword"
-                    android:textColor="@color/black" />
+                    android:backgroundTint="#000"/>
 
             </LinearLayout>
 
@@ -104,7 +101,8 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/pixelify_sans_medium"
                 android:text="Login"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal"/>
 
             <Button
                 android:id="@+id/sign_up_button"
@@ -115,7 +113,8 @@
                 android:fontFamily="@font/pixelify_sans_medium"
                 android:textColor="@color/white"
                 android:text="Sign Up"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 

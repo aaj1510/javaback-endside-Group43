@@ -14,5 +14,14 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <!-- Customised Default Font for Text -->
+    <style name="pixelTxt">
+        <item name="fontFamily">@font/pixelify_sans_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:shadowColor">#000</item>
+        <item name="android:shadowRadius">5</item>
+    </style>
+
     <style name="Theme.Java1D" parent="Base.Theme.Java1D" />
 </resources>

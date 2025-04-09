@@ -15,7 +15,7 @@
         <!-- Close Button at the top -->
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
