@@ -34,7 +34,7 @@ public class MajorTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         taskList = new ArrayList<>();
-        majorTaskAdapter = new MajorTaskAdapter(taskList);
+        majorTaskAdapter = new MajorTaskAdapter(taskList,getActivity());
         View rootView = inflater.inflate(R.layout.fragment_major_task, container, false);
         Button create_task_button = rootView.findViewById(R.id.create_task_btn);
         create_task_button.setOnClickListener(new View.OnClickListener() {

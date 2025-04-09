@@ -48,6 +48,14 @@
                         android:textColor="#000"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/editTaskBtn"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_edit"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,6 +159,9 @@
                     android:backgroundTint="#FDF0A8"
                     android:backgroundTintMode="multiply" />
 
+
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,6 +183,7 @@
                         android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
 
         <Button

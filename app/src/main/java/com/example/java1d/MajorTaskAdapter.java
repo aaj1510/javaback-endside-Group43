@@ -3,7 +3,6 @@ package com.example.java1d;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 import java.util.Locale;
 
+
 public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.ViewHolder>{
 
     private List<ListTaskItem> listTasks;
@@ -37,9 +39,12 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
     private DatabaseReference userTasksReference;
 
 
-    public MajorTaskAdapter(List<ListTaskItem> listTasks) {
+    private FragmentManager fragmentManager;
+
+    public MajorTaskAdapter(List<ListTaskItem> listTasks, FragmentActivity context) {
         this.listTasks = listTasks;
         this.context = context;
+        this.fragmentManager = context.getSupportFragmentManager();
     }
 
     @NonNull
@@ -68,6 +73,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
         holder.completeBtn.setTag(taskItem.getTaskId());
         holder.textViewTask.setText(taskItem.getTaskName());
         holder.taskDesc.setText(taskItem.getTaskDesc());
+
+
         if(taskItem.getTaskDesc() == null || taskItem.getTaskDesc().isEmpty()){
             holder.descIcon.setVisibility(View.GONE);
         }
@@ -75,6 +82,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
             holder.deleteBtn.setVisibility(View.VISIBLE);
+            holder.editBtn.setVisibility(View.GONE);
             holder.completeBtn.setEnabled(false);
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,10 +98,13 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                 }
             });
 
+
+
         } else {
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_off_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#FDF0A8"));
             holder.deleteBtn.setVisibility(View.GONE);
+            holder.editBtn.setVisibility(View.VISIBLE);
             holder.completeBtn.setEnabled(true);
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,6 +138,16 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
                 }
             });
         }
+        //can only edit task if task is not completed - done thru visibility of button
+        holder.editBtn.setOnClickListener(v -> {
+            // get taskid from complete button tag
+            String taskId = (String) holder.completeBtn.getTag();
+            //use newInstance function in updateTaskFragment to store the taskId and pass to the fragment
+            UpdateTaskFragment fragment = UpdateTaskFragment.newInstance(taskId);
+            //need fragmentManager to display the updateTaskFragment
+            fragment.show(fragmentManager, "UpdateTaskFragment");
+
+        });
     }
 
     public User getUserInfo(){
@@ -148,6 +169,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
         public Button deleteBtn;
         public CardView cardView;
         public ImageView descIcon;
+
+        public ImageView editBtn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -159,6 +182,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             completeBtn = itemView.findViewById(R.id.minorCompleteBtn);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
             descIcon = itemView.findViewById(R.id.desc_icon);
+            editBtn = itemView.findViewById(R.id.editTaskBtn);
 
 
         }
