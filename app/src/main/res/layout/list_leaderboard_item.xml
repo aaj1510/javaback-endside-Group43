@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     android:orientation="horizontal"
     android:padding="10dp"
     android:layout_marginBottom="5dp"
     android:background="#cca692"
     android:drawableTop="@android:color/black"
     android:drawableBottom="@android:color/black"
-
     android:gravity="center_vertical">
-
 
     <ImageView
         android:id="@+id/user_class"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/avatar_mage"
-        android:layout_marginEnd="10dp"/>
+        android:layout_weight="1"/>
 
     <!--info -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/user_name"
@@ -46,14 +45,24 @@
     </LinearLayout>
 
     <!--rank-->
-    <TextView
-        android:id="@+id/user_rank"
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:text="RANK - NA"
-        android:fontFamily="@font/pixelify_sans_medium"
-        android:textColor="#000"
-        android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/user_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RANK - NA"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginStart="50dp" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

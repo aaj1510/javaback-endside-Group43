@@ -90,25 +90,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/boss_ball">
 
-<!--            <ImageView-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:adjustViewBounds="true"-->
-<!--                android:clickable="true"-->
-<!--                android:src="@drawable/action_point" />-->
-<!--            -->
             <ImageButton
                 android:id="@+id/battleButton"
                 android:layout_width="200dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:backgroundTint="@android:color/transparent"
                 android:clickable="true"
-                android:scaleX="5"
-                android:scaleY="5"
-                android:src="@drawable/action_point" />
+                app:srcCompat="@drawable/action_point" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,18 +112,6 @@
                 android:text="BATTLE"
                 android:textColor="#fff"
                 android:textSize="30sp"/>
-<!--            <Button-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:backgroundTint="@android:color/transparent"-->
-<!--                android:elevation="10dp"-->
-<!--                android:fontFamily="@font/pixelify_sans_medium"-->
-<!--                android:shadowColor="@color/black"-->
-<!--                android:shadowRadius="10"-->
-<!--                android:text="BATTLE"-->
-<!--                android:textColor="#fff"-->
-<!--                android:textSize="30sp" />-->
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
