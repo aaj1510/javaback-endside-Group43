@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="USERNAME"
             android:fontFamily="@font/pixelify_sans_medium"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textStyle="bold"
             android:textSize="16sp"/>
 
@@ -39,9 +39,9 @@
             android:id="@+id/user_bosses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Bosses Defeated : 20 "
+            android:text="Total Damage Dealt : 0 "
             android:fontFamily="@font/pixelify_sans_medium"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="14sp"/>
     </LinearLayout>
 
@@ -53,7 +53,7 @@
         android:layout_marginLeft="60dp"
         android:text="RANK - NA"
         android:fontFamily="@font/pixelify_sans_medium"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="16sp" />
 
 </LinearLayout>

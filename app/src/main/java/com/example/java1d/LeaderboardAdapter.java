@@ -45,12 +45,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         //set textviews in UI based user data
         holder.usernameTv.setText(item.getUsername());
-        holder.bossDefeatTv.setText("Total Damage Dealt : "  + String.valueOf(item.getActionPoints())); //using action points for debugging
+        holder.bossDefeatTv.setText("Total Damage Dealt : "  + String.valueOf(item.getTotalDamageDealt()));
         holder.rankTv.setText("Rank - " + String.valueOf(item.getRank()));
         //System.out.println(item.getHero_class());
 
         String imageResourceName;
-        if (item.getHeroClass().toLowerCase().equals("nil")){
+        if (item.getHeroClass() == null || item.getHeroClass().toLowerCase().equals("nil")){
             imageResourceName = "avatar_warrior"; //set to warrior default
         }
         else{

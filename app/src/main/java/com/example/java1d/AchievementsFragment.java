@@ -95,11 +95,11 @@ public class AchievementsFragment extends Fragment {
                     Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class); //used for debugging
 
                     // if value is null, set it to 0
-                    if (action_pts == null) {
-                        action_pts = 0;
+                    if (total_damage_dealt == null) {
+                        total_damage_dealt = 0;
                     }
 
-                    User user = new User(username, hero_class, action_pts, 0); //later change to bossDefeated (After attack is working)
+                    User user = new User(username, hero_class, total_damage_dealt, 0); //later change to bossDefeated (After attack is working)
                     //System.out.println(user.getUsername());
                     //System.out.println(user.getHero_class());
                     userList.add(user);
@@ -116,9 +116,9 @@ public class AchievementsFragment extends Fragment {
                 if (getContext() != null) {
 
                     //first place to 3rd place
-                    updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getActionPoints(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
-                    updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getActionPoints(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
-                    updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getActionPoints(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
+                    updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getTotalDamageDealt(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
+                    updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getTotalDamageDealt(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
+                    updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getTotalDamageDealt(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
 
                     /*
                     //first place
@@ -175,7 +175,7 @@ public class AchievementsFragment extends Fragment {
 
                     Log.d("Leaderboard", "User List: " + userList.size());
                     for (User user : userList) {
-                        Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getActionPoints());
+                        Log.d("Leaderboard", "User: " + user.getUsername() + " | Score: " + user.getTotalDamageDealt());
                     }
                 }
 
@@ -209,7 +209,7 @@ public class AchievementsFragment extends Fragment {
         int startL = low;
         int startR = mid + 1;
         while (startL <= mid && startR <= high) {
-            if (userList.get(startL).getActionPoints() >= userList.get(startR).getActionPoints()) {
+            if (userList.get(startL).getTotalDamageDealt() >= userList.get(startR).getTotalDamageDealt()) {
                 sortedUsers.add(userList.get(startL));
                 startL += 1;
 
