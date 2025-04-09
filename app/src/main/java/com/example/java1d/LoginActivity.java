@@ -148,14 +148,13 @@ public class LoginActivity extends BackgroundActivity {
                                                     }
                                                     User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
 //                                                    Log.d("Firebase", className);
-                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
+//                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
                                                     if(userInfo.getHeroClass().equals("NIL")){
 //                                                    if (className.equals("NIL")){
                                                         // go to hero selection
                                                         Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
                                                         serviceIntent.putExtra("user_key", userInfo);
                                                         startService(serviceIntent);
-                                                        Toast.makeText(LoginActivity.this,"Classname is nil",Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(LoginActivity.this, HeroSelectionActivity.class);
                                                         startActivity(intent);
                                                     }
@@ -166,7 +165,6 @@ public class LoginActivity extends BackgroundActivity {
                                                         startService(serviceIntent);
                                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                         startActivity(intent);
-                                                        Toast.makeText(LoginActivity.this,"Classname is not nil",Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
                                                     // Sign-in failed, show an error message

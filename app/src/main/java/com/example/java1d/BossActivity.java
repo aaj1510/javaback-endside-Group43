@@ -1,6 +1,8 @@
 package com.example.java1d;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,10 +54,13 @@ public class BossActivity extends BackgroundActivity {
         bossHealthText = findViewById(R.id.boss_health_text);
         TextView bossTimeLeft = findViewById(R.id.time_left_text);
         bossHealthBar = findViewById(R.id.boss_health_bar);
+        TextView bossDefeatedText = findViewById(R.id.boss_defeated_text);
 
         // Buttons
         ImageButton atkBtn = findViewById(R.id.basic_attack);
+        TextView atkText = findViewById(R.id.attack_text);
         ImageButton skillBtn = findViewById(R.id.skill);
+        TextView skillText = findViewById(R.id.skill_text);
         ImageButton shopBtn = findViewById(R.id.inventory);
         ImageButton retreatBtn = findViewById(R.id.retreat);
 
@@ -77,7 +83,6 @@ public class BossActivity extends BackgroundActivity {
         bossNameText.setText(bossName.toUpperCase());
         bossHp = boss.getBossHp();
         bossTimeLeft.setText(boss.getBossRemainingTime());
-
         String userId = getUserInfo().getUserId();
         bossBattleDatabaseReference = FirebaseDatabase.getInstance().getReference("BossBattle");
 
@@ -108,10 +113,19 @@ public class BossActivity extends BackgroundActivity {
                 }
                 bossHealthBar.setMax(bossHp);
                 bossHealthBar.setProgress(currentHp);
-
                 String formattedHeath = String.format(Locale.US,"%d/%d", currentHp, bossHp);
                 bossHealthText.setText(formattedHeath);
+                if(boss.getBossCurrentHealth().equals(0)){
+                    atkBtn.setEnabled(false);
+                    atkBtn.setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+                    atkText.setTextColor(Color.BLACK);
+                    skillBtn.setEnabled(false);
+                    skillBtn.setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+                    skillText.setTextColor(Color.BLACK);
+                    bossDefeatedText.setVisibility(View.VISIBLE);
+                    bossImage.setColorFilter(Color.argb(230, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
 
+                }
             }
 
             @Override
@@ -124,7 +138,11 @@ public class BossActivity extends BackgroundActivity {
         atkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                damageBoss(5,10);
+                Random random = new Random();
+                int min = 3;
+                int max = 10;
+                Integer randomDamage = random.nextInt(max - min + 1) + min;
+                damageBoss(5,randomDamage);
 
             }
         });
@@ -162,14 +180,31 @@ public class BossActivity extends BackgroundActivity {
         Boss boss = bossIntent.getParcelableExtra("boss_info");
         Integer actionPoints = user.getActionPoints();
         Integer currentBossHp = boss.getBossCurrentHealth();
-        if(actionPoints > points && currentBossHp > 0){
+        if(actionPoints >= points && currentBossHp > 0){
             userDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
             Integer totalDamage = user.getTotalDamageDealt();
             int updatedTotalDamage = totalDamage + damage;
             user.setTotalDamageDealt(updatedTotalDamage);
             int updatedActionPoints = actionPoints - points;
             user.setActionPoints(updatedActionPoints);
-            int updatedBossHealth = currentBossHp - damage;
+            int updatedBossHealth;
+            int calculatedBossHealth = currentBossHp - damage;
+            if(calculatedBossHealth < 0){
+                updatedBossHealth = 0;
+                Integer totalBossDefeated = user.getTotalBossDefeated();
+                int updatedTotalBossDefeated = totalBossDefeated + 1;
+                user.setTotalBossDefeated(updatedTotalBossDefeated);
+                userDatabaseReference.child(userId).child("total_boss_defeated").setValue(updatedTotalBossDefeated).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("Firebase User", "Updated total number of boss defeated");
+                    }
+                });
+                //To Do: Add dialog fragment for user to collect reward
+            } else {
+                updatedBossHealth = calculatedBossHealth;
+            }
+            boss.setBossCurrentHealth(updatedBossHealth);
             Map<String,Object> attackMap = user.attackBossMap();
             userDatabaseReference.child(userId).updateChildren(attackMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -180,8 +215,8 @@ public class BossActivity extends BackgroundActivity {
             bossBattleDatabaseReference.child(userId).child("boss_health").setValue(updatedBossHealth).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    bossHealthBar.setProgress(updatedBossHealth);
-                    String formattedHeath = String.format(Locale.US,"%d/%d", updatedBossHealth, bossHp);
+                    bossHealthBar.setProgress(boss.getBossCurrentHealth());
+                    String formattedHeath = String.format(Locale.US,"%d/%d", boss.getBossCurrentHealth(), bossHp);
                     bossHealthText.setText(formattedHeath);
                 }
             });
