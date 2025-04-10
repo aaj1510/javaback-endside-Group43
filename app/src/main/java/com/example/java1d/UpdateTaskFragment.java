@@ -107,7 +107,7 @@ public class UpdateTaskFragment extends DialogFragment {
                 String selected_date = dateInput.getText().toString();
                 String selected_time = timeInput.getText().toString();
 
-                if (taskName.isEmpty() || taskDesc.isEmpty() || selected_date.isEmpty() || selected_time.isEmpty()) {
+                if (taskName.isEmpty() || selected_date.isEmpty() || selected_time.isEmpty()) {
                     Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }

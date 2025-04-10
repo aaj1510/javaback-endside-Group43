@@ -36,11 +36,21 @@ public class User implements Parcelable {
 
     //for leaderboard details:
     // will change action_pts to totalBossDefeated later, using action_points for debugging
-    public User(String username, String heroClass,  Integer totalDamageDealt,Integer rank ){
-        this.username = username;
-        this.heroClass = heroClass;
-        this.totalDamageDealt = totalDamageDealt;
-        this.rank = this.rank;
+    public User(String username, String heroClass, String criteria, Integer value, Integer rank ){
+
+        if(criteria.equals("damageDealt")){
+            this.username = username;
+            this.heroClass = heroClass;
+            this.totalDamageDealt = value;
+            this.rank = this.rank;
+        }
+        else{ //bossDefeated
+            this.username = username;
+            this.heroClass = heroClass;
+            this.totalBossDefeated = value; //
+            this.rank = this.rank;
+        }
+
     }
 
     //When user logins

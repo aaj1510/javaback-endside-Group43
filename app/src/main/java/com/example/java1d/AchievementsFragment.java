@@ -1,7 +1,6 @@
 package com.example.java1d;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class AchievementsFragment extends Fragment {
@@ -32,7 +30,12 @@ public class AchievementsFragment extends Fragment {
     private LeaderboardAdapter leaderboardAdapter;
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
+
+    private String criteria = "damageDealt"; // default sorting criterion
+
     TextView firstPlaceTv, firstPlaceScore, secondPlaceTv, secondPlaceScore, thirdPlaceTv, thirdPlaceScore;
+
+    Button damageDealtBtn, totalBossDefeatBtn;
 
     ImageView firstPlaceAvatar, secondPlaceAvatar, thirdPlaceAvatar;
 
@@ -56,7 +59,7 @@ public class AchievementsFragment extends Fragment {
         recyclerView.setAdapter(leaderboardAdapter);
 
 
-        fetchUsers();
+        fetchUsers(criteria);
 
         firstPlaceTv = view.findViewById(R.id.first_username);
         firstPlaceAvatar = view.findViewById(R.id.first_place_avatar);
@@ -70,12 +73,40 @@ public class AchievementsFragment extends Fragment {
         thirdPlaceScore = view.findViewById(R.id.third_score);
         thirdPlaceAvatar = view.findViewById(R.id.third_class_avatar);
 
+        damageDealtBtn = view.findViewById(R.id.damageDealtBtn);
+        totalBossDefeatBtn = view.findViewById(R.id.bossDefeatedBtn);
+
+
+        damageDealtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!criteria.equals("damageDealt")){//only do it if current criteria is different
+                    criteria = "damageDealt";
+                    totalBossDefeatBtn.setBackgroundColor(Color.GRAY);
+                    damageDealtBtn.setBackgroundColor(Color.WHITE);
+                    fetchUsers(criteria);
+                }
+
+            }
+        });
+
+        totalBossDefeatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                criteria = "totalBossDefeat"; //no need but for debugging sake
+                totalBossDefeatBtn.setBackgroundColor(Color.WHITE);
+                damageDealtBtn.setBackgroundColor(Color.GRAY);
+                fetchUsers(criteria);
+
+            }
+        });
+
         return view;
 
     }
 
 
-    private void fetchUsers() {
+    private void fetchUsers(String criteria) {
         // Start by clearing any old data
         //userList.clear();
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -86,39 +117,67 @@ public class AchievementsFragment extends Fragment {
                 // Log the entire snapshot for debugging
                 Log.d("FirebaseData", "DataSnapshot: " + snapshot.toString());
 
+
+
                 // fetch data from snapshot
                 for (DataSnapshot taskSnapshot : snapshot.getChildren()) {
                     String username = taskSnapshot.child("username").getValue(String.class);
                     String hero_class = taskSnapshot.child("class").getValue(String.class);
                     Integer bossDefeated = taskSnapshot.child("total_boss_defeated").getValue(Integer.class); //will use after boss battle is ready
                     Integer total_damage_dealt = taskSnapshot.child("total_damage_dealt").getValue(Integer.class); //will use after boss battle is ready
-                    Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class); //used for debugging
+                    //Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class); //used for debugging
 
                     // if value is null, set it to 0
                     if (total_damage_dealt == null) {
                         total_damage_dealt = 0;
                     }
 
-                    User user = new User(username, hero_class, total_damage_dealt, 0); //later change to bossDefeated (After attack is working)
-                    //System.out.println(user.getUsername());
-                    //System.out.println(user.getHero_class());
-                    userList.add(user);
+                    if (bossDefeated == null){
+                        bossDefeated = 0;
+                    }
 
+
+                    if(criteria.equals("damageDealt")){
+                        User user = new User(username, hero_class,criteria, total_damage_dealt, 0);
+                        userList.add(user);
+                    }
+                    else{ //boss defeat
+                        User user = new User(username, hero_class,criteria, bossDefeated, 0);
+                        userList.add(user);
+                    }
 
                 }
-                rankUsers(userList);
 
-                for (User u : userList) {
-                    Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getActionPoints());
-                } //sorting works
+                System.out.println(criteria);
+                rankUsers(userList,criteria);
+
+               // for (User u : userList) {
+                 //   Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getActionPoints());
+                //} //sorting works
 
                 //Set data into the textviews based on user rank
                 if (getContext() != null) {
 
+                    //Integer criteriaValue;
                     //first place to 3rd place
-                    updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getTotalDamageDealt(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
-                    updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getTotalDamageDealt(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
-                    updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getTotalDamageDealt(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
+                    //if criteria is damageDealt then get score of that
+
+                    //TODO: REMOVE REPETITIONS
+                    if(criteria.equals("damageDealt")){
+
+                        updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getTotalDamageDealt(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
+                        updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getTotalDamageDealt(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
+                        updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getTotalDamageDealt(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
+
+
+                    }
+
+                    else{
+                        updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getTotalBossDefeated(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
+                        updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getTotalBossDefeated(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
+                        updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getTotalBossDefeated(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
+
+                    }
 
                     /*
                     //first place
@@ -166,9 +225,11 @@ public class AchievementsFragment extends Fragment {
                     thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
                     */
 
+                    //TODO: IF SCORE == 0, THEN LOOK FOR THEIR SIGN UP DATE
+
                     //4th place to all the way to be shown as in leaderboard
                     List<User> filteredList = userList.subList(3, userList.size());
-                    leaderboardAdapter.updateData(filteredList);
+                    leaderboardAdapter.updateData(filteredList,criteria);
 
                     // Notify the adapter that the data has been updated
                     leaderboardAdapter.notifyDataSetChanged();
@@ -192,9 +253,11 @@ public class AchievementsFragment extends Fragment {
 
 
     //rankusers using merge sort
-    private void rankUsers(List<User> userList) {
+    private void rankUsers(List<User> userList,String criteria) {
 
-        mergeSort(userList, 0, userList.size() - 1);
+
+
+        mergeSort(userList, 0, userList.size() - 1,criteria);
         // Assign ranks based on the sorted list
         for (int i = 0; i < userList.size(); i++) { //works
             User user = userList.get(i);
@@ -204,12 +267,24 @@ public class AchievementsFragment extends Fragment {
         
     }
 
-    public static List<User> merge(List<User> userList, int low, int mid, int high) {
+    public static List<User> merge(List<User> userList, int low, int mid, int high,String criteria) {
+        Boolean comparisonResult;
+
         List<User> sortedUsers = new ArrayList<>();
         int startL = low;
         int startR = mid + 1;
         while (startL <= mid && startR <= high) {
-            if (userList.get(startL).getTotalDamageDealt() >= userList.get(startR).getTotalDamageDealt()) {
+
+            if(criteria.equals("damageDealt")){
+                comparisonResult = userList.get(startL).getTotalDamageDealt() >= userList.get(startR).getTotalDamageDealt();
+            }
+
+            else{
+                comparisonResult = userList.get(startL).getTotalBossDefeated() >= userList.get(startR).getTotalBossDefeated();
+
+            }
+
+            if (comparisonResult) {
                 sortedUsers.add(userList.get(startL));
                 startL += 1;
 
@@ -235,12 +310,12 @@ public class AchievementsFragment extends Fragment {
         return userList;
     }
 
-    public static void mergeSort(List<User> unsortedUsers, int low, int high){
+    public static void mergeSort(List<User> unsortedUsers, int low, int high, String criteria){
         if (low < high){
             int mid = (low + high)/2;
-            mergeSort(unsortedUsers, low, mid);
-            mergeSort(unsortedUsers, mid+1, high);
-            merge(unsortedUsers, low, mid, high);
+            mergeSort(unsortedUsers, low, mid ,criteria);
+            mergeSort(unsortedUsers, mid+1, high,criteria);
+            merge(unsortedUsers, low, mid, high,criteria);
         }
 
     }

@@ -5,286 +5,329 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/frame_layout"
+    android:background="@drawable/wooden_board"
     tools:context=".AchievementsFragment">
 
-    <!-- 3 seperations needed
-    1. Top 3 Layout
-    2. RecyclerView of the other 7 users
-    3. Daily Shop Layout-->
+    <!-- 4 seperations needed
+    1. Filter Buttons
+    2. Top 3 Layout
+    3. RecyclerView of the other users
+    -->
 
-    <!--  1. Top 3 Layout-->
+    <!--  1. Filter Buttons-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id = "@+id/layout">
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="269dp"
+            android:elevation="100dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/rv_leaderboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <Button
+                android:id="@+id/damageDealtBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:backgroundTint="#fff"
+                android:textColor="@color/black"
+                android:text="Damage Dealt">
+
+
+            </Button>
+
+            <Button
+                android:id="@+id/bossDefeatedBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:backgroundTint="#737373"
+                android:textColor="@color/black"
+                android:text="Boss Defeated">
+
+
+            </Button>
+
+        </LinearLayout>
+
+        <!--  2. Top 3 Layout-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toTopOf="@+id/rv_leaderboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout2">
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="52dp"
+                android:alpha="0.4"
+                android:background="@drawable/place_acheivement"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="42dp">
+
+            </View>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/first_user_win"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/view6"
+                app:layout_constraintEnd_toEndOf="@+id/view6"
+                app:layout_constraintStart_toStartOf="@+id/view6"
+                app:layout_constraintTop_toTopOf="@+id/view6">
+
+                <ImageView
+                    android:id="@+id/first_place_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar_mage" />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- TODO: ADD CROWN FOR FIRST PLACE -->
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:background="@drawable/wooden_board">
-
-                    <View
-                        android:id="@+id/view6"
-                        android:layout_marginTop="52dp"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:alpha="0.4"
-                        android:background="@drawable/place_acheivement"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:layout_editor_absoluteY="42dp">
-
-                    </View>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/first_user_win"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardBackgroundColor="@android:color/transparent"
-                        app:cardCornerRadius="100dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/view6"
-                        app:layout_constraintEnd_toEndOf="@+id/view6"
-                        app:layout_constraintStart_toStartOf="@+id/view6"
-                        app:layout_constraintTop_toTopOf="@+id/view6">
-
-                        <ImageView
-                            android:id="@+id/first_place_avatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/avatar_mage" />
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/view6"
+                app:layout_constraintStart_toStartOf="@+id/view6"
+                app:layout_constraintTop_toBottomOf="@+id/first_user_win">
 
 
-                    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="Top 1"
+                    android:textColor="#fff" />
 
-                    <!-- TODO: ADD CROWN FOR FIRST PLACE -->
+                <TextView
+                    android:id="@+id/first_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="USERNAME"
+                    android:textColor="#fff" />
 
+                <TextView
+                    android:id="@+id/first_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="@+id/view6"
-                        app:layout_constraintStart_toStartOf="@+id/view6"
-                        app:layout_constraintTop_toBottomOf="@+id/first_user_win">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:text="Top 1"
-                            android:textColor="#fff" />
-
-                        <TextView
-                            android:id="@+id/first_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:text="USERNAME"
-                            android:textColor="#fff" />
-
-                        <TextView
-                            android:id="@+id/first_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:text="0"
-                            android:textColor="#fff"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-
-
-                    <View
-                        android:id="@+id/view9"
-                        android:layout_width="100dp"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="42dp"
-                        android:alpha="0.4"
-                        android:background="@drawable/place_acheivement"
-                        app:layout_constraintEnd_toStartOf="@+id/view6"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/view6">
-
-                    </View>
-
-                    <!--second place -->
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/second_user_win"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardBackgroundColor="@android:color/transparent"
-                        app:cardCornerRadius="100dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/view9"
-                        app:layout_constraintEnd_toEndOf="@+id/view9"
-                        app:layout_constraintStart_toStartOf="@+id/view9"
-                        app:layout_constraintTop_toTopOf="@+id/view9">
-
-                        <ImageView
-                            android:id="@+id/second_class_avatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/avatar_archer" />
-                    </androidx.cardview.widget.CardView>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="@+id/view9"
-                        app:layout_constraintStart_toStartOf="@+id/view9"
-                        app:layout_constraintTop_toBottomOf="@+id/second_user_win">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Top 2"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:textColor="#fff" />
-
-                        <TextView
-                            android:id = "@+id/second_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="USERNAME"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:textColor="#fff" />
-
-                        <TextView
-                            android:id = "@+id/second_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="0"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:textColor="#fff" />
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/view10"
-                        android:layout_width="100dp"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="20dp"
-                        android:alpha="0.4"
-                        android:background="@drawable/place_acheivement"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/view6"
-                        app:layout_constraintTop_toTopOf="@+id/view9">
-                    </View>
-
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/third_user_win"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:cardBackgroundColor="@android:color/transparent"
-                        app:cardCornerRadius="100dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/view10"
-                        app:layout_constraintEnd_toEndOf="@+id/view10"
-                        app:layout_constraintStart_toStartOf="@+id/view10"
-                        app:layout_constraintTop_toTopOf="@+id/view10">
-
-                        <ImageView
-                            android:id="@+id/third_class_avatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/avatar_pirate" />
-                    </androidx.cardview.widget.CardView>
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="@+id/view10"
-                        app:layout_constraintStart_toStartOf="@+id/view10"
-                        app:layout_constraintTop_toBottomOf="@+id/third_user_win">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Top 3"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:textColor="#fff" />
-
-                        <TextView
-                            android:id = "@+id/third_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="USERNAME"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:textColor="#fff" />
-
-                        <TextView
-                            android:id = "@+id/third_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="0"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:textColor="#fff" />
-
-                    </LinearLayout>
-                    <!--  2. RecyclerView for LeaderBoard-->
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_leaderboard"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/wooden_board"
-                    android:padding="4dp">
-
-
-                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <View
+                android:id="@+id/view9"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="42dp"
+                android:alpha="0.4"
+                android:background="@drawable/place_acheivement"
+                app:layout_constraintEnd_toStartOf="@+id/view6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view6">
+
+            </View>
+
+            <!--second place -->
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/second_user_win"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/view9"
+                app:layout_constraintEnd_toEndOf="@+id/view9"
+                app:layout_constraintStart_toStartOf="@+id/view9"
+                app:layout_constraintTop_toTopOf="@+id/view9">
+
+                <ImageView
+                    android:id="@+id/second_class_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar_archer" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/view9"
+                app:layout_constraintStart_toStartOf="@+id/view9"
+                app:layout_constraintTop_toBottomOf="@+id/second_user_win">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="Top 2"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/second_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="USERNAME"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/second_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:alpha="0.4"
+                android:background="@drawable/place_acheivement"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/view6"
+                app:layout_constraintTop_toTopOf="@+id/view9"></View>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/third_user_win"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/view10"
+                app:layout_constraintEnd_toEndOf="@+id/view10"
+                app:layout_constraintStart_toStartOf="@+id/view10"
+                app:layout_constraintTop_toTopOf="@+id/view10">
+
+                <ImageView
+                    android:id="@+id/third_class_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar_pirate" />
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/view10"
+                app:layout_constraintStart_toStartOf="@+id/view10"
+                app:layout_constraintTop_toBottomOf="@+id/third_user_win">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="Top 3"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/third_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="USERNAME"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/third_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pixelify_sans_medium"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  3. RecyclerView for LeaderBoard-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_leaderboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="23dp"
+            android:layout_weight="1"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout2">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

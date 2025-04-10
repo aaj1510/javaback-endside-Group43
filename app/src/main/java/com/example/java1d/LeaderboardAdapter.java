@@ -17,13 +17,16 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     private List<User> userlist;
     private Context context;
 
+    private String criteria;
+
     public LeaderboardAdapter(List<User> userlists) {
         this.userlist = userlists;
         this.context = context; //check if need this
     }
 
-    public void updateData(List<User> newUserList) {
+    public void updateData(List<User> newUserList,String criteria) {
         this.userlist = newUserList;
+        this.criteria = criteria;
         notifyDataSetChanged();  // Notify the adapter that the data has changed
     }
 
@@ -45,9 +48,16 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         //set textviews in UI based user data
         holder.usernameTv.setText(item.getUsername());
-        holder.bossDefeatTv.setText("Total Damage Dealt : "  + String.valueOf(item.getTotalDamageDealt()));
+        if(criteria.equals("damageDealt")){
+            holder.bossDefeatTv.setText("Total Damage Dealt : " + String.valueOf(item.getTotalDamageDealt()));
+        }
+        else{
+            holder.bossDefeatTv.setText("Total Bosses Defeated : " + String.valueOf(item.getTotalBossDefeated()));
+
+        }
+
         holder.rankTv.setText("Rank - " + String.valueOf(item.getRank()));
-        //System.out.println(item.getHero_class());
+
 
         String imageResourceName;
         if (item.getHeroClass() == null || item.getHeroClass().toLowerCase().equals("nil")){
