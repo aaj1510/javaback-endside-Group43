@@ -124,7 +124,7 @@
                         android:text="0" />
 
                     <TextView
-                        android:id="@+id/bossesDefeated"
+                        android:id="@+id/user_bosses"
                         style="@style/pixelTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

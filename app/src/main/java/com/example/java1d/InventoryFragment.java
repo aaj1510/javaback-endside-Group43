@@ -14,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class InventoryFragment extends Fragment {
-
-    TextView daysAdventuring, bossesDefeated;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,10 +44,6 @@ public class InventoryFragment extends Fragment {
         TextView damageDealtText = view.findViewById(R.id.damage_dealt_text);
         damageDealtText.setText(String.valueOf(user.getTotalDamageDealt()));
         avatar_image.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
-
-        // Change text
-        bossesDefeated = view.findViewById(R.id.bossesDefeated);
-        bossesDefeated.setText("Bosses Defeated: \n" + String.valueOf(user.getTotalBossDefeated()));
 
         return view;
     }
