@@ -107,22 +107,39 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/days"
+                        android:id="@+id/total_damage"
                         style="@style/pixelTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Days Adventuring: \n 0 "
-                        android:gravity="start|center_vertical"/>
+                        android:gravity="start|center_vertical"
+                        android:text="Total Damage:" />
+
+                    <TextView
+                        android:id="@+id/damage_dealt_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/pixelTxt"
+                        android:text="0" />
 
                     <TextView
                         android:id="@+id/user_bosses"
                         style="@style/pixelTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginBottom="0dp"
                         android:layout_weight="1"
-                        android:text="Bosses Defeated: \n 0 "
-                        android:layout_gravity="start|center_vertical" />
+                        android:text="Bosses Defeated: " />
+
+                    <TextView
+                        android:id="@+id/bosses_defeated_text"
+                        style="@style/pixelTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0" />
 
                 </LinearLayout>
             </LinearLayout>

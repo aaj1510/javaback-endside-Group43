@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class InventoryFragment extends Fragment {
@@ -38,6 +39,10 @@ public class InventoryFragment extends Fragment {
         ImageView avatar_image = view.findViewById(R.id.avatar);
         String avatar = user.getHeroClass().toLowerCase();
         String imageResourceName = "avatar_" + avatar;
+        TextView bossesDefeatedText = view.findViewById(R.id.bosses_defeated_text);
+        bossesDefeatedText.setText(String.valueOf(user.getTotalBossDefeated()));
+        TextView damageDealtText = view.findViewById(R.id.damage_dealt_text);
+        damageDealtText.setText(String.valueOf(user.getTotalDamageDealt()));
         avatar_image.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
 
         return view;
