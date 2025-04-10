@@ -123,8 +123,8 @@ public class AchievementsFragment extends Fragment {
                 for (DataSnapshot taskSnapshot : snapshot.getChildren()) {
                     String username = taskSnapshot.child("username").getValue(String.class);
                     String hero_class = taskSnapshot.child("class").getValue(String.class);
-                    Integer bossDefeated = taskSnapshot.child("total_boss_defeated").getValue(Integer.class); //will use after boss battle is ready
-                    Integer total_damage_dealt = taskSnapshot.child("total_damage_dealt").getValue(Integer.class); //will use after boss battle is ready
+                    Integer bossDefeated = taskSnapshot.child("total_boss_defeated").getValue(Integer.class);
+                    Integer total_damage_dealt = taskSnapshot.child("total_damage_dealt").getValue(Integer.class);
                     //Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class); //used for debugging
 
                     // if value is null, set it to 0
@@ -158,26 +158,16 @@ public class AchievementsFragment extends Fragment {
                 //Set data into the textviews based on user rank
                 if (getContext() != null) {
 
-                    //Integer criteriaValue;
                     //first place to 3rd place
-                    //if criteria is damageDealt then get score of that
 
-                    //TODO: REMOVE REPETITIONS
-                    if(criteria.equals("damageDealt")){
-
-                        updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getTotalDamageDealt(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
-                        updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getTotalDamageDealt(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
-                        updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getTotalDamageDealt(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
-
+                    //need a function for this to update based on criteria and rank to avoid repitations of code
+                    for(int positon = 0; positon < 3 && positon < userList.size(); positon++){
+                        System.out.println(userList.get(positon));
+                        System.out.println(userList.get(positon).getUsername());
+                        updateLeaderboardItem(userList.get(positon),criteria);
 
                     }
 
-                    else{
-                        updateLeaderboardItem(userList.get(0).getUsername(), userList.get(0).getTotalBossDefeated(), userList.get(0).getHeroClass().toLowerCase(), firstPlaceTv, firstPlaceScore, firstPlaceAvatar);
-                        updateLeaderboardItem(userList.get(1).getUsername(), userList.get(1).getTotalBossDefeated(), userList.get(1).getHeroClass().toLowerCase(), secondPlaceTv, secondPlaceScore, secondPlaceAvatar);
-                        updateLeaderboardItem(userList.get(2).getUsername(), userList.get(2).getTotalBossDefeated(), userList.get(2).getHeroClass().toLowerCase(), thirdPlaceTv, thirdPlaceScore, thirdPlaceAvatar);
-
-                    }
 
                     /*
                     //first place
@@ -224,8 +214,6 @@ public class AchievementsFragment extends Fragment {
                     }
                     thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
                     */
-
-                    //TODO: IF SCORE == 0, THEN LOOK FOR THEIR SIGN UP DATE
 
                     //4th place to all the way to be shown as in leaderboard
                     List<User> filteredList = userList.subList(3, userList.size());
@@ -322,11 +310,49 @@ public class AchievementsFragment extends Fragment {
 
 
     // To avoid repetitions, updateLeaderboardItem - sets data in UI for first place, second place and third place
-    private void updateLeaderboardItem(String user_username, int user_score, String user_avatar, TextView usernameTextView, TextView scoreTextView, ImageView avatarImageView) {
-        usernameTextView.setText(user_username);
-        scoreTextView.setText(String.valueOf(user_score));
 
+    private void updateLeaderboardItem(User user, String criteria) {
+        System.out.println(user);
+        System.out.println(user.getUsername());
+        Integer criteriaVal;
+        if (criteria.equals("damageDealt")){
+            criteriaVal = user.getTotalDamageDealt();
+
+        }
+        else{//criteria is totalBossDefeat
+            criteriaVal = user.getTotalBossDefeated();
+        }
+
+        //set textviews for each rank
+        if (user.getRank() == 1){
+            firstPlaceTv.setText(user.getUsername());
+
+            firstPlaceScore.setText(String.valueOf(criteriaVal));
+            updateAvatar(user, firstPlaceAvatar);
+        }
+        else if (user.getRank() == 2){
+            secondPlaceTv.setText(user.getUsername());
+            secondPlaceScore.setText(String.valueOf(criteriaVal));
+            updateAvatar(user,secondPlaceAvatar);
+        }
+
+        else if (user.getRank()==3){
+            thirdPlaceTv.setText(user.getUsername());
+            thirdPlaceScore.setText(String.valueOf(criteriaVal));
+            updateAvatar(user,thirdPlaceAvatar);
+        }
+
+        //else{
+           // System.out.println("got issues");
+
+        //}
+    }
+
+
+    //need to have funtion for updateavatar in ui - to mitigate the case if getHeroClass is null
+    private void updateAvatar(User user, ImageView avatarImageView) {
         String imageResourceName;
+        String user_avatar = user.getHeroClass().toLowerCase();
         if (user_avatar.equals("nil")) {
             imageResourceName = "avatar_warrior"; //default warrior
         } else {
@@ -334,6 +360,8 @@ public class AchievementsFragment extends Fragment {
         }
 
         avatarImageView.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
+
+
     }
 
 
@@ -359,7 +387,6 @@ public class AchievementsFragment extends Fragment {
 
         }
     }*/
-
 
 
 }
