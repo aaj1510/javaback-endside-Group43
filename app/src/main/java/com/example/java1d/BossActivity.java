@@ -3,7 +3,10 @@ package com.example.java1d;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +37,10 @@ public class BossActivity extends BackgroundActivity {
     TextView actionPointsText;
     TextView bossHealthText;
     Integer bossHp;
+    ImageView bossImage;
+    TextView damageText;
+
+    Boss boss;
 
     @Override
     protected void onCreate(Bundle savedInstaceState) {
@@ -46,10 +52,10 @@ public class BossActivity extends BackgroundActivity {
         serviceIntent.setAction("play_music");
         startService(serviceIntent);
 
-        Intent bossIntent = getIntent();
-        Boss boss = bossIntent.getParcelableExtra("boss_info");
+        boss = getBossInfo();
+
         //Boss Views
-        ImageView bossImage = findViewById(R.id.boss_image);
+        bossImage = findViewById(R.id.boss_image);
         TextView bossNameText = findViewById(R.id.boss_name);
         bossHealthText = findViewById(R.id.boss_health_text);
         TextView bossTimeLeft = findViewById(R.id.time_left_text);
@@ -63,6 +69,8 @@ public class BossActivity extends BackgroundActivity {
         TextView skillText = findViewById(R.id.skill_text);
         ImageButton shopBtn = findViewById(R.id.inventory);
         ImageButton retreatBtn = findViewById(R.id.retreat);
+
+        damageText = findViewById(R.id.damage_text);
 
         // Changes Based on User Info
         // Action Points
@@ -123,7 +131,7 @@ public class BossActivity extends BackgroundActivity {
                     skillBtn.setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
                     skillText.setTextColor(Color.BLACK);
                     bossDefeatedText.setVisibility(View.VISIBLE);
-                    bossImage.setColorFilter(Color.argb(230, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+                    bossImage.setColorFilter(Color.argb(220, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
 
                 }
             }
@@ -176,12 +184,12 @@ public class BossActivity extends BackgroundActivity {
     public void damageBoss(Integer points, Integer damage){
         User user = getUserInfo();
         String userId = user.getUserId();
-        Intent bossIntent = getIntent();
-        Boss boss = bossIntent.getParcelableExtra("boss_info");
         Integer actionPoints = user.getActionPoints();
         Integer currentBossHp = boss.getBossCurrentHealth();
         if(actionPoints >= points && currentBossHp > 0){
             userDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+            playDamageSound(damage);
+            showDamaged(damage);
             Integer totalDamage = user.getTotalDamageDealt();
             int updatedTotalDamage = totalDamage + damage;
             user.setTotalDamageDealt(updatedTotalDamage);
@@ -198,9 +206,11 @@ public class BossActivity extends BackgroundActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d("Firebase User", "Updated total number of boss defeated");
+                        //To Do: Add dialog fragment for user to collect reward
+                        RewardFragment dialogFragment = new RewardFragment();
+                        dialogFragment.show(BossActivity.this.getSupportFragmentManager(),null);
                     }
                 });
-                //To Do: Add dialog fragment for user to collect reward
             } else {
                 updatedBossHealth = calculatedBossHealth;
             }
@@ -226,7 +236,52 @@ public class BossActivity extends BackgroundActivity {
 
     }
 
+    public void playDamageSound(Integer damage){
+        int soundId;
+        SoundPool soundPool = new SoundPool.Builder().setMaxStreams(1).build();
+        if(damage < 50){
+            soundPool.load(BossActivity.this, R.raw.attack_damage_sound, 1);
+        } else {
+            soundPool.load(BossActivity.this, R.raw.skill_damage_sound,1);
+        }
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int soundIdCallback, int status) {
+                if (status == 0){
+                    soundPool.play(soundIdCallback, 1,1,0,0,1);
+                }
+            }
+        });
+    }
+
+    public void showDamaged(Integer damage){
+        String formattedDamage = String.format(Locale.US,"- %d HP",damage);
+        damageText.setText(formattedDamage);
+        damageText.setVisibility(View.VISIBLE);
+        damageText.setAlpha(1f);
+        damageText.animate().alpha(0).setDuration(1000).setStartDelay(2000).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                damageText.setVisibility(View.GONE);
+            }
+        }).start();
+
+        bossImage.setColorFilter(Color.parseColor("#80FF0000"), PorterDuff.Mode.MULTIPLY);
+        new Handler(Looper.getMainLooper()).postDelayed(() ->{
+            if(!boss.getBossCurrentHealth().equals(0)){
+                bossImage.clearColorFilter();
+            }
+        }, 1000);
+
+    }
+
+
     public User getUserInfo(){
         return BackgroundService.getUserInfo();
+    }
+
+    public Boss getBossInfo(){
+        Intent bossIntent = getIntent();
+        return bossIntent.getParcelableExtra("boss_info");
     }
 }

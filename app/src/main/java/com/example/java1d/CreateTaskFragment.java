@@ -119,18 +119,6 @@ public class CreateTaskFragment extends DialogFragment {
         return view;
     }
 
-    public void openDialog(String type){
-        if(type == "Date"){
-            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
-
-                }
-            }, 2023,0,16);
-        }
-    }
-
     @Override
     public void onStart(){
         super.onStart();

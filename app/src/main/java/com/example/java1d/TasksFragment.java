@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -49,7 +50,17 @@ public class TasksFragment extends DialogFragment {
         });
 
         ImageButton closeButton = rootView.findViewById(R.id.exit);
-        closeButton.setOnClickListener(v -> dismiss());  // Close the dialog
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = getParentFragmentManager().findFragmentById(R.id.frame_layout);
+                if(fragment instanceof HomeFragment){
+                    HomeFragment homeFragment = (HomeFragment) fragment;
+                    homeFragment.updateActionPointsText();
+                }
+                dismiss();
+            }
+        });  // Close the dialog
 
         return rootView;
     }

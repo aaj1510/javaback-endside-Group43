@@ -13,7 +13,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class HomeFragment extends Fragment implements View.OnClickListener{
+    FirebaseAuth mAuth;
+    TextView pts_text;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +32,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         TextView username_text = view.findViewById(R.id.username);
         username_text.setText(getUserInfo().getUsername().toLowerCase());
 
-        TextView pts_text = view.findViewById(R.id.actionPts);
+        pts_text = view.findViewById(R.id.actionPts);
         pts_text.setText(String.valueOf(getUserInfo().getActionPoints()));
 
         ImageView avatar_image = view.findViewById(R.id.avatar);
@@ -73,6 +77,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             replaceFragment(new AchievementsFragment());
         }
         if (view.getId() == R.id.settings) {
+            mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             SettingsFragment settingsDialogFragment = new SettingsFragment();
             settingsDialogFragment.show(getActivity().getSupportFragmentManager(), null);
         }
@@ -83,6 +89,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void updateActionPointsText(){
+        pts_text.setText(String.valueOf(getUserInfo().getActionPoints()));
     }
 
     public User getUserInfo(){

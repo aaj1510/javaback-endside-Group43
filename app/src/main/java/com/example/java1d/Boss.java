@@ -58,6 +58,10 @@ public class Boss implements Parcelable {
         return bossLevel;
     }
 
+    public Integer getBossGold(){
+        return bossGold;
+    }
+
     public void setBossLevel(Integer bossLevel){
         this.bossLevel = bossLevel;
     }
