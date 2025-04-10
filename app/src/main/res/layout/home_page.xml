@@ -17,26 +17,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clipChildren="false">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="15dp">
+
+                <ImageButton
+                    android:id="@+id/settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.3">
+                    android:minWidth="50dp"
+                    android:minHeight="50dp"
+                    android:maxWidth="55dp"
+                    android:maxHeight="55dp"
+                    android:padding="0dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/menu_settings"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"/>
 
-                    <ImageButton
-                        android:id="@+id/settings"
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"
-                        android:padding="0dp"
-                        android:scaleType="fitXY"
-                        android:backgroundTint="@android:color/transparent"
-                        app:layout_constraintVertical_bias="0.7"
-                        app:layout_constraintTop_toTopOf="@id/username_background"
-                        app:layout_constraintBottom_toBottomOf="@id/username_background"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/username_background"
-                        app:srcCompat="@drawable/menu_settings" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="0.9">
 
                     <ImageView
                         android:id="@+id/username_background"
@@ -44,66 +54,84 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:backgroundTint="@android:color/transparent"
-                        android:cropToPadding="false"
-                        android:maxWidth="300dp"
-                        android:padding="0dp"
+                        android:paddingHorizontal="10dp"
                         android:scaleType="fitCenter"
-                        app:layout_constraintStart_toEndOf="@id/settings"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/signboard" />
 
-                    <TextView
-                        android:id="@+id/username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/pixelify_sans_medium"
-                        android:shadowColor="@color/black"
-                        android:shadowRadius="5"
-                        android:text="username"
-                        android:textColor="@color/white"
-                        android:textColorLink="#E6E6E6"
-                        android:textSize="20sp"
-                        app:layout_constraintVertical_bias="0.5"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:gravity="bottom|center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="10dp"
                         app:layout_constraintBottom_toBottomOf="@id/username_background"
                         app:layout_constraintEnd_toEndOf="@id/username_background"
                         app:layout_constraintStart_toStartOf="@id/username_background"
-                        app:layout_constraintTop_toTopOf="@id/username_background" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        app:layout_constraintStart_toStartOf="@id/username"
-                        app:layout_constraintEnd_toEndOf="@id/username"
-                        app:layout_constraintTop_toBottomOf="@id/username">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/action_point" />
+                        app:layout_constraintTop_toTopOf="@id/username_background" >
 
                         <TextView
-                            android:id="@+id/actionPts"
+                            android:id="@+id/username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:shadowColor="@color/black"
+                            android:shadowRadius="5"
+                            android:text="username"
+                            android:textColor="@color/white"
+                            android:textColorLink="#E6E6E6"
+                            android:autoSizeMinTextSize="12sp"
+                            android:autoSizeMaxTextSize="25sp"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="center|bottom"
+                            android:layout_weight="0.7"/>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/pixelify_sans_medium"
-                            android:text="pts"
-                            android:textColor="#fff"
-                            android:textSize="15sp" />
+                            android:orientation="horizontal"
+                            android:gravity="top|center"
+                            android:layout_weight="0.3">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/action_point" />
+
+                            <TextView
+                                android:id="@+id/actionPts"
+                                style="@style/pixelTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:text="pts"
+                                android:textColor="#fff"
+                                android:autoSizeMinTextSize="10sp"
+                                android:autoSizeMaxTextSize="15sp"
+                                android:autoSizeTextType="uniform"/>
+                        </LinearLayout>
+
                     </LinearLayout>
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </LinearLayout>
+
+            <!-- Achievements & Preview Boss -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_weight="0.1">
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:padding="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/achievements_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom">
@@ -113,10 +141,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:layout_marginEnd="10dp"
                         android:backgroundTint="@android:color/transparent"
                         android:cropToPadding="false"
                         android:maxWidth="175dp"
+                        android:minWidth="150dp"
                         android:padding="0dp"
                         android:scaleType="fitCenter"
                         app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +186,7 @@
                         android:backgroundTint="@android:color/transparent"
                         android:cropToPadding="false"
                         android:maxWidth="175dp"
+                        android:minWidth="150dp"
                         android:padding="0dp"
                         android:scaleType="fitCenter"
                         app:layout_constraintTop_toTopOf="parent"
@@ -185,15 +214,59 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <FrameLayout
+            <!--Bottom-->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1">
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="bottom">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                <!-- Inventory & Avatar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom">
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom">
+
+                        <ImageButton
+                            android:id="@+id/inventory_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:layout_marginStart="30dp"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxWidth="150dp"
+                            android:padding="0dp"
+                            android:scaleType="fitCenter"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/main_inventory" />
+
+                        <TextView
+                            android:id="@+id/inventory_header"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/pixelify_sans_medium"
+                            android:shadowColor="@color/black"
+                            android:shadowDx="5"
+                            android:shadowDy="5"
+                            android:shadowRadius="5"
+                            android:text="INVENTORY"
+                            android:textColor="@color/white"
+                            android:textColorLink="#E6E6E6"
+                            android:textSize="20dp"
+                            app:layout_constraintBottom_toBottomOf="@id/inventory_button"
+                            app:layout_constraintStart_toStartOf="@id/inventory_button" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
                         android:id="@+id/avatar"
@@ -206,11 +279,17 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/avatar_warrior" />
 
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <ImageView
                         android:id="@+id/cabinet_background"
                         android:layout_width="wrap_content"
-                        android:layout_height="220dp"
-                        android:scaleType="centerCrop"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -249,42 +328,9 @@
                         app:layout_constraintEnd_toEndOf="@id/tasksBtn"
                         app:layout_constraintStart_toStartOf="@id/tasksBtn"
                         app:layout_constraintTop_toTopOf="@id/tasksBtn" />
-
-                    <ImageButton
-                        android:id="@+id/inventory_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:layout_marginStart="30dp"
-                        android:backgroundTint="@android:color/transparent"
-                        android:maxWidth="150dp"
-                        android:padding="0dp"
-                        android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toTopOf="@id/cabinet_background"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:srcCompat="@drawable/main_inventory" />
-
-                    <TextView
-                        android:id="@+id/inventory_header"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/pixelify_sans_medium"
-                        android:shadowColor="@color/black"
-                        android:shadowDx="5"
-                        android:shadowDy="5"
-                        android:shadowRadius="5"
-                        android:text="INVENTORY"
-                        android:textColor="@color/white"
-                        android:textColorLink="#E6E6E6"
-                        android:textSize="20dp"
-                        app:layout_constraintBottom_toBottomOf="@id/inventory_button"
-                        app:layout_constraintStart_toStartOf="@id/inventory_button" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </FrameLayout>
-        </LinearLayout>
 
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>
