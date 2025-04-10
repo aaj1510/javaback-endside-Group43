@@ -1,24 +1,113 @@
 package com.example.java1d;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowInsets;
+import android.view.WindowManager;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.java1d.databinding.ActivityMainBinding;
+
+public class MainActivity extends BackgroundActivity {
+
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        replaceFragment(new HomeFragment());
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra("user_key");
+        getUserInfo();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            binding.navigationBar.setPadding(0,0,0,0);
             return insets;
         });
+        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationBar, (v, insets) -> {
+            v.setPadding(0,0,0,0);
+            return insets;
+        });
+
+        // TODO: Enable Navigation Bar on Home, Inventory, Tasks and Achievements (Leaderboard)
+        // For Navigation Bar
+
+        binding.navigationBar.setItemIconTintList(null);
+        binding.navigationBar.setBackground(null);
+        binding.navigationBar.setOnItemSelectedListener(item -> {
+
+            if (item.getItemId() == R.id.inventory){
+                replaceFragment(new InventoryFragment());
+            }
+            else if (item.getItemId() == R.id.battle) {
+                Intent newIntent = new Intent(MainActivity.this, BossActivity.class);
+                newIntent.putExtra("user_key",user);
+                startActivity(newIntent);
+            }
+            else if (item.getItemId() == R.id.home) {
+                replaceFragment(new HomeFragment(), "CurrentHomeFragment");
+            }
+            else if (item.getItemId() == R.id.achievements) {
+                replaceFragment(new AchievementsFragment());
+            }
+            else if (item.getItemId() == R.id.tasks) {
+                TasksFragment dialogFragment = new TasksFragment();
+                dialogFragment.show(getSupportFragmentManager(), "PresetTasksFragment");
+            }
+
+            return true;
+        });
+
+
     }
+
+    // Replaces Fragment (For UI)
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void replaceFragment(Fragment fragment, String tag){
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,fragment,tag).commit();
+    }
+
+    public User getUserInfo(){
+        Intent intent = getIntent();
+        return intent.getParcelableExtra("user_key");
+    }
+
+//    public String getUserId(){
+//        Intent intent = getIntent();
+//        User user = intent.getParcelableExtra("user_key");
+//        if(user!= null){
+//            return user.getUid();
+//        }
+//        return null;
+//    }
+//
+//    public String getHeroClass(){
+//        Intent intent = getIntent();
+//        User user = intent.getParcelableExtra("user_key");
+//        if(user!= null){
+//            return user.getHero_class();
+//        }
+//        return null;
+//    }
 }

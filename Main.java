@@ -8,19 +8,21 @@ public class Main {
         String url = "jdbc:sqlite:C:/Users/Alaina/javabackside.db"; //change path to ur db path
 
         //create table statement
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS Users ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "username TEXT NOT NULL UNIQUE, "
-                + "email TEXT NOT NULL, "
-                + "avatar TEXT NOT NULL, "
-                + "password TEXT NOT NULL, "
-                + "points_earned INTEGER DEFAULT 0, "
-                + "task_id INTEGER, "
-                + "total_bosses INTEGER DEFAULT 0, "
-                + "inventory_id INTEGER, "
-                + "FOREIGN KEY (task_id) REFERENCES Tasks(task_id), "
-                + "FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id)"
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS Tasks ("
+                + "task_id INTEGER PRIMARY KEY, "
+                + "user_id INTEGER,"
+                + "username TEXT,"
+                + "taskname TEXT NOT NULL, "
+                + "taskdescription TEXT, "
+                + "taskdifficulty TEXT NOT NULL, "
+                + "taskstatus INTEGER NOT NULL, "
+                + "task_date_time_started INTEGER ,"
+                + "task_date_time_completed INTEGER ,"
+                + "task_deadline INTEGER,"
+                + "FOREIGN KEY (user_id) REFERENCES Users(id), "
+                + "FOREIGN KEY (username) REFERENCES Users(username)"
                 + ");";
+                
 
         try {
             Class.forName("org.sqlite.JDBC"); //driver load

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MajorTaskFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/major_task_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            >
+
+            <Button
+                android:id="@+id/create_task_btn"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_margin="20dp"
+                android:textSize="20sp"
+                android:backgroundTint="#AF3400"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:text="Add a new task" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</FrameLayout>
