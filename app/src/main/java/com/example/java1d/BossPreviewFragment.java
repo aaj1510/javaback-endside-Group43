@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +30,7 @@ public class BossPreviewFragment extends Fragment {
     Boss boss;
     DatabaseReference bossOfTheWeekDatabaseReference;
     DatabaseReference bossesDatabaseReference;
+    Boolean dataLoaded = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +76,7 @@ public class BossPreviewFragment extends Fragment {
                         Integer bossHp = snapshot.child("boss_hp").getValue(Integer.class);
                         String bossReward = snapshot.child("boss_reward").getValue(String.class);
                         boss = new Boss(bossId, bossName, bossGold, bossHp, bossReward, formattedTime);
-
+                        dataLoaded = true;
                     }
 
                     @Override
@@ -93,9 +95,13 @@ public class BossPreviewFragment extends Fragment {
         battleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), BossActivity.class);
-                intent.putExtra("boss_info",boss);
-                startActivity(intent);
+                if(dataLoaded){
+                    Intent intent = new Intent(getActivity(), BossActivity.class);
+                    intent.putExtra("boss_info",boss);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Retrieving data, please wait", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

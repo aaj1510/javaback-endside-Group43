@@ -98,7 +98,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:backgroundTint="@android:color/transparent"
-                android:clickable="true"
+                android:enabled="false"
                 app:srcCompat="@drawable/action_point" />
 
             <TextView

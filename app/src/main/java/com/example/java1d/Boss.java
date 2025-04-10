@@ -9,7 +9,6 @@ import java.util.Map;
 public class Boss implements Parcelable {
     private String bossId;
     private String bossName;
-    private String bossDescription;
     private Integer bossLevel;
     private Integer bossGold;
     private Integer bossHp;
