@@ -45,7 +45,7 @@ public class RewardFragment extends DialogFragment {
                 userDatabaseReference.child(user.getUserId()).child("gold").setValue(updatedGoldValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        user.setGold(boss.getBossGold());
+                        user.setGold(updatedGoldValue);
                         Log.d("Firebase Data", "Successfully updated user's gold");
                         dismiss();
                     }

@@ -161,7 +161,6 @@ public class LoginActivity extends BackgroundActivity {
                         Toast.makeText(LoginActivity.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
 
