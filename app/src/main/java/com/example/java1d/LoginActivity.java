@@ -150,6 +150,10 @@ public class LoginActivity extends BackgroundActivity {
                                 }
                             }
                         }
+
+                        else{
+                            Toast.makeText(LoginActivity.this, "Username not found.", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override

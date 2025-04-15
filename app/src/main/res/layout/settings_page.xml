@@ -23,7 +23,20 @@
             android:shadowRadius="10"
             android:text="LOG OUT"
             android:textColor="#fff"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/deleteAccBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#A02020"
+            android:fontFamily="@font/pixelify_sans_medium"
+            android:shadowColor="#350000"
+            android:shadowRadius="10"
+            android:text="DELETE ACCOUNT"
+            android:textColor="#fff"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <ImageButton
