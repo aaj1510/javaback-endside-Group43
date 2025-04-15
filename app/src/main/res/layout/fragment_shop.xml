@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#491C01">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/shop_background">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_weight="0.25">
+
+                        <ImageButton
+                            android:id="@+id/close_shop_button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:background="@android:color/transparent"
+                            android:src="@android:drawable/ic_delete" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/signboard" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SHOP"
+                                android:layout_gravity="center"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:textSize="30dp"
+                                android:layout_marginTop="8dp"/>
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="180dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="20dp"
+                        android:src="@drawable/shop_keeper" />
+                </FrameLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/buttons_background"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:shadowColor="@color/black"
+                android:shadowRadius="5"
+                android:text="Gold: "
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="15dp"
+                app:srcCompat="@drawable/coin" />
+
+            <TextView
+                android:id="@+id/gold_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:fontFamily="@font/pixelify_sans_medium"
+                android:shadowColor="@color/black"
+                android:shadowRadius="5"
+                android:text="0"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/super_stamina"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:adjustViewBounds="true"
+                            android:backgroundTint="@android:color/transparent"
+                            android:scaleType="fitCenter"
+                            android:scaleY="1.8"
+                            android:tintMode="multiply"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/menu_background" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/super_stamina"
+                            app:layout_constraintEnd_toEndOf="@id/super_stamina"
+                            app:layout_constraintStart_toStartOf="@id/super_stamina"
+                            app:layout_constraintTop_toTopOf="@id/super_stamina">
+
+                            <TextView
+                                android:id="@+id/stamina_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="Super Stamina"
+                                android:textColor="#FFC107"
+                                android:textSize="19sp"
+                                app:layout_constraintBottom_toBottomOf="@id/super_stamina"
+                                app:layout_constraintEnd_toEndOf="@id/super_stamina"
+                                app:layout_constraintStart_toStartOf="@id/super_stamina"
+                                app:layout_constraintTop_toTopOf="@id/super_stamina" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="43dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:text="The next attack cost 0"
+                                android:textAlignment="center"
+                                android:textColor="@color/white" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="2dp"
+                                    app:srcCompat="@drawable/coin" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pixelify_sans_medium"
+                                    android:shadowColor="@color/black"
+                                    android:shadowRadius="20"
+                                    android:text="5"
+                                    android:textColor="#fff"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/arcane_aura"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:adjustViewBounds="true"
+                            android:backgroundTint="@android:color/transparent"
+                            android:scaleType="fitCenter"
+                            android:scaleY="1.8"
+                            android:tintMode="multiply"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/menu_background" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/arcane_aura"
+                            app:layout_constraintEnd_toEndOf="@id/arcane_aura"
+                            app:layout_constraintStart_toStartOf="@id/arcane_aura"
+                            app:layout_constraintTop_toTopOf="@id/arcane_aura">
+
+                            <TextView
+                                android:id="@+id/arcane_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="Arcane Aura"
+                                android:textAlignment="center"
+                                android:textColor="#AE4FE7"
+                                android:textSize="19sp"
+                                app:layout_constraintBottom_toBottomOf="@id/arcane_aura"
+                                app:layout_constraintEnd_toEndOf="@id/arcane_aura"
+                                app:layout_constraintStart_toStartOf="@id/arcane_aura"
+                                app:layout_constraintTop_toTopOf="@id/arcane_aura" />
+
+                            <TextView
+                                android:id="@+id/arcane_description"
+                                android:layout_width="123dp"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:text="Reduce the cost of your next skill to 5"
+                                android:textAlignment="center"
+                                android:textColor="@color/white" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="@id/arcane_aura"
+                                app:layout_constraintStart_toStartOf="@id/arcane_aura"
+                                app:layout_constraintTop_toBottomOf="@id/arcane_aura">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="2dp"
+                                    app:srcCompat="@drawable/coin" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pixelify_sans_medium"
+                                    android:shadowColor="@color/black"
+                                    android:shadowRadius="20"
+                                    android:text="20"
+                                    android:textColor="#fff"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/double_damage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:adjustViewBounds="true"
+                            android:backgroundTint="@android:color/transparent"
+                            android:scaleType="fitCenter"
+                            android:scaleY="1.8"
+                            android:tintMode="multiply"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/menu_background" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/double_damage"
+                            app:layout_constraintEnd_toEndOf="@id/double_damage"
+                            app:layout_constraintStart_toStartOf="@id/double_damage"
+                            app:layout_constraintTop_toTopOf="@id/double_damage">
+
+                            <TextView
+                                android:id="@+id/double_damage_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="Double Damage"
+                                android:textAlignment="center"
+                                android:textColor="#5DEEFF"
+                                android:textSize="19sp"
+                                app:layout_constraintBottom_toBottomOf="@id/double_damage"
+                                app:layout_constraintEnd_toEndOf="@id/double_damage"
+                                app:layout_constraintStart_toStartOf="@id/double_damage"
+                                app:layout_constraintTop_toTopOf="@id/double_damage" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:text="Double the damage of your next skill"
+                                android:textAlignment="center"
+                                android:textColor="@color/white" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="@id/skill"
+                                app:layout_constraintStart_toStartOf="@id/skill"
+                                app:layout_constraintTop_toBottomOf="@id/skill">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="2dp"
+                                    app:srcCompat="@drawable/coin" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pixelify_sans_medium"
+                                    android:shadowColor="@color/black"
+                                    android:shadowRadius="20"
+                                    android:text="50"
+                                    android:textColor="#fff"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/fiery_fury"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:adjustViewBounds="true"
+                            android:backgroundTint="@android:color/transparent"
+                            android:scaleType="fitCenter"
+                            android:scaleY="1.8"
+                            android:tintMode="multiply"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/menu_background" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/fiery_fury"
+                            app:layout_constraintEnd_toEndOf="@id/fiery_fury"
+                            app:layout_constraintStart_toStartOf="@id/fiery_fury"
+                            app:layout_constraintTop_toTopOf="@id/fiery_fury">
+
+                            <TextView
+                                android:id="@+id/fury_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:shadowColor="@color/black"
+                                android:shadowRadius="20"
+                                android:text="Fiery Fury"
+                                android:textAlignment="center"
+                                android:textColor="#D1061E"
+                                android:textSize="19sp"
+                                app:layout_constraintBottom_toBottomOf="@id/fiery_fury"
+                                app:layout_constraintEnd_toEndOf="@id/fiery_fury"
+                                app:layout_constraintStart_toStartOf="@id/fiery_fury"
+                                app:layout_constraintTop_toTopOf="@id/fiery_fury" />
+
+                            <TextView
+                                android:layout_width="132dp"
+                                android:layout_height="54dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/pixelify_sans_medium"
+                                android:text="Deal 50% of the boss max HP on your next attack"
+                                android:textAlignment="center"
+                                android:textColor="@color/white" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="@id/skill"
+                                app:layout_constraintStart_toStartOf="@id/skill"
+                                app:layout_constraintTop_toBottomOf="@id/skill">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="2dp"
+                                    app:srcCompat="@drawable/coin" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pixelify_sans_medium"
+                                    android:shadowColor="@color/black"
+                                    android:shadowRadius="20"
+                                    android:text="100"
+                                    android:textColor="#fff"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
+
+
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="336dp"-->
+<!--        android:background="@drawable/shop_background"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttons_background"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--    </FrameLayout>-->
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView2"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="90dp"-->
+<!--        android:src="@drawable/signboard"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.855"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/buttons_background"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--            android:shadowColor="@color/black"-->
+<!--            android:shadowRadius="5"-->
+<!--            android:text="Gold: "-->
+<!--            android:textColor="#fff"-->
+<!--            android:textSize="18sp" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            app:srcCompat="@drawable/coin" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/gold_amount"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="2dp"-->
+<!--            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--            android:shadowColor="@color/black"-->
+<!--            android:shadowRadius="5"-->
+<!--            android:text="0"-->
+<!--            android:textColor="#fff"-->
+<!--            android:textSize="15sp" />-->
+<!--    </LinearLayout>-->
+
+<!--    -->
+<!--    <FrameLayout-->
+<!--        android:id="@+id/buttons_background"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:scaleY="3"-->
+<!--            android:tintMode="multiply"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:srcCompat="@drawable/menu_background"-->
+<!--            app:tint="@color/material_dynamic_secondary70" />-->
+
+<!--        <TableLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center">-->
+
+<!--            <TableRow-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/super_stamina"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:backgroundTint="@android:color/transparent"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:scaleY="1.8"-->
+<!--                        android:tintMode="multiply"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/menu_background" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/super_stamina"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/super_stamina"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/super_stamina"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/super_stamina">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/stamina_text"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:shadowColor="@color/black"-->
+<!--                            android:shadowRadius="20"-->
+<!--                            android:text="Super Stamina"-->
+<!--                            android:textColor="#FFC107"-->
+<!--                            android:textSize="20dp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/super_stamina"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/super_stamina"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/super_stamina"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/super_stamina" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/textView4"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="43dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:text="The next attack cost 0"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/white" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="20dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginEnd="2dp"-->
+<!--                                app:srcCompat="@drawable/coin" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                                android:shadowColor="@color/black"-->
+<!--                                android:shadowRadius="20"-->
+<!--                                android:text="5"-->
+<!--                                android:textColor="#fff"-->
+<!--                                android:textSize="18sp" />-->
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/arcane_aura"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:backgroundTint="@android:color/transparent"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:scaleY="1.8"-->
+<!--                        android:tintMode="multiply"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/menu_background" />-->
+
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/arcane_aura"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/arcane_aura"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/arcane_aura"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/arcane_aura">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/arcane_text"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:shadowColor="@color/black"-->
+<!--                            android:shadowRadius="20"-->
+<!--                            android:text="Arcane Aura"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#AE4FE7"-->
+<!--                            android:textSize="20sp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/arcane_aura"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/arcane_aura"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/arcane_aura"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/arcane_aura" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/arcane_description"-->
+<!--                            android:layout_width="123dp"-->
+<!--                            android:layout_height="56dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:text="Reduce the cost of your next skill to 5"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/white" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/arcane_aura"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/arcane_aura"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/arcane_aura">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="20dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginEnd="2dp"-->
+<!--                                app:srcCompat="@drawable/coin" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                                android:shadowColor="@color/black"-->
+<!--                                android:shadowRadius="20"-->
+<!--                                android:text="20"-->
+<!--                                android:textColor="#fff"-->
+<!--                                android:textSize="18sp" />-->
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </TableRow>-->
+
+<!--            <TableRow-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/double_damage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:backgroundTint="@android:color/transparent"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:scaleY="1.8"-->
+<!--                        android:tintMode="multiply"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/menu_background" />-->
+
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/double_damage"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/double_damage"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/double_damage"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/double_damage">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/double_damage_text"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:shadowColor="@color/black"-->
+<!--                            android:shadowRadius="20"-->
+<!--                            android:text="Double Damage"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#5DEEFF"-->
+<!--                            android:textSize="20sp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/double_damage"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/double_damage"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/double_damage"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/double_damage" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="56dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:text="Double the damage of your next skill"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/white" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/skill"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/skill"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/skill">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="20dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginEnd="2dp"-->
+<!--                                app:srcCompat="@drawable/coin" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                                android:shadowColor="@color/black"-->
+<!--                                android:shadowRadius="20"-->
+<!--                                android:text="50"-->
+<!--                                android:textColor="#fff"-->
+<!--                                android:textSize="18sp" />-->
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/fiery_fury"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:backgroundTint="@android:color/transparent"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:scaleY="1.8"-->
+<!--                        android:tintMode="multiply"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:srcCompat="@drawable/menu_background" />-->
+
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/fiery_fury"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/fiery_fury"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/fiery_fury"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/fiery_fury">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/fury_text"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:shadowColor="@color/black"-->
+<!--                            android:shadowRadius="20"-->
+<!--                            android:text="Fiery Fury"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#D1061E"-->
+<!--                            android:textSize="20sp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/fiery_fury"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/fiery_fury"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/fiery_fury"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/fiery_fury" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="132dp"-->
+<!--                            android:layout_height="54dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                            android:text="Deal 50% of the boss max HP on your next attack"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/white" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/skill"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/skill"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/skill">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="20dp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginEnd="2dp"-->
+<!--                                app:srcCompat="@drawable/coin" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/pixelify_sans_medium"-->
+<!--                                android:shadowColor="@color/black"-->
+<!--                                android:shadowRadius="20"-->
+<!--                                android:text="100"-->
+<!--                                android:textColor="#fff"-->
+<!--                                android:textSize="18sp" />-->
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </TableRow>-->
+
+<!--        </TableLayout>-->
+
+<!--    </FrameLayout>-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/pixelify_sans_medium"-->
+<!--        android:text="SHOP"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="40sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imageView2"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/imageView2"-->
+<!--        app:layout_constraintHorizontal_bias="0.48"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/imageView2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/imageView2"-->
+<!--        app:layout_constraintVertical_bias="0.642" />-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/return_button"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="72dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:scaleX="3"-->
+<!--        android:scaleY="3"-->
+<!--        android:src="@drawable/nav_battle"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttons_background"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/imageView2"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView4"-->
+<!--        android:layout_width="166dp"-->
+<!--        android:layout_height="184dp"-->
+<!--        android:src="@drawable/shop_keeper"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttons_background"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
