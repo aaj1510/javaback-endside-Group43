@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class ShopFragment extends DialogFragment {
         ImageButton arcaneAura = view.findViewById(R.id.arcane_aura);
         ImageButton doubleDamage = view.findViewById(R.id.double_damage);
         ImageButton fieryFury = view.findViewById(R.id.fiery_fury);
-        ImageButton backButton = view.findViewById(R.id.close_shop_button);
+        ImageView backButton = view.findViewById(R.id.close_shop_button);
         goldAmount = view.findViewById(R.id.gold_amount);
         goldAmount.setText(String.valueOf(user.getGold()));
 
@@ -58,7 +59,7 @@ public class ShopFragment extends DialogFragment {
         doubleDamage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                purchasePowerUp(20,"Double Damage");
+                purchasePowerUp(50,"Double Damage");
             }
         });
 
