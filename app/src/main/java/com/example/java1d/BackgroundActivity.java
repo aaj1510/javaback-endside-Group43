@@ -1,27 +1,13 @@
 package com.example.java1d;
-
-import android.content.Context;
-import android.media.MediaSession2;
-import android.media.MediaSession2Service;
-import android.media.browse.MediaBrowser;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.exoplayer2.DefaultRenderersFactory;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 
 public class BackgroundActivity extends AppCompatActivity{
     @Override
-    protected void onCreate(Bundle savedInstaceState){
-        super.onCreate(savedInstaceState);
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
         hideSystemUI();
     }
 

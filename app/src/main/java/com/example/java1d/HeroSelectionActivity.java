@@ -19,17 +19,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 
 public class HeroSelectionActivity extends BackgroundActivity{
     private DatabaseReference databaseRef;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_selection_page);
-        User user = getUserInfo();
-        String userId = user.getUserId();
+        user = getUserInfo();
         String heroClass = user.getHeroClass();
-        Log.d("User", userId + "/" + heroClass);
         ImageButton selectWarrior = findViewById(R.id.warrior_poster);
         ImageButton selectMage = findViewById(R.id.mage_poster);
         ImageButton selectArcher = findViewById(R.id.archer_poster);
@@ -38,94 +42,89 @@ public class HeroSelectionActivity extends BackgroundActivity{
         selectWarrior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseRef.child("Users").child(userId).child("class").setValue("Warrior").addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        user.setHeroClass("Warrior");
-                        Log.d("User Class", user.getHeroClass());
-                        Intent intent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener(){
-                            @Override
-                            public void onFailure(@NonNull Exception e){
-                                Log.e("Firebase", e.getLocalizedMessage());
-                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if(heroClass.equals("NIL")){
+                    generateMinorTasks(1,3, 1,5);
+                    generateMinorTasks(4,6,21,28);
+                }
+               updateUserClass("Warrior");
             }
         });
 
         selectMage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseRef.child("Users").child(userId).child("class").setValue("Mage").addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                user.setHeroClass("Mage");
-                                Log.d("User Class", user.getHeroClass());
-                                Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                                startActivity(newIntent);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener(){
-                            @Override
-                            public void onFailure(@NonNull Exception e){
-                                Log.e("Firebase", e.getLocalizedMessage());
-                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if(heroClass.equals("NIL")){
+                    generateMinorTasks(1,3,6,10);
+                    generateMinorTasks(4,6,21,28);
+                }
+               updateUserClass("Mage");
             }
         });
 
         selectArcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseRef.child("Users").child(userId).child("class").setValue("Archer").addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                user.setHeroClass("Archer");
-                                Log.d("User Class", user.getHeroClass());
-                                Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                                startActivity(newIntent);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener(){
-                            @Override
-                            public void onFailure(@NonNull Exception e){
-                                Log.e("Firebase", e.getLocalizedMessage());
-                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if(heroClass.equals("NIL")){
+                    generateMinorTasks(1,3,11,15);
+                    generateMinorTasks(4,6,21,28);
+                }
+               updateUserClass("Archer");
             }
         });
 
         selectPirate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseRef.child("Users").child(userId).child("class").setValue("Pirate").addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                user.setHeroClass("Pirate");
-                                Log.d("User Class", user.getHeroClass());
-                                Intent newIntent = new Intent(HeroSelectionActivity.this,MainActivity.class);
-                                startActivity(newIntent);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener(){
-                            @Override
-                            public void onFailure(@NonNull Exception e){
-                                Log.e("Firebase", e.getLocalizedMessage());
-                                Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if(heroClass.equals("NIL")){
+                    generateMinorTasks(1,3,16,20);
+                    generateMinorTasks(4,6,21,28);
+                }
+                updateUserClass("Pirate");
             }
         });
 
     }
 
+    public void updateUserClass(String selectedClass){
+        databaseRef.child("Users").child(user.getUserId()).child("class").setValue(selectedClass).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        user.setHeroClass(selectedClass);
+                        Log.d("User Class", user.getHeroClass());
+                        Intent intent = new Intent(HeroSelectionActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e){
+                        Log.e("Firebase", e.getLocalizedMessage());
+                        Toast.makeText(HeroSelectionActivity.this,"An error occurred",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     public User getUserInfo(){
         return BackgroundService.getUserInfo();
+    }
+
+    public void generateMinorTasks(Integer startIndex,Integer endIndex,Integer min, Integer max){
+        DatabaseReference minorTasksRef;
+        minorTasksRef = FirebaseDatabase.getInstance().getReference("MinorTasks");
+        Map<String, Object> minorTaskMap = new HashMap<>();
+        ArrayList<Integer> selectedNumbers = new ArrayList<>();
+        Random random = new Random();
+        int number;
+        for(int i = startIndex; i <= endIndex;){
+            number = random.nextInt(max - min + 1) + min;
+            if(!selectedNumbers.contains(number)){
+                selectedNumbers.add(number);
+                Log.d("Creating Minor Tasks", selectedNumbers.toString());
+                minorTaskMap.put("task_id", "task" + number);
+                minorTaskMap.put("completed", false);
+                minorTasksRef.child(user.getUserId()).child("task_" + i).updateChildren(minorTaskMap);
+                i++;
+            }
+        }
     }
 }

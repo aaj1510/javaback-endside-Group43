@@ -32,6 +32,10 @@ public class BackgroundService extends Service {
             currentMusicResId = music;
         }
 
+        if(intent != null && "stop_music".equals(intent.getAction())){
+            stopMusic();
+        }
+
         if(intent != null && intent.hasExtra("user_key")){
             user = intent.getParcelableExtra("user_key");
             Log.d("Background Service", user.toString());

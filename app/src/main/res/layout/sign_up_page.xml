@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:backgroundTint="#000" />
 
 
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:backgroundTint="#000" />
 
                 <Button

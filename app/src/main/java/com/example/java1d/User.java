@@ -16,7 +16,7 @@ public class User implements Parcelable {
     private Integer totalBossDefeated;
     private Integer totalDamageDealt;
     private String lastLoginDate;
-    private Integer rank; //for leaderboard
+    private Integer rank;
 
     public User(){}
 
@@ -42,19 +42,21 @@ public class User implements Parcelable {
             this.username = username;
             this.heroClass = heroClass;
             this.totalDamageDealt = value;
-            this.rank = this.rank;
+            this.rank = rank;
         }
         else{ //bossDefeated
             this.username = username;
             this.heroClass = heroClass;
             this.totalBossDefeated = value; //
-            this.rank = this.rank;
+            this.rank = rank;
         }
 
     }
 
     //When user logins
-    public User(String uid, String username, String email, String heroClass, Integer gold, Integer actionPoints, Integer totalBossDefeated, Integer totalDamageDealt, String lastLoginDate){
+    public User(String uid, String username, String email, String heroClass, Integer gold,
+                Integer actionPoints, Integer totalBossDefeated, Integer totalDamageDealt,
+                String lastLoginDate){
         this.userId = uid;
         this.username = username;
         this.email = email;
@@ -73,50 +75,25 @@ public class User implements Parcelable {
     public String getUsername(){
         return username;
     }
-
-    public String getEmail(){
-        return email;
-    }
-
     public String getHeroClass(){
         return heroClass;
     }
-
     public void setHeroClass(String heroClass){
         this.heroClass = heroClass;
     }
-
-    public Integer getGold(){
-        return gold;
-    }
-
     public void setGold(Integer gold){
         this.gold = gold;
     }
-
     public Integer getActionPoints(){
         return actionPoints;
     }
-
     public void setActionPoints(Integer actionPoints){
         this.actionPoints = actionPoints;
     }
-
-    public Integer getTotalBossDefeated(){
-        return totalBossDefeated;
-    }
-
-    public void setTotalBossDefeated(Integer boss_defeated){
-        this.totalBossDefeated = boss_defeated;
-    }
-
-    public Integer getTotalDamageDealt(){
-        return totalDamageDealt;
-    }
-
-    public void setTotalDamageDealt(Integer totalDamageDealt){
-        this.totalDamageDealt = totalDamageDealt;
-    }
+    public Integer getTotalBossDefeated(){ return totalBossDefeated;}
+    public void setTotalBossDefeated(Integer boss_defeated){this.totalBossDefeated = boss_defeated;}
+    public Integer getTotalDamageDealt(){return totalDamageDealt;}
+    public void setTotalDamageDealt(Integer totalDamageDealt){this.totalDamageDealt = totalDamageDealt;}
 
     public Integer getRank() {
         return rank;
@@ -125,6 +102,14 @@ public class User implements Parcelable {
     public void setRank(Integer rank) {
         this.rank = rank;
     }
+
+    public Integer getGold(){
+        return gold;
+    }
+    public String getEmail(){
+        return email;
+    }
+
 
     public Map<String, Object> toMap(){
         Map<String, Object> userMap = new HashMap<>();

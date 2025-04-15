@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,8 @@ public class LoginActivity extends BackgroundActivity {
     FirebaseAuth mAuth;
     DatabaseReference usersRef;
     DatabaseReference minorTasksRef;
+    String className;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -86,8 +89,8 @@ public class LoginActivity extends BackgroundActivity {
                                                     // Sign-in success,check class.
                                                     FirebaseUser user = mAuth.getCurrentUser();
                                                     String username = userSnapshot.child("username").getValue(String.class);
-                                                    String uid = userSnapshot.child("uid").getValue(String.class);
-                                                    String className = userSnapshot.child("class").getValue(String.class);
+                                                    userId = userSnapshot.child("uid").getValue(String.class);
+                                                    className = userSnapshot.child("class").getValue(String.class);
                                                     Integer gold = userSnapshot.child("gold").getValue(Integer.class);
                                                     Integer action_points = userSnapshot.child("action_points").getValue(Integer.class);
                                                     Integer total_boss_defeated = userSnapshot.child("total_boss_defeated").getValue(Integer.class);
@@ -99,54 +102,23 @@ public class LoginActivity extends BackgroundActivity {
                                                     int month = calendar.get(Calendar.MONTH);
                                                     int day = calendar.get(Calendar.DAY_OF_MONTH);
                                                     String currentDate = day + "/" + (month + 1) + "/" + year;
-                                                    usersRef.child(uid).child("last_login_date").setValue(currentDate);
+                                                    usersRef.child(userId).child("last_login_date").setValue(currentDate);
 
                                                     if(last_login_date == null || last_login_date.isEmpty() || !last_login_date.equals(currentDate)){
-                                                        Map<String, Object> minorTaskMap = new HashMap<>();
-                                                        Random random = new Random();
-                                                        if(className.equals("NIL")){
-                                                            for(int i = 1; i < 6; i ++ ){
-                                                                int max = 28;                                                                int min = 21;
-                                                                int number = random.nextInt(max - min + 1) + min;
-                                                                minorTaskMap.put("task_id", "task" + number);
-                                                                minorTaskMap.put("completed", false);
-                                                                minorTasksRef.child(uid).child("task_" + i).updateChildren(minorTaskMap);
-                                                            }
-                                                        } else {
-                                                            for(int i = 1; i < 3; i ++ ){
-                                                                int max = 28;
-                                                                int min = 21;
-                                                                int number = random.nextInt(max - min + 1) + min;
-                                                                minorTaskMap.put("task_id", "task" + number);
-                                                                minorTaskMap.put("completed", false);
-                                                                minorTasksRef.child(uid).child("task_" + i).updateChildren(minorTaskMap);
-                                                            }
-                                                            int number = 0;
-                                                            for(int j = 3; j < 6; j ++){
-                                                                if(className.equals("Warrior")){
-                                                                    int min = 1;
-                                                                    int max = 5;
-                                                                    number = random.nextInt(max - min + 1) + min;
-                                                                } else if (className.equals("Mage")){
-                                                                    int min = 6;
-                                                                    int max = 10;
-                                                                    number = random.nextInt(max - min + 1) + min;
-                                                                } else if (className.equals("Archer")){
-                                                                    int min = 11;
-                                                                    int max = 15;
-                                                                    number = random.nextInt(max - min + 1) + min;
-                                                                } else if (className.equals("Pirate")){
-                                                                    int min = 16;
-                                                                    int max = 20;
-                                                                    number = random.nextInt(max - min + 1) + min;
-                                                                }
-                                                                minorTaskMap.put("task_id", "task" + number);
-                                                                minorTaskMap.put("completed", false);
-                                                                minorTasksRef.child(uid).child("task_" + j).updateChildren(minorTaskMap);
-                                                            }
-                                                        }
+                                                       if(!className.equals("NIL")){
+                                                           if(className.equals("Warrior")){
+                                                               generateMinorTasks(1,3, 1,5);
+                                                           } else if (className.equals("Mage")){
+                                                               generateMinorTasks(1,3,6,10);
+                                                           } else if (className.equals("Archer")){
+                                                               generateMinorTasks(1,3,11,15);
+                                                           } else if (className.equals("Pirate")){
+                                                               generateMinorTasks(1,3,16,20);
+                                                           }
+                                                           generateMinorTasks(4,6,21,28);
+                                                       }
                                                     }
-                                                    User userInfo = new User(uid,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
+                                                    User userInfo = new User(userId,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
 //                                                    Log.d("Firebase", className);
 //                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
                                                     if(userInfo.getHeroClass().equals("NIL")){
@@ -178,6 +150,10 @@ public class LoginActivity extends BackgroundActivity {
                                 }
                             }
                         }
+
+                        else{
+                            Toast.makeText(LoginActivity.this, "Username not found.", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -189,5 +165,23 @@ public class LoginActivity extends BackgroundActivity {
             }
         });
 
+    }
+
+    public void generateMinorTasks(Integer startIndex,Integer endIndex,Integer min, Integer max){
+        Map<String, Object> minorTaskMap = new HashMap<>();
+        ArrayList<Integer> selectedNumbers = new ArrayList<>();
+        Random random = new Random();
+        int number;
+        for(int i = startIndex; i <= endIndex;){
+            number = random.nextInt(max - min + 1) + min;
+            if(!selectedNumbers.contains(number)){
+                selectedNumbers.add(number);
+                Log.d("Creating Minor Tasks", selectedNumbers.toString());
+                minorTaskMap.put("task_id", "task" + number);
+                minorTaskMap.put("completed", false);
+                minorTasksRef.child(userId).child("task_" + i).updateChildren(minorTaskMap);
+                i++;
+            }
+        }
     }
 }
