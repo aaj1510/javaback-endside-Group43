@@ -41,7 +41,8 @@ public class RewardFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 userDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                userDatabaseReference.child(user.getUserId()).child("gold").setValue(boss.getBossGold()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                int updatedGoldValue = user.getGold() + boss.getBossGold();
+                userDatabaseReference.child(user.getUserId()).child("gold").setValue(updatedGoldValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         user.setGold(boss.getBossGold());

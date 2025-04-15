@@ -146,28 +146,42 @@ public class BossActivity extends BackgroundActivity {
         atkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                int min = 3;
-                int max = 10;
-                Integer randomDamage = random.nextInt(max - min + 1) + min;
-                damageBoss(5,randomDamage);
+                int points = 5;
+                int damage = randomDamage(3,10);
+
+                if(user.getPowerUp().equals("Super Stamina")){
+                    points = 0;
+                    user.setPowerUp("None");
+                }
+                if(user.getPowerUp().equals("Fiery Fury")){
+                    damage = boss.getBossHp() / 2;
+                    user.setPowerUp("None");
+                }
+                damageBoss(points,damage);
 
             }
         });
         skillBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                int min = 50;
-                int max = 99;
-                Integer randomDamage = random.nextInt(max - min + 1) + min;
-                damageBoss(20,randomDamage);
+                int damage = randomDamage(50,99);
+                int points = 20;
+                if(user.getPowerUp().equals("Double Damage")){
+                    damage = damage * 2;
+                    user.setPowerUp("None");
+                }
+                if (user.getPowerUp().equals("Arcane Aura")){
+                    points = 5;
+                    user.setPowerUp("None");
+                }
+                damageBoss(points,damage);
             }
         });
         shopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ShopFragment dialogFragment = new ShopFragment();
+                dialogFragment.show(getSupportFragmentManager(), null);
             }
         });
         retreatBtn.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +193,12 @@ public class BossActivity extends BackgroundActivity {
             }
         });
 
+    }
+
+    public Integer randomDamage(int min, int max){
+        Random random = new Random();
+        Integer randomDamage = random.nextInt(max - min + 1) + min;
+        return randomDamage;
     }
 
     public void damageBoss(Integer points, Integer damage){
@@ -237,7 +257,6 @@ public class BossActivity extends BackgroundActivity {
     }
 
     public void playDamageSound(Integer damage){
-        int soundId;
         SoundPool soundPool = new SoundPool.Builder().setMaxStreams(1).build();
         if(damage < 50){
             soundPool.load(BossActivity.this, R.raw.attack_damage_sound, 1);

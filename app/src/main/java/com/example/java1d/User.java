@@ -17,6 +17,7 @@ public class User implements Parcelable {
     private Integer totalDamageDealt;
     private String lastLoginDate;
     private Integer rank;
+    private String powerUp;
 
     public User(){}
 
@@ -66,6 +67,7 @@ public class User implements Parcelable {
         this.totalBossDefeated = totalBossDefeated;
         this.totalDamageDealt = totalDamageDealt;
         this.lastLoginDate = lastLoginDate;
+        this.powerUp = "None";
     }
 
     public String getUserId(){
@@ -110,6 +112,9 @@ public class User implements Parcelable {
         return email;
     }
 
+    public String getPowerUp() {return powerUp;}
+
+    public void setPowerUp(String powerUp) {this.powerUp = powerUp;}
 
     public Map<String, Object> toMap(){
         Map<String, Object> userMap = new HashMap<>();
@@ -142,6 +147,7 @@ public class User implements Parcelable {
         totalBossDefeated = in.readInt();
         totalDamageDealt = in.readInt();
         lastLoginDate = in.readString();
+        powerUp = in.readString();
     }
 
     @Override
@@ -155,6 +161,7 @@ public class User implements Parcelable {
         dest.writeInt(totalBossDefeated);
         dest.writeInt(totalDamageDealt);
         dest.writeString(lastLoginDate);
+        dest.writeString(powerUp);
     }
 
     @Override

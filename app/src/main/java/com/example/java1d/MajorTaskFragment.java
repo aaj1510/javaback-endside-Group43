@@ -92,7 +92,6 @@ public class MajorTaskFragment extends Fragment {
     }
 
 
-
     public User getUserInfo(){
         return BackgroundService.getUserInfo();
     }
