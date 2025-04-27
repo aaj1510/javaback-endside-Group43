@@ -5,13 +5,13 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BackgroundActivity extends AppCompatActivity{
-    @Override
+    @Override //Set to fullscreen on creation
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         hideSystemUI();
     }
 
-    @Override
+    @Override //If application is focused, set window to fullscreen
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -19,7 +19,8 @@ public class BackgroundActivity extends AppCompatActivity{
         }
     }
 
-    protected void hideSystemUI(){
+
+    protected void hideSystemUI(){ //View settings for fullscreen
         View decorView = getWindow().getDecorView();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         decorView.setSystemUiVisibility(

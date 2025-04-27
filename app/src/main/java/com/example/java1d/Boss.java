@@ -18,6 +18,7 @@ public class Boss implements Parcelable {
 
     public Boss(){}
 
+    //Instantiation of Boss Class
     public Boss(String bossId, String bossName, Integer bossGold, Integer bossHp, String bossReward, String bossRemainingTime){
         this.bossId = bossId;
         this.bossName = bossName;
@@ -65,12 +66,14 @@ public class Boss implements Parcelable {
         this.bossLevel = bossLevel;
     }
 
+    //Maps String keys with corresponding fields for Firebase Database
     public Map<String, Object> toMap(){
         Map<String, Object> bossBattleMap = new HashMap<>();
         bossBattleMap.put("boss_health", bossCurrentHealth);
         bossBattleMap.put("boss_level", bossLevel);
         return bossBattleMap;
     }
+
 
     protected Boss (Parcel in){
         bossId = in.readString();
