@@ -27,8 +27,8 @@ public class User implements Parcelable {
         this.username = username;
         this.email = email;
         this.heroClass = "NIL";
-        this.gold = 0;
-        this.actionPoints = 0;
+        this.gold = 100;
+        this.actionPoints = 50;
         this.totalBossDefeated = 0;
         this.totalDamageDealt = 0;
 

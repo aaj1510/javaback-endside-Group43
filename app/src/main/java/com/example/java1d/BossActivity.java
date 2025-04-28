@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class BossActivity extends BackgroundActivity {
     ImageView bossImage;
     TextView damageText;
 
+    RelativeLayout resetButtonLayout;
     Boss boss;
 
     @Override
@@ -69,6 +71,7 @@ public class BossActivity extends BackgroundActivity {
         TextView skillText = findViewById(R.id.skill_text);
         ImageButton shopBtn = findViewById(R.id.inventory);
         ImageButton retreatBtn = findViewById(R.id.retreat);
+        ImageButton resetBtn = findViewById(R.id.reset_button);
 
         damageText = findViewById(R.id.damage_text);
 
@@ -77,6 +80,8 @@ public class BossActivity extends BackgroundActivity {
         User user = getUserInfo();
         actionPointsText = findViewById(R.id.boss_battle_action_pts);
         actionPointsText.setText(String.valueOf(user.getActionPoints()));
+
+        resetButtonLayout = findViewById(R.id.reset_button_layout);
 
         // Avatar
         ImageView avatar_image = findViewById(R.id.avatar);
@@ -132,7 +137,18 @@ public class BossActivity extends BackgroundActivity {
                     skillText.setTextColor(Color.BLACK);
                     bossDefeatedText.setVisibility(View.VISIBLE);
                     bossImage.setColorFilter(Color.argb(220, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+                    resetButtonLayout.setVisibility(View.VISIBLE);
 
+                } else {
+                    atkBtn.setEnabled(true);
+                    atkBtn.clearColorFilter();
+                    atkText.setTextColor(Color.parseColor("#5DEEFF"));
+                    skillBtn.setEnabled(true);
+                    skillBtn.clearColorFilter();
+                    skillText.setTextColor(Color.parseColor("#AE4FE7"));
+                    bossDefeatedText.setVisibility(View.GONE);
+                    bossImage.clearColorFilter();
+                    resetButtonLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -190,6 +206,19 @@ public class BossActivity extends BackgroundActivity {
                 Intent intent = new Intent(BossActivity.this, MainActivity.class);
                 intent.putExtra("user_key",user);
                 startActivity(intent);
+            }
+        });
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boss.setBossCurrentHealth(boss.getBossHp());
+                bossBattleDatabaseReference.child(userId).child("boss_health").setValue(boss.getBossHp()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("Boss Battle", "Boss reset successful");
+                    }
+                });
             }
         });
 
@@ -290,7 +319,7 @@ public class BossActivity extends BackgroundActivity {
             if(!boss.getBossCurrentHealth().equals(0)){
                 bossImage.clearColorFilter();
             }
-        }, 1000);
+        }, 1500);
 
     }
 

@@ -34,13 +34,14 @@
                         android:layout_marginTop="23dp"
                         android:layout_weight="0.25">
 
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/close_shop_button"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_centerInParent="true"
                             android:background="@android:color/transparent"
-                            android:src="@android:drawable/ic_delete" />
+                            android:src="@drawable/ic_delete"
+                            android:clickable="true" />
                     </RelativeLayout>
 
                     <RelativeLayout
