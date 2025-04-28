@@ -46,7 +46,7 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position){ //Sets the data into the views for each item
         User user = getUserInfo();
         String userId = user.getUserId();
         ListTaskItem taskItem = listTasks.get(position);
@@ -55,21 +55,21 @@ public class MinorTaskAdapter extends RecyclerView.Adapter<MinorTaskAdapter.View
         holder.taskPoints.setText(points);
         holder.taskName.setText(taskItem.getTaskName());
         holder.taskDesc.setText(taskItem.getTaskDesc());
-        if(taskItem.getTaskCompleted().equals(true)){
+        if(taskItem.getTaskCompleted().equals(true)){ //If task is completed, disable the complete button and darken the cardview
             holder.completeBtn.setEnabled(false);
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
-        }else {
-            holder.completeBtn.setOnClickListener(new View.OnClickListener() {
+        }else { //If task is not completed
+            holder.completeBtn.setOnClickListener(new View.OnClickListener() { //On click complete button
                 @Override
                 public void onClick(View view) {
                     minorTasksRef.child(userId).child(taskItem.getTaskNumber()).child("completed").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
+                        @Override //Get minor task data by user Id and update completed field to true
                         public void onSuccess(Void unused) {
                             Log.d("Firebase Data", "Updated task completed to true");
                             Toast.makeText(view.getContext(), "Great Job, you earned " + difficulty.toString() + " actions points!", Toast.LENGTH_SHORT).show();
                             userTasksRef.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
+                                @Override //Gets value of current actions points, add the values and set the new value in firebase and user class
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += difficulty;

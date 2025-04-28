@@ -61,7 +61,7 @@ public class MajorTaskFragment extends Fragment {
         userMajorTasksQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                taskList.clear();
+                taskList.clear(); //Clears the task list
                 Log.d("FirebaseData", "DataSnapshot: " + snapshot.toString());
 
                 for (DataSnapshot taskSnapshot : snapshot.getChildren()) {

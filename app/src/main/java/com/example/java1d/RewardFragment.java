@@ -38,8 +38,9 @@ public class RewardFragment extends DialogFragment {
         coinText.setText(formattedCoinText);
         Button collectButton = view.findViewById(R.id.collect_button);
         collectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override // On clicking collect button
             public void onClick(View view) {
+                // Update user's gold value in firebase and user class, then close dialog fragment
                 userDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
                 int updatedGoldValue = user.getGold() + boss.getBossGold();
                 userDatabaseReference.child(user.getUserId()).child("gold").setValue(updatedGoldValue).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -57,7 +58,7 @@ public class RewardFragment extends DialogFragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart(){ //View settings of dialog fragment
         super.onStart();
         if(getDialog() != null && getDialog().getWindow() != null){
             getDialog().getWindow().setLayout(

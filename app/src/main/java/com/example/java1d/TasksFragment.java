@@ -24,7 +24,7 @@ public class TasksFragment extends DialogFragment {
         getChildFragmentManager().beginTransaction().replace(R.id.task_fragment_layout, new MinorTaskFragment()).commit();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) { //Display the minor/major task tabs when selected
+            public void onTabSelected(TabLayout.Tab tab) { //Display the minor task or major task tabs when selected
                 switch (tab.getPosition()){
                     case 0:
                         Log.d("Task Fragment", "Minor task tab opened");

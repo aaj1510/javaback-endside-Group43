@@ -42,6 +42,7 @@ public class ShopFragment extends DialogFragment {
         goldAmount.setText(String.valueOf(user.getGold()));
 
 
+        //OnClickListener of various buttons
         superStamina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +82,7 @@ public class ShopFragment extends DialogFragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() { //Dialog fragment settings
         super.onStart();
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setLayout(
@@ -100,16 +101,16 @@ public class ShopFragment extends DialogFragment {
     }
 
     public void purchasePowerUp(Integer goldCost, String powerUp){
-        if(user.getGold() < goldCost){
+        if(user.getGold() < goldCost){ //Checks if user has enough gold
             Toast.makeText(this.getContext(), "You do not have enough gold", Toast.LENGTH_SHORT).show();
-        } else if (!user.getPowerUp().equals("None")){
+        } else if (!user.getPowerUp().equals("None")){ //Checks if user already have a power up
             Toast.makeText(this.getContext(), "You already have a power up active", Toast.LENGTH_SHORT).show();
-        } else {
-            int newGoldAmount = user.getGold() - goldCost;
+        } else { //If user does not have a power up and has enough gold
+            int newGoldAmount = user.getGold() - goldCost; //Calculate gold value after purchase
             userDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
             userDatabaseReference.child(user.getUserId()).child("gold").setValue(newGoldAmount).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
+                @Override //Update user's gold value in firebase
+                public void onSuccess(Void unused) { //On success, play sound effect
                     SoundPool soundPool = new SoundPool.Builder().setMaxStreams(1).build();
                     soundPool.load(getContext(), R.raw.purchase_sound, 1);
                     soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
@@ -120,6 +121,7 @@ public class ShopFragment extends DialogFragment {
                             }
                         }
                     });
+                    //Update the user class with the new values and set the text view of the new gold amount
                     user.setPowerUp(powerUp);
                     user.setGold(newGoldAmount);
                     goldAmount.setText(String.valueOf(user.getGold()));

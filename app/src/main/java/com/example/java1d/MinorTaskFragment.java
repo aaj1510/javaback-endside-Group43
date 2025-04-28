@@ -45,12 +45,12 @@ public class MinorTaskFragment extends Fragment {
         String userId = user.getUserId();
         minorTasksRef = FirebaseDatabase.getInstance().getReference("MinorTasks");
         presetTasksRef = FirebaseDatabase.getInstance().getReference("PresetTasks");
-        minorTasksRef.child(userId).addValueEventListener(new ValueEventListener() {
+        minorTasksRef.child(userId).addValueEventListener(new ValueEventListener() { //Get minor task data by userId
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                taskList.clear();
-                if(snapshot.exists()){
-                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                taskList.clear(); //CLear current list
+                if(snapshot.exists()){ //If data exists
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){ //For each children, get and assign the value of the data
                         String taskNumber = dataSnapshot.getKey();
                         Log.d("Minor Task Fragment", taskNumber);
                         String taskId = dataSnapshot.child("task_id").getValue(String.class);
@@ -58,15 +58,16 @@ public class MinorTaskFragment extends Fragment {
                         Boolean completed = dataSnapshot.child("completed").getValue(Boolean.class);
                         presetTasksRef.child(taskId).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            public void onDataChange(@NonNull DataSnapshot snapshot) { //Using the return task Id, get the minor task values
                                     String taskName = snapshot.child("task_name").getValue(String.class);
                                     String taskDesc = snapshot.child("task_description").getValue(String.class);
                                     Integer difficulty = snapshot.child("difficulty").getValue(Integer.class);
 
+                                    //Instantiate a new list task item and add it to the task list
                                     ListTaskItem taskItem = new ListTaskItem(taskNumber,taskName,taskDesc,difficulty,completed);
                                     taskList.add(taskItem);
 
-                                minorTaskAdapter.notifyDataSetChanged();
+                                minorTaskAdapter.notifyDataSetChanged(); //Notifies the adapter of change and rebuilds the lists in XML
                             }
 
                             @Override

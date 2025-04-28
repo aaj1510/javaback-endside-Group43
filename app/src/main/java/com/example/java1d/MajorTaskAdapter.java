@@ -58,7 +58,7 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) { //Sets the data into the views for each item
         User user = getUserInfo();
         String userId = user.getUserId();
         ListTaskItem taskItem = listTasks.get(position);
@@ -76,9 +76,10 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
 
 
         if(taskItem.getTaskDesc() == null || taskItem.getTaskDesc().isEmpty()){
-            holder.descIcon.setVisibility(View.GONE);
+            holder.descIcon.setVisibility(View.GONE); //Hide image icon if task description is empty
         }
-        if(taskItem.getTaskCompleted()){
+        if(taskItem.getTaskCompleted()){ //If task is completed
+            //Set the various view settings
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_on_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#E0D599"));
             holder.deleteBtn.setVisibility(View.VISIBLE);
@@ -86,10 +87,10 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.completeBtn.setEnabled(false);
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    String taskId = (String) holder.completeBtn.getTag();
+                public void onClick(View view) { //On clicking delete button
+                    String taskId = (String) holder.completeBtn.getTag(); //Gets the task Id by button tag
                     databaseReference.child(taskId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
+                        @Override //Using the tag of the button, delete the data from the table
                         public void onSuccess(Void unused) {
                             notifyDataSetChanged();
                             Toast.makeText(view.getContext(), "Task successfully deleted",Toast.LENGTH_SHORT).show();
@@ -100,7 +101,8 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
 
 
 
-        } else {
+        } else { //If task is not completed
+            //Set the various view settings to default
             holder.completeBtn.setBackground(ContextCompat.getDrawable(holder.completeBtn.getContext(), android.R.drawable.checkbox_off_background));
             holder.cardView.setBackgroundColor(Color.parseColor("#FDF0A8"));
             holder.deleteBtn.setVisibility(View.GONE);
@@ -108,19 +110,19 @@ public class MajorTaskAdapter extends RecyclerView.Adapter<MajorTaskAdapter.View
             holder.completeBtn.setEnabled(true);
             holder.completeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    String taskId = (String) holder.completeBtn.getTag();
+                public void onClick(View view) { //On clicking complete button
+                    String taskId = (String) holder.completeBtn.getTag(); //Get task Id by button tag
                     databaseReference.child(taskId).child("completed").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
+                        @Override //Using the button tag, update completed filed in major task table to be true
                         public void onSuccess(Void unused) {
-                            taskItem.setTaskCompleted(true);
+                            taskItem.setTaskCompleted(true); //Update
                             notifyDataSetChanged();
                             Integer task_actionPoints = taskItem.getTaskDifficulty();
                             Log.d("Firebase Data", "Updated task completed to true");
                             Toast.makeText(view.getContext(), "Great Job, you earned " + task_actionPoints.toString() + " actions points!", Toast.LENGTH_SHORT).show();
                             userTasksReference = FirebaseDatabase.getInstance().getReference("Users");
                             userTasksReference.child(userId).child("action_points").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
+                                @Override //Gets value of current actions points, add the values and set the new value in firebase and user class
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     Integer action_points = snapshot.getValue(Integer.class);
                                     action_points += task_actionPoints;

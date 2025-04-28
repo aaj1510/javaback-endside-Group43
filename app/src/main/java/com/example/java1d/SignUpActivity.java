@@ -44,17 +44,14 @@ public class SignUpActivity extends BackgroundActivity {
         mAuth = FirebaseAuth.getInstance();
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //Move to Login Activity
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
 
 
-
-
-
-        btnReg.setOnClickListener(new View.OnClickListener() {
+        btnReg.setOnClickListener(new View.OnClickListener() { //On click register button
             @Override
             public void onClick(View v) {
 
@@ -63,6 +60,7 @@ public class SignUpActivity extends BackgroundActivity {
                 String rePassword = repasswordInput.getText().toString().trim();
                 String username = usernameInput.getText().toString().trim();
 
+                //Input validation
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(SignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
 
@@ -78,8 +76,7 @@ public class SignUpActivity extends BackgroundActivity {
                     Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
 
                 } else {
-
-                    //create user
+                    //Create user using email and password with firebase auth
                     mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {

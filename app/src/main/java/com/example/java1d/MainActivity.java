@@ -25,6 +25,7 @@ public class MainActivity extends BackgroundActivity {
         EdgeToEdge.enable(this);
         replaceFragment(new HomeFragment());
 
+        //Call BackgroundService to play music
         Intent serviceIntent = new Intent(MainActivity.this, BackgroundService.class);
         serviceIntent.putExtra("musicId", R.raw.background_music);
         serviceIntent.setAction("play_music");
@@ -42,9 +43,7 @@ public class MainActivity extends BackgroundActivity {
             return insets;
         });
 
-        // TODO: Enable Navigation Bar on Home, Inventory, Tasks and Achievements (Leaderboard)
         // For Navigation Bar
-
         binding.navigationBar.setItemIconTintList(null);
         binding.navigationBar.setBackground(null);
         binding.navigationBar.setOnItemSelectedListener(item -> {

@@ -67,7 +67,6 @@ public class LoginActivity extends BackgroundActivity {
             public void onClick(View view) {
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
-//                Toast.makeText(LoginActivity.this,"OnClick Works",Toast.LENGTH_SHORT).show();
                 // get email by searching username in realtime database..
                 // sign in with email and password using firebase auth.
 
@@ -112,10 +111,7 @@ public class LoginActivity extends BackgroundActivity {
 
 
                                                     User userInfo = new User(userId,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
-//                                                    Log.d("Firebase", className);
-//                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
                                                     if(userInfo.getHeroClass().equals("NIL")){
-//                                                    if (className.equals("NIL")){
                                                         // go to hero selection
                                                         Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
                                                         serviceIntent.putExtra("user_key", userInfo);
@@ -162,6 +158,7 @@ public class LoginActivity extends BackgroundActivity {
 
 
     public void generateMinorTasks(Integer startIndex,Integer endIndex,Integer min, Integer max){
+        //Using a for loop, randomly generate tasks id with various ranges base on the classes
         Map<String, Object> minorTaskMap = new HashMap<>();
         ArrayList<Integer> selectedNumbers = new ArrayList<>();
         Random random = new Random();
@@ -180,7 +177,7 @@ public class LoginActivity extends BackgroundActivity {
     }
 
 
-    private void assignTaskBasedOnHero(String className) {
+    private void assignTaskBasedOnHero(String className) { //Sets the task range of each class using hash map
         Map<String, int[]> heroTaskRange = new HashMap<>();
         heroTaskRange.put("Warrior", new int[]{1, 5});
         heroTaskRange.put("Mage", new int[]{6, 10});

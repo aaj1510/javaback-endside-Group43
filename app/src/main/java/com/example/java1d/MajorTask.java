@@ -45,7 +45,7 @@ public class MajorTask {
         return taskDescription;
     }
 
-    public Map<String, Object> toMap(){
+    public Map<String, Object> toMap(){ //For mapping firebase key strings with major task fields
         Map<String, Object> majorTaskMap = new HashMap<>();
         majorTaskMap.put("user_id", userId);
         majorTaskMap.put("task_name", taskName);
