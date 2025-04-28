@@ -58,7 +58,7 @@ public class AchievementsFragment extends Fragment {
         //recyclerview associate adapter to leaderboard adapter
         recyclerView.setAdapter(leaderboardAdapter);
 
-
+        //retrieve users based on criteria
         fetchUsers(criteria);
 
         firstPlaceTv = view.findViewById(R.id.first_username);
@@ -80,11 +80,11 @@ public class AchievementsFragment extends Fragment {
         damageDealtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!criteria.equals("damageDealt")){//only do it if current criteria is different
-                    criteria = "damageDealt";
-                    totalBossDefeatBtn.setBackgroundColor(Color.GRAY);
-                    damageDealtBtn.setBackgroundColor(Color.WHITE);
-                    fetchUsers(criteria);
+                if(!criteria.equals("damageDealt")){//only do it if current criteria is different //if criteria not equal damage dealt
+                    criteria = "damageDealt"; //set criteria to damage dealt and change the background color of the button to indicate which filter is applied.
+                    totalBossDefeatBtn.setBackgroundColor(Color.GRAY); //button not active
+                    damageDealtBtn.setBackgroundColor(Color.WHITE); //button active
+                    fetchUsers(criteria); //fetch user data based on criteria
                 }
 
             }
@@ -93,7 +93,7 @@ public class AchievementsFragment extends Fragment {
         totalBossDefeatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                criteria = "totalBossDefeat"; //no need but for debugging sake
+                criteria = "totalBossDefeat";
                 totalBossDefeatBtn.setBackgroundColor(Color.WHITE);
                 damageDealtBtn.setBackgroundColor(Color.GRAY);
                 fetchUsers(criteria);
@@ -107,17 +107,12 @@ public class AchievementsFragment extends Fragment {
 
 
     private void fetchUsers(String criteria) {
-        // Start by clearing any old data
-        //userList.clear();
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
-                // Log the entire snapshot for debugging
                 Log.d("FirebaseData", "DataSnapshot: " + snapshot.toString());
-
-
 
                 // fetch data from snapshot
                 for (DataSnapshot taskSnapshot : snapshot.getChildren()) {
@@ -125,7 +120,6 @@ public class AchievementsFragment extends Fragment {
                     String hero_class = taskSnapshot.child("class").getValue(String.class);
                     Integer bossDefeated = taskSnapshot.child("total_boss_defeated").getValue(Integer.class);
                     Integer total_damage_dealt = taskSnapshot.child("total_damage_dealt").getValue(Integer.class);
-                    //Integer action_pts = taskSnapshot.child("action_points").getValue(Integer.class); //used for debugging
 
                     // if value is null, set it to 0
                     if (total_damage_dealt == null) {
@@ -136,12 +130,12 @@ public class AchievementsFragment extends Fragment {
                         bossDefeated = 0;
                     }
 
-
+                    //if criteria equals to damage dealt, pass the criteria value as total_damage_dealt
                     if(criteria.equals("damageDealt")){
                         User user = new User(username, hero_class,criteria, total_damage_dealt, 0);
                         userList.add(user);
                     }
-                    else{ //boss defeat
+                    else{ //else if criteria equals to boss defeat, pass the criteria value as bossDefeated
                         User user = new User(username, hero_class,criteria, bossDefeated, 0);
                         userList.add(user);
                     }
@@ -149,71 +143,21 @@ public class AchievementsFragment extends Fragment {
                 }
 
                 System.out.println(criteria);
+                //call the function to rank
                 rankUsers(userList,criteria);
-
-               // for (User u : userList) {
-                 //   Log.d("Check Sorting", "Details: " + u.getUsername() + " | " + u.getActionPoints());
-                //} //sorting works
 
                 //Set data into the textviews based on user rank
                 if (getContext() != null) {
 
                     //first place to 3rd place
 
-                    //need a function for this to update based on criteria and rank to avoid repitations of code
+                    //update the first 3 ranks based on criteria and rank using a method called updateLeaderboardItem to avoid repetitions of code
                     for(int positon = 0; positon < 3 && positon < userList.size(); positon++){
                         System.out.println(userList.get(positon));
                         System.out.println(userList.get(positon).getUsername());
                         updateLeaderboardItem(userList.get(positon),criteria);
 
                     }
-
-
-                    /*
-                    //first place
-                    String first_username = sortedList.get(0).getUsername();
-                    String first_avatar = sortedList.get(0).getHeroClass().toLowerCase(); //do avatar later
-                    Integer first_score = sortedList.get(0).getActionPoints();
-                    String firstImageResourceName;
-                    firstPlaceTv.setText(first_username);
-                    firstPlaceScore.setText(String.valueOf(first_score));
-                    if (first_avatar.equals("nil")) {
-                        firstImageResourceName = "avatar_warrior";
-                    } else {
-                        firstImageResourceName = "avatar_" + first_avatar;
-                    }
-                    firstPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(firstImageResourceName, "drawable", getContext().getPackageName()));
-
-                    //second place
-                    String second_username = sortedList.get(1).getUsername();
-                    String second_avatar = sortedList.get(1).getHeroClass().toLowerCase();
-                    Integer second_score = sortedList.get(1).getActionPoints();
-                    secondPlaceTv.setText(second_username);
-                    secondPlaceScore.setText(String.valueOf(second_score));
-                    String secondImageResourceName;
-                    if (second_avatar.equals("nil")) {
-                        secondImageResourceName = "avatar_warrior";
-                    } else {
-                        secondImageResourceName = "avatar_" + second_avatar;
-                    }
-                    secondPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(secondImageResourceName, "drawable", getContext().getPackageName()));
-                    Log.d("Check Avatar", "Details: " + second_avatar);
-
-
-                    //third place
-                    String third_username = sortedList.get(2).getUsername();
-                    Integer third_score = sortedList.get(2).getActionPoints();
-                    String third_avatar = sortedList.get(2).getHeroClass().toLowerCase();
-                    thirdPlaceTv.setText(third_username);
-                    thirdPlaceScore.setText(String.valueOf(third_score));
-                    String thirdImageResourceName;
-                    if (third_avatar.equals("nil")) {
-                        thirdImageResourceName = "avatar_warrior";
-                    } else {
-                        thirdImageResourceName = "avatar_" + third_avatar;
-                    }
-                    thirdPlaceAvatar.setImageResource(getContext().getResources().getIdentifier(thirdImageResourceName, "drawable", getContext().getPackageName()));
-                    */
 
                     //4th place to all the way to be shown as in leaderboard
                     List<User> filteredList = userList.subList(3, userList.size());
@@ -243,11 +187,9 @@ public class AchievementsFragment extends Fragment {
     //rankusers using merge sort
     private void rankUsers(List<User> userList,String criteria) {
 
-
-
         mergeSort(userList, 0, userList.size() - 1,criteria);
         // Assign ranks based on the sorted list
-        for (int i = 0; i < userList.size(); i++) { //works
+        for (int i = 0; i < userList.size(); i++) {
             User user = userList.get(i);
             //rank starts at 1
             user.setRank(i + 1);
@@ -255,33 +197,37 @@ public class AchievementsFragment extends Fragment {
         
     }
 
+    //merge function to combine two sorted subarrays into one sorted array in the merge sort algorithm
     public static List<User> merge(List<User> userList, int low, int mid, int high,String criteria) {
+
         Boolean comparisonResult;
 
         List<User> sortedUsers = new ArrayList<>();
         int startL = low;
         int startR = mid + 1;
-        while (startL <= mid && startR <= high) {
 
+        while (startL <= mid && startR <= high) {
+            //condition based on criteria
             if(criteria.equals("damageDealt")){
+                //If criteria is "damageDealt", it compares the getTotalDamageDealt() values of the left and right users.
                 comparisonResult = userList.get(startL).getTotalDamageDealt() >= userList.get(startR).getTotalDamageDealt();
             }
-
             else{
+                //else compares based on getTotalBossDefeated()
                 comparisonResult = userList.get(startL).getTotalBossDefeated() >= userList.get(startR).getTotalBossDefeated();
 
             }
-
+            //adds user to the sortedUsers list based on result
             if (comparisonResult) {
                 sortedUsers.add(userList.get(startL));
                 startL += 1;
-
             } else {
                 sortedUsers.add(userList.get(startR));
                 startR += 1;
             }
         }
 
+        // add remaining elements from left sublist
         while (startL <= mid) {
             sortedUsers.add(userList.get(startL));
             startL += 1;
@@ -292,6 +238,7 @@ public class AchievementsFragment extends Fragment {
             startR += 1;
         }
 
+        // Update the original list with sorted values
         for (int i = low; i <= high; i++) {
             userList.set((i), sortedUsers.get(i - low));
         }
@@ -299,11 +246,11 @@ public class AchievementsFragment extends Fragment {
     }
 
     public static void mergeSort(List<User> unsortedUsers, int low, int high, String criteria){
-        if (low < high){
+        if (low < high){ //base case - continues sorting until the condition is false
             int mid = (low + high)/2;
-            mergeSort(unsortedUsers, low, mid ,criteria);
-            mergeSort(unsortedUsers, mid+1, high,criteria);
-            merge(unsortedUsers, low, mid, high,criteria);
+            mergeSort(unsortedUsers, low, mid ,criteria); //sort first half
+            mergeSort(unsortedUsers, mid+1, high,criteria); // sort second half
+            merge(unsortedUsers, low, mid, high,criteria); // combine 2 sorted arrays
         }
 
     }
@@ -323,33 +270,28 @@ public class AchievementsFragment extends Fragment {
             criteriaVal = user.getTotalBossDefeated();
         }
 
-        //set textviews for each rank
-        if (user.getRank() == 1){
+        //set textviews for each rank //update avatar using the updateAvatar function
+        if (user.getRank() == 1){ //rank 1
             firstPlaceTv.setText(user.getUsername());
-
             firstPlaceScore.setText(String.valueOf(criteriaVal));
             updateAvatar(user, firstPlaceAvatar);
         }
-        else if (user.getRank() == 2){
+        else if (user.getRank() == 2){ //rank 2
             secondPlaceTv.setText(user.getUsername());
             secondPlaceScore.setText(String.valueOf(criteriaVal));
             updateAvatar(user,secondPlaceAvatar);
         }
 
-        else if (user.getRank()==3){
+        else if (user.getRank()==3){ //rank 3
             thirdPlaceTv.setText(user.getUsername());
             thirdPlaceScore.setText(String.valueOf(criteriaVal));
             updateAvatar(user,thirdPlaceAvatar);
         }
 
-        //else{
-           // System.out.println("got issues");
-
-        //}
     }
 
 
-    //need to have funtion for updateavatar in ui - to mitigate the case if getHeroClass is null
+    //need to have funtion for updateavatar in ui - to mitigate the case if getHeroClass is null - which happens when user signs up but haven't login to choose avatar
     private void updateAvatar(User user, ImageView avatarImageView) {
         String imageResourceName;
         String user_avatar = user.getHeroClass().toLowerCase();
@@ -363,30 +305,5 @@ public class AchievementsFragment extends Fragment {
 
 
     }
-
-
-    //rank users function using collections.sort() //for debugging
-
-    /*
-    private void rankUsers(List<User> userList) {
-        // Sort the list of users by score in descending order using compare function
-        Collections.sort(userList, new Comparator<User>() {
-            @Override
-            public int compare(User u1, User u2) {
-                // Compare by score in descending order
-                // Higher score comes first
-                return Integer.compare(u2.getAction_points(), u1.getAction_points());
-            }
-        });
-
-        // Assign ranks based on the sorted list
-        for (int i = 0; i < userList.size(); i++) {
-            User user = userList.get(i);
-            //rank starts at 1
-            user.setRank(i + 1);
-
-        }
-    }*/
-
 
 }

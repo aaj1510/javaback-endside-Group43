@@ -21,7 +21,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     public LeaderboardAdapter(List<User> userlists) {
         this.userlist = userlists;
-        this.context = context; //check if need this
+        this.context = context;
     }
 
     public void updateData(List<User> newUserList,String criteria) {
@@ -73,12 +73,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     @Override
     public int getItemCount() {
-        //if(userlist.size() > 10) {
-         //   return 10;
-        //}
-        //else{
-          //  return userlist.size();
-        //}
         return userlist.size();
     }
 
@@ -91,7 +85,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
-
             usernameTv = itemView.findViewById(R.id.user_name);
             bossDefeatTv = itemView.findViewById(R.id.user_bosses);
             rankTv = itemView.findViewById(R.id.user_rank);
