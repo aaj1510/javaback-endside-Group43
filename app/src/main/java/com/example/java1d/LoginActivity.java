@@ -56,8 +56,8 @@ public class LoginActivity extends BackgroundActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -88,8 +88,6 @@ public class LoginActivity extends BackgroundActivity {
                                                 if (task.isSuccessful()) {
                                                     // Sign-in success,check class.
                                                     FirebaseUser user = mAuth.getCurrentUser();
-
-                                                    if(user!= null){
                                                     String username = userSnapshot.child("username").getValue(String.class);
                                                     userId = userSnapshot.child("uid").getValue(String.class);
                                                     className = userSnapshot.child("class").getValue(String.class);
@@ -106,24 +104,17 @@ public class LoginActivity extends BackgroundActivity {
                                                     String currentDate = day + "/" + (month + 1) + "/" + year;
                                                     usersRef.child(userId).child("last_login_date").setValue(currentDate);
 
-                                                    if (last_login_date == null || last_login_date.isEmpty() || !last_login_date.equals(currentDate)) {
-                                                        if (!className.equals("NIL")) {
-                                                            if (className.equals("Warrior")) {
-                                                                generateMinorTasks(1, 3, 1, 5);
-                                                            } else if (className.equals("Mage")) {
-                                                                generateMinorTasks(1, 3, 6, 10);
-                                                            } else if (className.equals("Archer")) {
-                                                                generateMinorTasks(1, 3, 11, 15);
-                                                            } else if (className.equals("Pirate")) {
-                                                                generateMinorTasks(1, 3, 16, 20);
-                                                            }
-                                                            generateMinorTasks(4, 6, 21, 28);
+                                                    if(last_login_date == null || last_login_date.isEmpty() || !last_login_date.equals(currentDate)){
+                                                        if(!className.equals("NIL")){
+                                                            assignTaskBasedOnHero(className);
                                                         }
                                                     }
-                                                    User userInfo = new User(userId, username, retrived_email, className, gold, action_points, total_boss_defeated, total_damage_dealt, last_login_date);
+
+
+                                                    User userInfo = new User(userId,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
 //                                                    Log.d("Firebase", className);
 //                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
-                                                    if (userInfo.getHeroClass().equals("NIL")) {
+                                                    if(userInfo.getHeroClass().equals("NIL")){
 //                                                    if (className.equals("NIL")){
                                                         // go to hero selection
                                                         Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
@@ -131,7 +122,8 @@ public class LoginActivity extends BackgroundActivity {
                                                         startService(serviceIntent);
                                                         Intent intent = new Intent(LoginActivity.this, HeroSelectionActivity.class);
                                                         startActivity(intent);
-                                                    } else {
+                                                    }
+                                                    else{
                                                         // go to home page
                                                         Intent serviceIntent = new Intent(LoginActivity.this, BackgroundService.class);
                                                         serviceIntent.putExtra("user_key", userInfo);
@@ -139,7 +131,6 @@ public class LoginActivity extends BackgroundActivity {
                                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                         startActivity(intent);
                                                     }
-                                                }
                                                 } else {
                                                     // Sign-in failed, show an error message
                                                     Toast.makeText(LoginActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -163,11 +154,12 @@ public class LoginActivity extends BackgroundActivity {
                         Toast.makeText(LoginActivity.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
 
     }
+
+
 
     public void generateMinorTasks(Integer startIndex,Integer endIndex,Integer min, Integer max){
         Map<String, Object> minorTaskMap = new HashMap<>();
@@ -186,4 +178,20 @@ public class LoginActivity extends BackgroundActivity {
             }
         }
     }
+
+
+    private void assignTaskBasedOnHero(String className) {
+        Map<String, int[]> heroTaskRange = new HashMap<>();
+        heroTaskRange.put("Warrior", new int[]{1, 5});
+        heroTaskRange.put("Mage", new int[]{6, 10});
+        heroTaskRange.put("Archer", new int[]{11, 15});
+        heroTaskRange.put("Pirate", new int[]{16, 20});
+
+        if (heroTaskRange.containsKey(className)) {
+            int[] range = heroTaskRange.get(className);
+            generateMinorTasks(1, 3, range[0], range[1]);//class based tasks
+            generateMinorTasks(4, 6, 21, 28);//all tasks
+        }
+    }
+
 }
