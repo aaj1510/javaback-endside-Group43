@@ -56,8 +56,8 @@ public class LoginActivity extends BackgroundActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -105,19 +105,12 @@ public class LoginActivity extends BackgroundActivity {
                                                     usersRef.child(userId).child("last_login_date").setValue(currentDate);
 
                                                     if(last_login_date == null || last_login_date.isEmpty() || !last_login_date.equals(currentDate)){
-                                                       if(!className.equals("NIL")){
-                                                           if(className.equals("Warrior")){
-                                                               generateMinorTasks(1,3, 1,5);
-                                                           } else if (className.equals("Mage")){
-                                                               generateMinorTasks(1,3,6,10);
-                                                           } else if (className.equals("Archer")){
-                                                               generateMinorTasks(1,3,11,15);
-                                                           } else if (className.equals("Pirate")){
-                                                               generateMinorTasks(1,3,16,20);
-                                                           }
-                                                           generateMinorTasks(4,6,21,28);
-                                                       }
+                                                        if(!className.equals("NIL")){
+                                                            assignTaskBasedOnHero(className);
+                                                        }
                                                     }
+
+
                                                     User userInfo = new User(userId,username,retrived_email, className, gold,action_points,total_boss_defeated,total_damage_dealt, last_login_date);
 //                                                    Log.d("Firebase", className);
 //                                                    Toast.makeText(LoginActivity.this,"Data retrieved",Toast.LENGTH_SHORT).show();
@@ -166,6 +159,8 @@ public class LoginActivity extends BackgroundActivity {
 
     }
 
+
+
     public void generateMinorTasks(Integer startIndex,Integer endIndex,Integer min, Integer max){
         Map<String, Object> minorTaskMap = new HashMap<>();
         ArrayList<Integer> selectedNumbers = new ArrayList<>();
@@ -183,4 +178,20 @@ public class LoginActivity extends BackgroundActivity {
             }
         }
     }
+
+
+    private void assignTaskBasedOnHero(String className) {
+        Map<String, int[]> heroTaskRange = new HashMap<>();
+        heroTaskRange.put("Warrior", new int[]{1, 5});
+        heroTaskRange.put("Mage", new int[]{6, 10});
+        heroTaskRange.put("Archer", new int[]{11, 15});
+        heroTaskRange.put("Pirate", new int[]{16, 20});
+
+        if (heroTaskRange.containsKey(className)) {
+            int[] range = heroTaskRange.get(className);
+            generateMinorTasks(1, 3, range[0], range[1]);//class based tasks
+            generateMinorTasks(4, 6, 21, 28);//all tasks
+        }
+    }
+
 }
