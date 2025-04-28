@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-
+//Handles boss_page.xml
 public class BossActivity extends BackgroundActivity {
 
     DatabaseReference bossBattleDatabaseReference;
@@ -99,10 +99,11 @@ public class BossActivity extends BackgroundActivity {
         String userId = getUserInfo().getUserId();
         bossBattleDatabaseReference = FirebaseDatabase.getInstance().getReference("BossBattle");
 
+        //Calls firebase to get data of boss battle by userId
         bossBattleDatabaseReference.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Integer currentHp = boss.getBossCurrentHealth(); //Get current health of the boss
+                Integer currentHp = boss.getBossCurrentHealth(); //Get current health of the boss from boss class
                 if(snapshot.exists()){ //If data exists (Player has fought or entered the boss battle before)
                     currentHp = snapshot.child("boss_health").getValue(Integer.class);  //Get boss health from Firebase
                     boss.setBossCurrentHealth(currentHp); //Sets boss health in boss class

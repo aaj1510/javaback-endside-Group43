@@ -66,8 +66,8 @@ public class Boss implements Parcelable {
         this.bossLevel = bossLevel;
     }
 
-    //Maps String keys with corresponding fields for Firebase Database
-    public Map<String, Object> toMap(){
+
+    public Map<String, Object> toMap(){  //Maps String keys with corresponding fields for Firebase Database
         Map<String, Object> bossBattleMap = new HashMap<>();
         bossBattleMap.put("boss_health", bossCurrentHealth);
         bossBattleMap.put("boss_level", bossLevel);
@@ -75,7 +75,7 @@ public class Boss implements Parcelable {
     }
 
 
-    protected Boss (Parcel in){
+    protected Boss (Parcel in){ //Deserializing values from Parcel
         bossId = in.readString();
         bossName = in.readString();
         bossGold = in.readInt();
@@ -87,7 +87,7 @@ public class Boss implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags){
+    public void writeToParcel(Parcel dest, int flags){ //Save values into Parcel
         dest.writeString(bossId);
         dest.writeString(bossName);
         dest.writeInt(bossGold);
@@ -98,9 +98,9 @@ public class Boss implements Parcelable {
         dest.writeInt(bossLevel);
     }
 
-    public int describeContents() {return 0;}
+    public int describeContents() {return 0;} //Not used, but required by Parcelable interface
 
-    public static final Parcelable.Creator<Boss> CREATOR = new Parcelable.Creator<Boss>(){
+    public static final Parcelable.Creator<Boss> CREATOR = new Parcelable.Creator<Boss>(){ //Create a parcelable class to store the values
         @Override
         public Boss createFromParcel(Parcel in) {return new Boss(in);}
         @Override

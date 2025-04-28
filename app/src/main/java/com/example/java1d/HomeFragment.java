@@ -60,10 +60,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) { //onClick of buttons, switches to respective fragments base on id of buttons
         if (view.getId() == R.id.tasksBtn) {
-//            TaskFragment dialogFragment = new TaskFragment();
-//            dialogFragment.show(getActivity().getSupportFragmentManager(), "TaskFragment");
             TasksFragment dialogFragment = new TasksFragment();
             dialogFragment.show(getActivity().getSupportFragmentManager(), null);
         }
@@ -84,14 +82,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment){ //Replaces current fragment with respective fragments
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
 
-    public void updateActionPointsText(){
+    public void updateActionPointsText(){ //Updates action points text view
         pts_text.setText(String.valueOf(getUserInfo().getActionPoints()));
     }
 

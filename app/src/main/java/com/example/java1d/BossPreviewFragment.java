@@ -42,12 +42,14 @@ public class BossPreviewFragment extends Fragment {
         ImageView bossImage = view.findViewById(R.id.boss_image);
         TextView bossDescriptionText = view.findViewById(R.id.boss_description);
 
+        //Gets current date and time
         LocalDate today = LocalDate.now();
         Integer dateOfToday = today.getDayOfMonth();
         LocalTime currentTime = LocalTime.now();
         Integer currentHour = currentTime.getHour();
 
         bossOfTheWeekDatabaseReference = FirebaseDatabase.getInstance().getReference("BossOfTheWeek");
+        //Gets data from firebase of boss of the week
         bossOfTheWeekDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -58,13 +60,16 @@ public class BossPreviewFragment extends Fragment {
                 String[] endTime = bossEndTime.split(":");
                 int remainingDays = Integer.parseInt(endDate[0]) - dateOfToday;
                 int remainingHours = Integer.parseInt(endTime[0]) - currentHour;
+                //Compares and calculate end date of boss battle with current date then displays it
                 String formattedTime = String.format(Locale.US,"%d DAYS %02d HOURS", remainingDays, remainingHours);
                 Log.d("Remaining Day", String.valueOf(remainingDays));
                 remainingTime.setText(formattedTime);
                 String imageResourceName;
                 imageResourceName = bossId;
+                //Set to respective boss image based on database value
                 bossImage.setImageResource(getContext().getResources().getIdentifier(imageResourceName, "drawable", getContext().getPackageName()));
                 bossesDatabaseReference = FirebaseDatabase.getInstance().getReference("Bosses").child(bossId);
+                //From the boss id of boss of the week data, get the values from the bosses table in firebase
                 bossesDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -75,8 +80,8 @@ public class BossPreviewFragment extends Fragment {
                         Integer bossGold = snapshot.child("boss_gold").getValue(Integer.class);
                         Integer bossHp = snapshot.child("boss_hp").getValue(Integer.class);
                         String bossReward = snapshot.child("boss_reward").getValue(String.class);
-                        boss = new Boss(bossId, bossName, bossGold, bossHp, bossReward, formattedTime);
-                        dataLoaded = true;
+                        boss = new Boss(bossId, bossName, bossGold, bossHp, bossReward, formattedTime); //Instantiate boss from the returned values from the bosses table in firebase
+                        dataLoaded = true; //Boolean variable to check if data has finished loading
                     }
 
                     @Override
@@ -95,11 +100,11 @@ public class BossPreviewFragment extends Fragment {
         battleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataLoaded){
+                if(dataLoaded){ //If data is loaded, go to boss activity (For cases where user tries to enter before data has fully loaded)
                     Intent intent = new Intent(getActivity(), BossActivity.class);
                     intent.putExtra("boss_info",boss);
                     startActivity(intent);
-                } else {
+                } else { //Else if data is not loaded, display toast to user
                     Toast.makeText(getContext(), "Retrieving data, please wait", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -36,7 +36,6 @@ public class User implements Parcelable {
 
 
     //for leaderboard details:
-    // will change action_pts to totalBossDefeated later, using action_points for debugging
     public User(String username, String heroClass, String criteria, Integer value, Integer rank ){
 
         if(criteria.equals("damageDealt")){
@@ -116,7 +115,7 @@ public class User implements Parcelable {
 
     public void setPowerUp(String powerUp) {this.powerUp = powerUp;}
 
-    public Map<String, Object> toMap(){
+    public Map<String, Object> toMap(){ //For mapping firebase key string with user fields;
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("uid",userId);
         userMap.put("username", username);
@@ -130,14 +129,14 @@ public class User implements Parcelable {
         return userMap;
     }
 
-    public Map<String, Object> attackBossMap(){
+    public Map<String, Object> attackBossMap(){ //For mapping firebase key strings with only the necessary fields when attacking boss
         Map<String, Object> attackBossMap = new HashMap<>();
         attackBossMap.put("action_points", actionPoints);
         attackBossMap.put("total_damage_dealt", totalDamageDealt);
         return attackBossMap;
     }
 
-    protected User(Parcel in){
+    protected User(Parcel in){ //Deserializing values from Parcel
         userId = in.readString();
         username = in.readString();
         email = in.readString();
@@ -151,7 +150,7 @@ public class User implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags) { //Saving values into parcel
         dest.writeString(userId);
         dest.writeString(username);
         dest.writeString(email);
@@ -167,9 +166,9 @@ public class User implements Parcelable {
     @Override
     public int describeContents(){
         return 0;
-    }
+    } //Not used, but a required method by Parcelable interface
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>(){
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>(){ //Create a parcelable class to store the values
         @Override
         public User createFromParcel(Parcel in){
             return new User(in);

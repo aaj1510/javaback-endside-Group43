@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class InventoryFragment extends Fragment {
     @Override
@@ -24,18 +23,17 @@ public class InventoryFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         User user = mainActivity.getUserInfo();
 
-        // Change Class
+        // On clicking change class button
         ImageButton changeClassBtn = view.findViewById(R.id.changeClassBtn);
         changeClassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HeroSelectionActivity.class);
-                startActivity(intent);
-        //  Toast.makeText(getActivity(),"Changing class", Toast.LENGTH_SHORT).show();
+                startActivity(intent); //Go to hero selection activity
             }
         });
 
-        // Change avatar
+        // Set text view and image view based on user's data
         ImageView avatar_image = view.findViewById(R.id.avatar);
         String avatar = user.getHeroClass().toLowerCase();
         String imageResourceName = "avatar_" + avatar;

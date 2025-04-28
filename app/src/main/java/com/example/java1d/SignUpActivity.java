@@ -57,7 +57,6 @@ public class SignUpActivity extends BackgroundActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 1. need to check if username exists in db - if it does, prompt to differ <-IMPT
 
                 String email = emailInput.getText().toString().trim();
                 String password = passwordInput.getText().toString().trim();
@@ -107,7 +106,6 @@ public class SignUpActivity extends BackgroundActivity {
                                             Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                            //Toast.makeText(SignUpActivity.this, "Authenticated!", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

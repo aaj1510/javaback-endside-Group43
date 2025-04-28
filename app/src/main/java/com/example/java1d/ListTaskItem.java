@@ -30,7 +30,6 @@ public class ListTaskItem {
     }
 
     public ListTaskItem() {
-        // Default constructor is required for Firebase
     }
 
     public String getTaskName(){

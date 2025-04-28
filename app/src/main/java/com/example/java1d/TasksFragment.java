@@ -24,7 +24,7 @@ public class TasksFragment extends DialogFragment {
         getChildFragmentManager().beginTransaction().replace(R.id.task_fragment_layout, new MinorTaskFragment()).commit();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(TabLayout.Tab tab) { //Display the minor/major task tabs when selected
                 switch (tab.getPosition()){
                     case 0:
                         Log.d("Task Fragment", "Minor task tab opened");
@@ -52,21 +52,21 @@ public class TasksFragment extends DialogFragment {
         ImageButton closeButton = rootView.findViewById(R.id.exit);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //When closing task fragments, update the action points text view in the home fragments to the new value
                 Fragment fragment = getParentFragmentManager().findFragmentById(R.id.frame_layout);
-                if(fragment instanceof HomeFragment){
+                if(fragment instanceof HomeFragment){ //Checks if fragment is an instance of home fragment before updating (in case of null)
                     HomeFragment homeFragment = (HomeFragment) fragment;
                     homeFragment.updateActionPointsText();
                 }
-                dismiss();
+                dismiss(); // Close the dialog
             }
-        });  // Close the dialog
+        });
 
         return rootView;
     }
 
     @Override
-    public void onStart() {
+    public void onStart() { //View settings of dialog fragment
         super.onStart();
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setLayout(

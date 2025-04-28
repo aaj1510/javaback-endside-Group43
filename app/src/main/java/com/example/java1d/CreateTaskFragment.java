@@ -48,69 +48,74 @@ public class CreateTaskFragment extends DialogFragment {
 
         cancel_task_button.setOnClickListener(v -> dismiss());  // Close the dialog
 
-        create_task_button.setOnClickListener(new View.OnClickListener() {
+        create_task_button.setOnClickListener(new View.OnClickListener() { //On clicking create button
             @Override
             public void onClick(View v) {
                 db = FirebaseDatabase.getInstance().getReference("MajorTasks");
                 User user = getUserInfo();
-                String task_id = db.push().getKey();
+                //Get all the values from the inputs
+                String task_id = db.push().getKey(); //Allows firebase to create a unique key for the primary key of storing the data
                 String task_name = task_name_input.getText().toString();
                 String task_description = task_description_input.getText().toString();
                 Integer difficulty = difficulty_seekbar.getProgress() + 1;
                 String selected_date = date_input.getText().toString();
                 String selected_time = time_input.getText().toString();
                 String userId = user.getUserId();
+                //Creates an instance of Major Task class with the require values
                 MajorTask majorTask = new MajorTask(userId,task_id,task_name,task_description,selected_date,selected_time,difficulty);
-                Map<String, Object> taskValues = majorTask.toMap();
-                if(task_name.isEmpty() || task_name.equals(" ")){
+                Map<String, Object> taskValues = majorTask.toMap(); //Calls method to map values with firebase field
+                if(task_name.isEmpty() || task_name.equals(" ")){ //Check if task name input is empty
                     Toast.makeText(getContext(),"Please enter the task name.", Toast.LENGTH_SHORT).show();
                 }
-                if (selected_date.isEmpty()){
+                if (selected_date.isEmpty()){ //Checks if date input is empty
                     Toast.makeText(getContext(), "Please select an end date", Toast.LENGTH_SHORT).show();
                 }
-                if (selected_time.isEmpty()){
+                if (selected_time.isEmpty()){ //Checks if time input is empty
                     Toast.makeText(getContext(), "Please select an end time", Toast.LENGTH_SHORT).show();
                 }
-                if(!task_name.isEmpty() && !selected_date.isEmpty() && !selected_time.isEmpty()){
-                    db.child(task_id).setValue(taskValues).addOnSuccessListener(new OnSuccessListener<Void>() {
+                if(!task_name.isEmpty() && !selected_date.isEmpty() && !selected_time.isEmpty()){ //If necessary fields are not empty
+                    db.child(task_id).setValue(taskValues).addOnSuccessListener(new OnSuccessListener<Void>() { //Update major task table in firebase
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(getContext(),"Your task have been successfully created",Toast.LENGTH_SHORT).show();
-                            dismiss();
+                            dismiss(); //dismiss dialog on success
                         }
                     });
                 }
             }
         });
 
-        date_input.setOnClickListener(new View.OnClickListener() {
+        date_input.setOnClickListener(new View.OnClickListener() { //On clicking date input
             @Override
             public void onClick(View view) {
+                //Creates a calendar instance and gets the current date
                 Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-
+                //Creates an instance of a date picker dialog
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),(dateView, selectedYear, selectedMonth, selectedDay) -> {
                     String dateString = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                    date_input.setText(dateString);
-                }, year,month,day);
-                datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
-                datePickerDialog.show();
+                    date_input.setText(dateString); //set date input to selected date
+                }, year,month,day); //Set value of date picker to current date
+                datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis()); //Set selectable dates to be current and future days only
+                datePickerDialog.show();//Display date picker
             }
         });
 
-        time_input.setOnClickListener(new View.OnClickListener() {
+        time_input.setOnClickListener(new View.OnClickListener() { //On clicking time input
             @Override
             public void onClick(View view) {
+                //Creates a calender instance and gets the current time
                 Calendar calendar = Calendar.getInstance();
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
                 int minutes = calendar.get(Calendar.MINUTE);
+                //Creates an instance of a time picker dialog
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),(timeView, selectedHour, selectedMinutes) -> {
-                    String timeString = String.format(Locale.US,"%02d:%02d", selectedHour, selectedMinutes);
-                    time_input.setText(timeString);
-                }, hour,minutes,true);
-                timePickerDialog.show();
+                    String timeString = String.format(Locale.US,"%02d:%02d", selectedHour, selectedMinutes); //Formats the time
+                    time_input.setText(timeString); //Set the time input to be the selected time
+                }, hour,minutes,true); //Sets value of the time picker to current time
+                timePickerDialog.show();//Display time picker
             }
         });
 
@@ -120,7 +125,7 @@ public class CreateTaskFragment extends DialogFragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart(){ //Settings for sizing and fullscreen effect of dialog
         super.onStart();
         if(getDialog() != null && getDialog().getWindow() != null){
             getDialog().getWindow().setLayout(
@@ -140,5 +145,5 @@ public class CreateTaskFragment extends DialogFragment {
 
     public User getUserInfo(){
         return BackgroundService.getUserInfo();
-    }
+    } //Method to get user data
 }

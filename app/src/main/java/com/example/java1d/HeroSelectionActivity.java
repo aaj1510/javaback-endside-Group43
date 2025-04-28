@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-
+//Handles the Hero Selection Page
 public class HeroSelectionActivity extends BackgroundActivity{
     private DatabaseReference databaseRef;
     User user;
