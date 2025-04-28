@@ -39,53 +39,53 @@ public class HeroSelectionActivity extends BackgroundActivity{
         ImageButton selectArcher = findViewById(R.id.archer_poster);
         ImageButton selectPirate = findViewById(R.id.pirate_poster);
         databaseRef = FirebaseDatabase.getInstance().getReference();
-        selectWarrior.setOnClickListener(new View.OnClickListener() {
+        selectWarrior.setOnClickListener(new View.OnClickListener() { //Sets hero class to Warrior
             @Override
             public void onClick(View view) {
-                if(heroClass.equals("NIL")){
-                    generateMinorTasks(1,3, 1,5);
-                    generateMinorTasks(4,6,21,28);
+                String className = "Warrior";
+                if(heroClass.equals("NIL")){ //If user has no hero class yet, assign hero class tasks
+                    assignTaskBasedOnHero(className);
                 }
-               updateUserClass("Warrior");
+               updateUserClass(className);
             }
         });
 
-        selectMage.setOnClickListener(new View.OnClickListener() {
+        selectMage.setOnClickListener(new View.OnClickListener() { //Sets hero class to Mage
             @Override
             public void onClick(View view) {
-                if(heroClass.equals("NIL")){
-                    generateMinorTasks(1,3,6,10);
-                    generateMinorTasks(4,6,21,28);
+                String className = "Mage";
+                if(heroClass.equals("NIL")){ //If user has no hero class yet, assign hero class tasks
+                    assignTaskBasedOnHero(className);
                 }
-               updateUserClass("Mage");
+               updateUserClass(className);
             }
         });
 
-        selectArcher.setOnClickListener(new View.OnClickListener() {
+        selectArcher.setOnClickListener(new View.OnClickListener() { //Sets hero class to Archer
             @Override
             public void onClick(View view) {
-                if(heroClass.equals("NIL")){
-                    generateMinorTasks(1,3,11,15);
-                    generateMinorTasks(4,6,21,28);
+                String className = "Archer";
+                if(heroClass.equals("NIL")){ //If user has no hero class yet, assign hero class tasks
+                    assignTaskBasedOnHero(className);
                 }
-               updateUserClass("Archer");
+               updateUserClass(className);
             }
         });
 
-        selectPirate.setOnClickListener(new View.OnClickListener() {
+        selectPirate.setOnClickListener(new View.OnClickListener() { //Sets hero class to Pirate
             @Override
             public void onClick(View view) {
-                if(heroClass.equals("NIL")){
-                    generateMinorTasks(1,3,16,20);
-                    generateMinorTasks(4,6,21,28);
+                String className = "Pirate";
+                if(heroClass.equals("NIL")){ //If user has no hero class yet, assign hero class tasks
+                    assignTaskBasedOnHero(className);
                 }
-                updateUserClass("Pirate");
+                updateUserClass(className);
             }
         });
 
     }
 
-    public void updateUserClass(String selectedClass){
+    public void updateUserClass(String selectedClass){ //Update user's hero class in firebase and user class
         databaseRef.child("Users").child(user.getUserId()).child("class").setValue(selectedClass).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -109,6 +109,7 @@ public class HeroSelectionActivity extends BackgroundActivity{
     }
 
     public void generateMinorTasks(Integer startIndex,Integer endIndex,Integer min, Integer max){
+        //Using a for loop, randomly generate tasks id with various ranges base on the classes
         DatabaseReference minorTasksRef;
         minorTasksRef = FirebaseDatabase.getInstance().getReference("MinorTasks");
         Map<String, Object> minorTaskMap = new HashMap<>();
@@ -125,6 +126,20 @@ public class HeroSelectionActivity extends BackgroundActivity{
                 minorTasksRef.child(user.getUserId()).child("task_" + i).updateChildren(minorTaskMap);
                 i++;
             }
+        }
+    }
+
+    private void assignTaskBasedOnHero(String className) { //Sets the task range of each class using hash map
+        Map<String, int[]> heroTaskRange = new HashMap<>();
+        heroTaskRange.put("Warrior", new int[]{1, 5});
+        heroTaskRange.put("Mage", new int[]{6, 10});
+        heroTaskRange.put("Archer", new int[]{11, 15});
+        heroTaskRange.put("Pirate", new int[]{16, 20});
+
+        if (heroTaskRange.containsKey(className)) {
+            int[] range = heroTaskRange.get(className);
+            generateMinorTasks(1, 3, range[0], range[1]);//class based tasks
+            generateMinorTasks(4, 6, 21, 28);//all tasks
         }
     }
 }
